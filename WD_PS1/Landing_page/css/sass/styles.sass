@@ -1,0 +1,197 @@
+@import "normalize.css"
+@import "../libs/Fonts-Awesome/css/all.css"
+
+$bg-color-first: #fff
+$bg-color-second: #1abc9c
+$text-color-first: #fff
+$text-color-second: #2c3e50
+$active-item-color-dark: #1abc9c
+$active-item-color: #2c3e50
+$default-transition: all .2s linear
+
+p, a
+	color: $text-color-first
+
+a
+	transition: all .2s linear
+	text-decoration: none
+	&:hover
+		text-decoration: underline
+		color: $active-item-color-dark
+
+h2
+	color: $text-color-first
+	margin: 0
+	font-size: 22px
+	margin: 68px 0 60px 0
+
+.bg-color-first
+	background: $bg-color-first
+
+.bg-color-second
+	background: $bg-color-second
+
+.wrapper
+	width: 1100px
+	margin: 0 auto
+
+.flex-grid
+	display: -webkit-flex
+		display: -moz-flex
+		display: -ms-flex
+		display: -o-flex
+		display: flex
+	align-items: center
+
+.half-size
+	width: 50%
+
+.custom-size
+	width: calc(100%/3)
+
+.logo
+	color: $bg-color-second
+	h1
+		font-size: 47px
+		margin: 0
+	&:first-letter
+		color: $text-color-second
+
+nav
+	text-transform: uppercase
+	justify-content: flex-end
+	a
+		color: $text-color-second
+		font-size: 16px
+		margin-right: 70px
+		transition: $default-transition
+
+.phone-app
+	padding: 60px 0
+	.flex-grid
+		align-items: end
+
+.phone-block-form
+	background: url(../private/images/section_phone/iphone.png) no-repeat
+	background-size: cover
+	width: 205px
+	height: 437px
+	position: relative
+	margin: 0 auto
+	form
+		position: relative
+		text-align: center
+		top: 64px
+		background: linear-gradient(45deg, #013560 0%,#86a6ee 34%,#86a6ee 57%,#013560 100%)
+		margin: 0 13px 0 17px
+	span
+		display: block
+	p
+		margin-top: 26px
+		font-size: 12px
+		font-weight: bold
+	i
+		color: #3e9b50
+
+.phone-form-head
+	font-size: 21px
+	padding: 10px 0
+	color: $text-color-first
+	background: linear-gradient(to right, #4d8ba5 0%,#4c5f70 100%)
+
+.phone-block-form-item
+	font-size: 11px
+	padding: 4px 0
+	border: 1px solid $bg-color-second
+	border-radius: 4px
+	background: $text-color-first
+	color: $text-color-second
+	margin: 0 4px
+
+.phone-block-form-submit
+	background: #5ac0de
+	color: $text-color-first
+	padding: 4px 6px
+	border: 1px solid #4cb9d9
+	border-radius: 5px
+	font-size: 14px
+	margin-top: 13px
+	margin-bottom: 35px
+	cursor: pointer
+	transition: $default-transition
+	&:hover
+		color: $text-color-second
+.phone-text
+	p
+		font-size: 16px
+		margin-bottom: 44px
+	a
+		border: 2px solid $text-color-first
+		border-radius: 3px
+		font-size: 14px
+		padding: 15px
+		font-weight: bold
+		display: inline-block
+		&:hover
+			border-color: $active-item-color
+			color: $active-item-color
+.about
+	text-align: center
+	.custom-size
+		padding: 60px 0
+	span
+		display: block
+		font-weight: bold
+		font-size: 16px
+	p, span
+		color: $text-color-second
+	p
+		font-size: 14px
+	i
+		background: $bg-color-second
+		font-size: 38px
+		color: $text-color-first
+		border-radius: 50%
+		margin-bottom: 20px
+		height: 85px
+		width: 85px
+		position: relative
+		&:before
+			position: absolute
+			left: 50%
+			top: 50%
+			transform: translateX(-50%) translateY(-50%)
+.contact
+	padding: 60px
+	text-align: center
+	h2
+		margin-top: 0
+	input, textarea
+		display: block
+		width: 600px
+		font-size: 12px
+		padding: 10px
+		margin: 0 auto 10px
+		&:last-child
+			margin-bottom: 0
+		&:placeholder
+				color: #a9a9a9
+	textarea
+		resize: none
+	button
+		font-size: 16px
+		padding: 10px 60px
+		border: 2px solid #fff
+		background: none
+		color: #fff
+		border-radius: 4px
+		transition: $default-transition
+		cursor: pointer
+		&:hover
+			border-color: $active-item-color
+			color: $active-item-color
+
+@import "_media.sass"
+
+
+
