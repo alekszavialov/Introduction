@@ -1,59 +1,292 @@
-/*
-Error: File to import not found or unreadable: _media.sass.
-       Load path: C:/shpp/introduction/css/sass
-        on line 194 of css/sass/styles.sass
+@import url(normalize.css);
+@import url(../libs/Fonts-Awesome/css/all.css);
+p, a {
+  color: #fff; }
 
-189: 		cursor: pointer
-190: 		&:hover
-191: 			border-color: $active-item-color
-192: 			color: $active-item-color
-193: 
-194: @import "_media.sass"
+a, input {
+  outline: none; }
 
-Backtrace:
-css/sass/styles.sass:194
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:67:in `rescue in import'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:44:in `import'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:28:in `imported_file'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/import_node.rb:37:in `css_import?'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:310:in `visit_import'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:79:in `block in with_base'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:135:in `with_frame'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/stack.rb:79:in `with_base'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:158:in `visit'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `map'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/base.rb:36:in `visit'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:157:in `visit'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/visitors/perform.rb:10:in `visit'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/root_node.rb:36:in `css_tree'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/engine.rb:307:in `render_with_sourcemap'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:209:in `each'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-3.5.7/lib/sass/plugin/compiler.rb:320:in `block in watch'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
-C:/Ruby25-x64/lib/ruby/gems/2.5.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: _media.sass.\A        Load path: C:/shpp/introduction/css/sass\A         on line 194 of css/sass/styles.sass\A \A 189: 		cursor: pointer\A 190: 		&:hover\A 191: 			border-color: $active-item-color\A 192: 			color: $active-item-color\A 193: \A 194: @import \"_media.sass\""; }
+a {
+  transition: all 0.2s linear;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline;
+    color: #1abc9c; }
+
+h2 {
+  color: #fff;
+  margin: 0;
+  font-size: 22px;
+  margin: 68px 0 60px 0; }
+
+#phone-form {
+  display: none;
+  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: #fff;
+  z-index: 10;
+  text-align: center;
+  border: 2px solid #2c3e50; }
+  #phone-form input {
+    border-radius: 4px;
+    border: 1px solid #1abc9c;
+    padding: 5px;
+    margin: 10px;
+    width: calc(100% - 30px);
+    background: none; }
+  #phone-form input[type="submit"] {
+    cursor: pointer; }
+
+#phone-form-close {
+  font-size: 30px;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: #fff;
+  border-radius: 50%;
+  color: red;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: all 0.2s linear; }
+  #phone-form-close:hover {
+    color: #2c3e50; }
+
+.bg-color-first {
+  background: #fff; }
+
+.bg-color-second {
+  background: #1abc9c; }
+
+.wrapper {
+  width: 1100px;
+  margin: 0 auto; }
+
+.flex-grid {
+  display: -webkit-flex;
+    display-display: -moz-flex;
+    display-display: -ms-flex;
+    display-display: -o-flex;
+    display-display: flex;
+  align-items: center; }
+
+.half-size {
+  width: 50%; }
+
+.custom-size {
+  width: calc(100%/3); }
+
+.logo {
+  color: #1abc9c; }
+  .logo h1 {
+    font-size: 47px;
+    margin: 0; }
+  .logo:first-letter {
+    color: #2c3e50; }
+
+nav {
+  text-transform: uppercase;
+  justify-content: flex-end; }
+  nav a {
+    color: #2c3e50;
+    font-size: 16px;
+    margin-right: 70px;
+    transition: all 0.2s linear; }
+
+.phone-app {
+  padding: 60px 0; }
+  .phone-app .flex-grid {
+    align-items: end; }
+
+.phone-block-form {
+  background: url(../private/images/section_phone/iphone.png) no-repeat;
+  background-size: cover;
+  width: 205px;
+  height: 437px;
+  position: relative;
+  margin: 0 auto; }
+
+.phone-block-form-way {
+  position: relative;
+  text-align: center;
+  top: 64px;
+  background: linear-gradient(45deg, #013560 0%, #86a6ee 34%, #86a6ee 57%, #013560 100%);
+  margin: 0 13px 0 17px; }
+  .phone-block-form-way span {
+    display: block; }
+  .phone-block-form-way p {
+    margin-top: 26px;
+    font-size: 12px;
+    font-weight: bold; }
+  .phone-block-form-way i {
+    color: #3e9b50; }
+
+.phone-block-form-way-head {
+  font-size: 21px;
+  padding: 10px 0;
+  color: #fff;
+  background: linear-gradient(to right, #4d8ba5 0%, #4c5f70 100%);
+  font-style: italic; }
+
+.phone-block-form-way-item {
+  font-size: 11px;
+  padding: 4px 0;
+  border: 1px solid #1abc9c;
+  border-radius: 4px;
+  background: #fff;
+  color: #2c3e50;
+  margin: 0 4px; }
+
+.phone-block-form-way-submit {
+  background: #5ac0de;
+  color: #fff;
+  padding: 4px 6px;
+  border: 1px solid #4cb9d9;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 13px;
+  margin-bottom: 35px;
+  cursor: pointer;
+  transition: all 0.2s linear; }
+  .phone-block-form-way-submit:hover {
+    color: #2c3e50; }
+
+.phone-text p {
+  font-size: 16px;
+  margin-bottom: 44px; }
+.phone-text a {
+  border: 2px solid #fff;
+  border-radius: 3px;
+  font-size: 14px;
+  padding: 15px;
+  font-weight: bold;
+  display: inline-block; }
+  .phone-text a:hover {
+    border-color: #2c3e50;
+    color: #2c3e50; }
+
+.about {
+  text-align: center; }
+  .about .custom-size {
+    padding: 60px 0; }
+  .about span {
+    display: block;
+    font-weight: bold;
+    font-size: 16px; }
+  .about p, .about span {
+    color: #2c3e50; }
+  .about p {
+    font-size: 14px; }
+  .about i {
+    background: #1abc9c;
+    font-size: 38px;
+    color: #fff;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    height: 85px;
+    width: 85px;
+    position: relative; }
+    .about i:before {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%); }
+
+.contact {
+  padding: 60px;
+  text-align: center; }
+  .contact h2 {
+    margin-top: 0; }
+  .contact input, .contact textarea {
+    display: block;
+    width: 600px;
+    font-size: 12px;
+    padding: 10px;
+    margin: 0 auto 10px; }
+    .contact input:last-child, .contact textarea:last-child {
+      margin-bottom: 0; }
+    .contact input:placeholder, .contact textarea:placeholder {
+      color: #a9a9a9; }
+  .contact textarea {
+    resize: none; }
+  .contact button {
+    font-size: 16px;
+    padding: 10px 60px;
+    border: 2px solid #fff;
+    background: none;
+    color: #fff;
+    border-radius: 4px;
+    transition: all 0.2s linear;
+    cursor: pointer; }
+    .contact button:hover {
+      border-color: #2c3e50;
+      color: #2c3e50; }
+
+@media only screen and (max-width: 1280px) {
+  .wrapper {
+    width: auto;
+    padding: 0 20px; } }
+@media only screen and (max-width: 768px) {
+  .half-size, .custom-size {
+    width: 100%; }
+
+  .flex-grid {
+    flex-direction: column;
+    text-align: center; }
+
+  .logo h1 {
+    font-size: 60px;
+    margin-bottom: 20px; }
+
+  nav a {
+    margin: 0 0 10px 0;
+    font-size: 20px; }
+
+  .phone-block-form {
+    width: 280px;
+    height: 585px; }
+
+  .phone-block-form-way {
+    margin: 0 21px 0 23px;
+    top: 86px; }
+    .phone-block-form-way p {
+      font-size: 18px; }
+
+  .phone-form-head {
+    font-size: 30px; }
+
+  .phone-block-form-way-item {
+    font-size: 15px; }
+
+  .phone-block-form-way-submit {
+    font-size: 18px;
+    margin-bottom: 103px; }
+
+  h2 {
+    font-size: 32px; }
+
+  .phone-text p {
+    font-size: 22; }
+  .phone-text a {
+    font-size: 26px; }
+
+  .about span {
+    font-size: 22px; }
+  .about p {
+    font-size: 20px; }
+  .about .custom-size {
+    padding: 20px 0; }
+
+  .contact {
+    padding: 60px 0; }
+    .contact input, .contact textarea {
+      font-size: 18px;
+      width: calc(100% - 20px);
+      margin: 0 0 10px 0; }
+    .contact button {
+      font-size: 22px; } }
+
+/*# sourceMappingURL=styles.css.map */

@@ -7,6 +7,16 @@
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+	<div id="phone-form">
+		<form action="#">
+			<input type="text" placeholder="Where are you?">
+			<input type="text" placeholder="Where you want to go?">
+			<input type="submit" value="Calculate way!">
+		</form>
+		<div id="phone-form-close" class="fas fas fa-times">
+
+		</div>
+	</div>
 	<header class="bg-color-first">
 		<div class="wrapper flex-grid">
 			<div class="logo half-size">
@@ -23,18 +33,18 @@
 		<div class="wrapper flex-grid">
 			<div class="phone-block half-size">
 				<div class="phone-block-form">
-					<form action="#">
-						<span class="phone-form-head">Post Party</span>
+					<div class="phone-block-form-way">
+						<span class="phone-block-form-way-head">Post Party</span>
 						<p>Shortest way for this route:</p>
-						<span class="phone-block-form-item">Las Vegas, NY, USA</span>
+						<span class="phone-block-form-way-item">Las Vegas, NY, USA</span>
 						<i class="fas fa-arrow-down"></i>
-						<span class="phone-block-form-item">Manhattan, New York, NY, USA</span>
+						<span class="phone-block-form-way-item">Manhattan, New York, NY, USA</span>
 						<i class="fas fa-arrow-down"></i>
-						<span class="phone-block-form-item">Downtown, Los Angeles, CA, USA</span>
+						<span class="phone-block-form-way-item">Downtown, Los Angeles, CA, USA</span>
 						<i class="fas fa-arrow-down"></i>
-						<span class="phone-block-form-item">California, USA</span>
-						<input type="submit" value="Create another way" class="phone-block-form-submit">
-					</form>
+						<span class="phone-block-form-way-item">California, USA</span>
+						<input type="button" id="show-form" value="Create another way" class="phone-block-form-way-submit">
+					</div>
 				</div>
 			</div>
 			<div class="phone-text half-size">
@@ -75,5 +85,13 @@
 			</form>
 		</div>
 	</section>
+	<script>
+		document.getElementById('show-form').onclick=function(){
+				document.getElementById('phone-form').style.display='block';
+		};
+		document.getElementById('phone-form-close').onclick=function(){
+				document.getElementById('phone-form').style.display='none';
+		};
+	</script>
 </body>
 </html>

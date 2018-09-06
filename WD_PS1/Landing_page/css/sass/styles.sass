@@ -8,12 +8,16 @@ $text-color-second: #2c3e50
 $active-item-color-dark: #1abc9c
 $active-item-color: #2c3e50
 $default-transition: all .2s linear
+$center-element: translateX(-50%) translateY(-50%)
 
 p, a
 	color: $text-color-first
 
+a, input
+	outline: none
+
 a
-	transition: all .2s linear
+	transition: $default-transition
 	text-decoration: none
 	&:hover
 		text-decoration: underline
@@ -24,6 +28,42 @@ h2
 	margin: 0
 	font-size: 22px
 	margin: 68px 0 60px 0
+
+#phone-form
+	display: none
+	width: 300px
+	position: fixed
+	top: 50%
+	left: 50%
+	transform: $center-element
+	background: $bg-color-first
+	z-index: 10
+	text-align: center
+	border: 2px solid $text-color-second
+	input
+		border-radius: 4px
+		border: 1px solid $active-item-color-dark
+		padding: 5px
+		margin: 10px
+		width: calc(100% - 30px)
+		background: none
+	input[type="submit"]
+		cursor: pointer
+
+#phone-form-close
+	font-size: 30px
+	position: absolute
+	top: -15px
+	right: -15px
+	background: $bg-color-first
+	border-radius: 50%
+	color: red
+	width: 30px
+	height: 30px
+	cursor: pointer
+	transition: $default-transition
+	&:hover
+		color: $active-item-color
 
 .bg-color-first
 	background: $bg-color-first
@@ -78,12 +118,12 @@ nav
 	height: 437px
 	position: relative
 	margin: 0 auto
-	form
-		position: relative
-		text-align: center
-		top: 64px
-		background: linear-gradient(45deg, #013560 0%,#86a6ee 34%,#86a6ee 57%,#013560 100%)
-		margin: 0 13px 0 17px
+.phone-block-form-way
+	position: relative
+	text-align: center
+	top: 64px
+	background: linear-gradient(45deg, #013560 0%,#86a6ee 34%,#86a6ee 57%,#013560 100%)
+	margin: 0 13px 0 17px
 	span
 		display: block
 	p
@@ -93,13 +133,14 @@ nav
 	i
 		color: #3e9b50
 
-.phone-form-head
+.phone-block-form-way-head
 	font-size: 21px
 	padding: 10px 0
 	color: $text-color-first
 	background: linear-gradient(to right, #4d8ba5 0%,#4c5f70 100%)
+	font-style: italic
 
-.phone-block-form-item
+.phone-block-form-way-item
 	font-size: 11px
 	padding: 4px 0
 	border: 1px solid $bg-color-second
@@ -108,7 +149,7 @@ nav
 	color: $text-color-second
 	margin: 0 4px
 
-.phone-block-form-submit
+.phone-block-form-way-submit
 	background: #5ac0de
 	color: $text-color-first
 	padding: 4px 6px
@@ -160,7 +201,7 @@ nav
 			position: absolute
 			left: 50%
 			top: 50%
-			transform: translateX(-50%) translateY(-50%)
+			transform: $center-element
 .contact
 	padding: 60px
 	text-align: center
