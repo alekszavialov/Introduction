@@ -1,23 +1,29 @@
 @import url(normalize.css);
 @import url(../libs/Fonts-Awesome/css/all.css);
+
 p, a {
-  color: #fff; }
+  color: #fff;
+}
 
 a, input {
-  outline: none; }
+  outline: none;
+}
 
 a {
   transition: all 0.2s linear;
-  text-decoration: none; }
-  a:hover {
-    text-decoration: underline;
-    color: #1abc9c; }
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #1abc9c;
+}
 
 h2 {
   color: #fff;
-  margin: 0;
   font-size: 22px;
-  margin: 68px 0 60px 0; }
+  margin: 68px 0 60px 0;
+}
 
 #phone-form {
   display: none;
@@ -29,16 +35,21 @@ h2 {
   background: #fff;
   z-index: 10;
   text-align: center;
-  border: 2px solid #2c3e50; }
-  #phone-form input {
-    border-radius: 4px;
-    border: 1px solid #1abc9c;
-    padding: 5px;
-    margin: 10px;
-    width: calc(100% - 30px);
-    background: none; }
-  #phone-form input[type="submit"] {
-    cursor: pointer; }
+  border: 2px solid #2c3e50;
+}
+
+#phone-form input {
+  border-radius: 4px;
+  border: 1px solid #1abc9c;
+  padding: 5px;
+  margin: 10px;
+  width: calc(100% - 30px);
+  background: none;
+}
+
+#phone-form input[type="submit"] {
+  cursor: pointer;
+}
 
 #phone-form-close {
   font-size: 30px;
@@ -51,55 +62,71 @@ h2 {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  transition: all 0.2s linear; }
-  #phone-form-close:hover {
-    color: #2c3e50; }
+  transition: all 0.2s linear;
+}
+
+#phone-form-close:hover {
+  color: #2c3e50;
+}
 
 .bg-color-first {
-  background: #fff; }
+  background: #fff;
+}
 
 .bg-color-second {
-  background: #1abc9c; }
+  background: #1abc9c;
+}
 
 .wrapper {
   width: 1100px;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .flex-grid {
-  display: -webkit-flex;
-    display-display: -moz-flex;
-    display-display: -ms-flex;
-    display-display: -o-flex;
-    display-display: flex;
-  align-items: center; }
+  display: flex;
+  align-items: center;
+}
 
 .half-size {
-  width: 50%; }
+  width: 50%;
+}
 
 .custom-size {
-  width: calc(100%/3); }
+  width: calc(100%/3);
+}
 
 .logo {
-  color: #1abc9c; }
-  .logo h1 {
-    font-size: 47px;
-    margin: 0; }
-  .logo:first-letter {
-    color: #2c3e50; }
+  color: #1abc9c;
+}
+
+.logo h1 {
+  font-size: 47px;
+  margin: 0;
+}
+
+.logo:first-letter {
+  color: #2c3e50;
+}
 
 nav {
   text-transform: uppercase;
-  justify-content: flex-end; }
-  nav a {
-    color: #2c3e50;
-    font-size: 16px;
-    margin-right: 70px;
-    transition: all 0.2s linear; }
+  justify-content: flex-end;
+}
+
+nav a {
+  color: #2c3e50;
+  font-size: 16px;
+  margin-right: 70px;
+  transition: all 0.2s linear;
+}
 
 .phone-app {
-  padding: 60px 0; }
-  .phone-app .flex-grid {
-    align-items: end; }
+  padding: 60px 0;
+}
+
+.phone-app .flex-grid {
+  align-items: end;
+}
 
 .phone-block-form {
   background: url(../private/images/section_phone/iphone.png) no-repeat;
@@ -107,29 +134,38 @@ nav {
   width: 205px;
   height: 437px;
   position: relative;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .phone-block-form-way {
   position: relative;
   text-align: center;
   top: 64px;
   background: linear-gradient(45deg, #013560 0%, #86a6ee 34%, #86a6ee 57%, #013560 100%);
-  margin: 0 13px 0 17px; }
-  .phone-block-form-way span {
-    display: block; }
-  .phone-block-form-way p {
-    margin-top: 26px;
-    font-size: 12px;
-    font-weight: bold; }
-  .phone-block-form-way i {
-    color: #3e9b50; }
+  margin: 0 13px 0 17px;
+}
+
+.phone-block-form-way span {
+  display: block;
+}
+
+.phone-block-form-way p {
+  margin-top: 26px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.phone-block-form-way i {
+  color: #3e9b50;
+}
 
 .phone-block-form-way-head {
   font-size: 21px;
   padding: 10px 0;
   color: #fff;
   background: linear-gradient(to right, #4d8ba5 0%, #4c5f70 100%);
-  font-style: italic; }
+  font-style: italic;
+}
 
 .phone-block-form-way-item {
   font-size: 11px;
@@ -138,7 +174,8 @@ nav {
   border-radius: 4px;
   background: #fff;
   color: #2c3e50;
-  margin: 0 4px; }
+  margin: 0 4px;
+}
 
 .phone-block-form-way-submit {
   background: #5ac0de;
@@ -150,143 +187,210 @@ nav {
   margin-top: 13px;
   margin-bottom: 35px;
   cursor: pointer;
-  transition: all 0.2s linear; }
-  .phone-block-form-way-submit:hover {
-    color: #2c3e50; }
+  transition: all 0.2s linear;
+}
+
+.phone-block-form-way-submit:hover {
+  color: #2c3e50;
+}
 
 .phone-text p {
   font-size: 16px;
-  margin-bottom: 44px; }
+  margin-bottom: 44px;
+}
+
 .phone-text a {
   border: 2px solid #fff;
   border-radius: 3px;
   font-size: 14px;
   padding: 15px;
   font-weight: bold;
-  display: inline-block; }
-  .phone-text a:hover {
-    border-color: #2c3e50;
-    color: #2c3e50; }
+  display: inline-block;
+}
+
+.phone-text a:hover {
+  border-color: #2c3e50;
+  color: #2c3e50;
+}
 
 .about {
-  text-align: center; }
-  .about .custom-size {
-    padding: 60px 0; }
-  .about span {
-    display: block;
-    font-weight: bold;
-    font-size: 16px; }
-  .about p, .about span {
-    color: #2c3e50; }
-  .about p {
-    font-size: 14px; }
-  .about i {
-    background: #1abc9c;
-    font-size: 38px;
-    color: #fff;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    height: 85px;
-    width: 85px;
-    position: relative; }
-    .about i:before {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translateX(-50%) translateY(-50%); }
+  text-align: center;
+}
+
+.about .custom-size {
+  padding: 60px 0;
+}
+
+.about span {
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.about p, .about span {
+  color: #2c3e50;
+}
+
+.about p {
+  font-size: 14px;
+}
+
+.about i {
+  background: #1abc9c;
+  font-size: 38px;
+  color: #fff;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  height: 85px;
+  width: 85px;
+  position: relative;
+}
+
+.about i:before {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
 
 .contact {
   padding: 60px;
-  text-align: center; }
-  .contact h2 {
-    margin-top: 0; }
-  .contact input, .contact textarea {
-    display: block;
-    width: 600px;
-    font-size: 12px;
-    padding: 10px;
-    margin: 0 auto 10px; }
-    .contact input:last-child, .contact textarea:last-child {
-      margin-bottom: 0; }
-    .contact input:placeholder, .contact textarea:placeholder {
-      color: #a9a9a9; }
-  .contact textarea {
-    resize: none; }
-  .contact button {
-    font-size: 16px;
-    padding: 10px 60px;
-    border: 2px solid #fff;
-    background: none;
-    color: #fff;
-    border-radius: 4px;
-    transition: all 0.2s linear;
-    cursor: pointer; }
-    .contact button:hover {
-      border-color: #2c3e50;
-      color: #2c3e50; }
+  text-align: center;
+}
 
-@media only screen and (max-width: 1280px) {
+.contact h2 {
+  margin-top: 0;
+}
+
+.contact input, .contact textarea {
+  display: block;
+  width: 600px;
+  font-size: 12px;
+  padding: 10px;
+  margin: 0 auto 10px;
+}
+
+.contact input:last-child, .contact textarea:last-child {
+  margin-bottom: 0;
+}
+
+.contact input:placeholder, .contact textarea:placeholder {
+  color: #a9a9a9;
+}
+
+.contact textarea {
+  resize: none;
+}
+
+.contact button {
+  font-size: 16px;
+  padding: 10px 60px;
+  border: 2px solid #fff;
+  background: none;
+  color: #fff;
+  border-radius: 4px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.contact button:hover {
+  border-color: #2c3e50;
+  color: #2c3e50;
+}
+
+@media only screen and (max-width:1280px) {
   .wrapper {
     width: auto;
-    padding: 0 20px; } }
-@media only screen and (max-width: 768px) {
+    padding: 0 20px;
+  }
+
+}
+
+@media only screen and (max-width:768px) {
   .half-size, .custom-size {
-    width: 100%; }
+    width: 100%;
+  }
 
   .flex-grid {
     flex-direction: column;
-    text-align: center; }
+    text-align: center;
+  }
 
   .logo h1 {
     font-size: 60px;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+  }
 
   nav a {
     margin: 0 0 10px 0;
-    font-size: 20px; }
+    font-size: 20px;
+  }
 
   .phone-block-form {
     width: 280px;
-    height: 585px; }
+    height: 585px;
+  }
 
   .phone-block-form-way {
     margin: 0 21px 0 23px;
-    top: 86px; }
-    .phone-block-form-way p {
-      font-size: 18px; }
+    top: 86px;
+  }
+
+  .phone-block-form-way p {
+    font-size: 18px;
+  }
 
   .phone-form-head {
-    font-size: 30px; }
+    font-size: 30px;
+  }
 
   .phone-block-form-way-item {
-    font-size: 15px; }
+    font-size: 15px;
+  }
 
   .phone-block-form-way-submit {
     font-size: 18px;
-    margin-bottom: 103px; }
+    margin-bottom: 103px;
+  }
 
   h2 {
-    font-size: 32px; }
+    font-size: 32px;
+  }
 
   .phone-text p {
-    font-size: 22; }
+    font-size: 22;
+  }
+
   .phone-text a {
-    font-size: 26px; }
+    font-size: 26px;
+  }
 
   .about span {
-    font-size: 22px; }
+    font-size: 22px;
+  }
+
   .about p {
-    font-size: 20px; }
+    font-size: 20px;
+  }
+
   .about .custom-size {
-    padding: 20px 0; }
+    padding: 20px 0;
+  }
 
   .contact {
-    padding: 60px 0; }
-    .contact input, .contact textarea {
-      font-size: 18px;
-      width: calc(100% - 20px);
-      margin: 0 0 10px 0; }
-    .contact button {
-      font-size: 22px; } }
+    padding: 60px 0;
+  }
+
+  .contact input, .contact textarea {
+    font-size: 18px;
+    width: calc(100% - 20px);
+    margin: 0 0 10px 0;
+  }
+
+  .contact button {
+    font-size: 22px;
+  }
+
+}
 
 /*# sourceMappingURL=styles.css.map */

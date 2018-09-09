@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-				<meta charset="UTF-8">
-				<title>WD_PS2</title>
-				<style>
-					.wrapper{
-						margin: 0 auto 20px;
-						width: 600px;
-						text-align: center;
-					}
-					.wrapper input, .wrapper button, .wrapper textarea{
-						display: block;
-						font-size: 20px;
-						outline: none;
-						width: 300px;
-						margin: 0 auto 20px;
-					}
-					.wrapper p{
-						font-size: 26px;
-					}
-					#steps-answer{
-						text-align: left;
-					}
-					.white{
-						display: inline-block;
-						vertical-align: middle;
-						width: 60px;
-						height: 60px;
-						background: #f9b7b7;
-					}
-					.black{
-						display: inline-block;
-						vertical-align: middle;
-						width: 60px;
-						height: 60px;
-						background: #000;
-					}
-				</style>
+	<meta charset="UTF-8">
+	<title>WD_PS2</title>
+	<style>
+	.wrapper{
+		margin: 0 auto 20px;
+		width: 600px;
+		text-align: center;
+	}
+	.wrapper input, .wrapper button, .wrapper textarea{
+		display: block;
+		font-size: 20px;
+		outline: none;
+		width: 300px;
+		margin: 0 auto 20px;
+	}
+	.wrapper p{
+		font-size: 26px;
+	}
+	#steps-answer{
+		text-align: left;
+	}
+	.white{
+		display: inline-block;
+		vertical-align: middle;
+		width: 60px;
+		height: 60px;
+		background: #f9b7b7;
+	}
+	.black{
+		display: inline-block;
+		vertical-align: middle;
+		width: 60px;
+		height: 60px;
+		background: #000;
+	}
+</style>
 </head>
 <body>
 	<section class="task">
@@ -104,6 +104,7 @@
 			<p>Найти квартиру</p>
 			<input id="room-four-val" type="text" value="15">
 			<button onclick="room()">Find room</button>
+			<p id="room-answer"></p>
 		</div>
 		<div class="wrapper">
 			<h3>Найти сумму цифр введённого числа</h3>
