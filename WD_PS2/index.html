@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+				<meta charset="UTF-8">
+				<title>WD_PS2</title>
+				<style>
+					.wrapper{
+						margin: 0 auto 20px;
+						width: 600px;
+						text-align: center;
+					}
+					.wrapper input, .wrapper button, .wrapper textarea{
+						display: block;
+						font-size: 20px;
+						outline: none;
+						width: 300px;
+						margin: 0 auto 20px;
+					}
+					.wrapper p{
+						font-size: 26px;
+					}
+					#steps-answer{
+						text-align: left;
+					}
+					.white{
+						display: inline-block;
+						vertical-align: middle;
+						width: 60px;
+						height: 60px;
+						background: #f9b7b7;
+					}
+					.black{
+						display: inline-block;
+						vertical-align: middle;
+						width: 60px;
+						height: 60px;
+						background: #000;
+					}
+				</style>
+</head>
+<body>
+	<section class="task">
+		<div class="wrapper">
+			<h3>посчитать сумму чисел от -1000 до 1000</h3>
+			<input id="get-sum-first-val" type="text">
+			<input id="get-sum-second-val" type="text">
+			<button onclick="getSumm()">Get summ</button>
+			<p id="get-sum-answer"></p>
+		</div>
+		<div class="wrapper">
+			<h3>посчитать сумму чисел от -1000 до 1000, суммируя только числа которые заканчиваются на 2,3, и 7</h3>
+			<input id="get-sum-end-first-val" type="text">
+			<input id="get-sum-end-second-val" type="text">
+			<button onclick="getSummEnd()">Get summ</button>
+			<p id="get-sum-end-answer"></p>
+		</div>
+		<div class="wrapper">
+			<h3>посчитать сумму чисел от -1000 до 1000, суммируя только числа которые заканчиваются на 2,3, и 7</h3>
+			<input id="steps-first-val" type="text">
+			<button onclick="steps()">Create steps</button>
+			<p id="steps-answer"></p>
+		</div>
+		<div class="wrapper">
+			<h3>Пользователь вводит время в секундах. Вывести в формате: hh:mm:ss (01:05:20)</h3>
+			<input id="seconds-first-val" type="text">
+			<button onclick="seconds()">Create steps</button>
+			<p id="seconds-answer"></p>
+		</div>
+		<div class="wrapper">
+			<h3>Для указанного возраста студента вывести фразу вида "22 года" ( 1 год, 20 лет....)</h3>
+			<input id="date-years-first-val" type="text">
+			<button onclick="dateYears()">Create steps</button>
+			<p id="date-years-answer"></p>
+		</div>
+		<div class="wrapper">
+			<h3>Вычислить промежуток времени</h3>
+			<input id="date-difference-first-val" type="text" value="October 13, 2014 11:13:00">
+			<input id="date-difference-second-val" type="text" value="October 15, 2014 11:13:00">
+			<button onclick="dateDifferense()">Show difference</button>
+			<p id="date-difference-answer"></p>
+		</div>
+		<div class="wrapper">
+			<h3>Знаки зодиака</h3>
+			<input id="zodiac-first-val" type="text" value="2014-12-31">
+			<button onclick="zodiacSign()">Show zodiac sign</button>
+			<p id="zodiac-answer"></p>
+			<img src="" alt="" id="zodiac-answer-img">
+		</div>
+		<div class="wrapper">
+			<h3>Шахматная доска</h3>
+			<input id="chess-first-val" type="text" value="8">
+			<input id="chess-second-val" type="text" value="8">
+			<button onclick="chess()">Create desc</button>
+			<div id="chess-box"></div>
+		</div>
+		<div class="wrapper">
+			<h3>Определить номер подъезда и этаж по номеру квартиры</h3>
+			<p>Количество подъездов</p>
+			<input id="room-first-val" type="text" value="5">
+			<p>Количество квартир </p>
+			<input id="room-second-val" type="text" value="3">
+			<p>Количество этажей</p>
+			<input id="room-third-val" type="text" value="5">
+			<p>Найти квартиру</p>
+			<input id="room-four-val" type="text" value="15">
+			<button onclick="room()">Find room</button>
+		</div>
+		<div class="wrapper">
+			<h3>Найти сумму цифр введённого числа</h3>
+			<input id="find-val-first-val" type="text" value="5">
+			<button onclick="calcValue()">Calc value</button>
+			<p id="find-val-answer"></p>
+		</div>
+		<div class="wrapper">
+			<h3>Дан некий textarea, в который пользователь вводит ссылки через запятую. Когда textarea станет неактивным удалить http:// и https:// из ссылок и вывести их отсортированным по алфавиту списком ссылок.</h3>
+			<textarea name="text" cols="30" rows="10" id="sortsrc"></textarea>
+		</div>
+	</section>
+	<script src="common.js"></script>
+</body>
+</html>
