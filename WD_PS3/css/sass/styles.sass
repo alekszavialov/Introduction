@@ -1,0 +1,57 @@
+@import "normalize.css"
+
+$default-transition: all .2s linear
+$center-element: translateX(-50%) translateY(-50%)
+
+.select
+	border: 1px solid #cacaca
+	width: 300px
+	display: flex
+	flex-flow: column
+	border-radius: 4px
+
+.select-items
+	display: none
+
+.select-head
+	padding: 10px
+	display: flex
+	align-items: center
+	justify-content: space-between
+	cursor: pointer
+	&:hover
+		.select-arrow
+			border-top-color: red
+		.select-selected
+			color: #000
+
+.select-selected
+	color: #cacaca
+	transition: $default-transition
+
+.select-arrow
+	width: 0
+	height: 0
+	border-left: 10px solid transparent
+	border-right: 10px solid transparent
+	border-top: 10px solid #000	
+	transition: $default-transition
+
+.select-item
+	padding: 10px
+	display: flex
+	align-items: center
+	transition: $default-transition
+	cursor: pointer
+	&:hover
+		background: #f3f3f3
+
+.select-image
+	width: 30px
+	height: 30px
+	border-radius: 50%
+	margin-right: 5px
+
+.select-item-value
+	white-space: nowrap
+	color: #000

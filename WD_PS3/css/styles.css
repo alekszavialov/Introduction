@@ -1,0 +1,65 @@
+@import url(normalize.css);
+.select {
+  border: 1px solid #cacaca;
+  width: 300px;
+  display: flex;
+  flex-flow: column;
+  border-radius: 4px;
+}
+
+.select-items {
+  display: none;
+}
+
+.select-head {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.select-head:hover .select-arrow {
+  border-top-color: red;
+}
+.select-head:hover .select-selected {
+  color: #000;
+}
+
+.select-selected {
+  color: #cacaca;
+  transition: all 0.2s linear;
+}
+
+.select-arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #000;
+  transition: all 0.2s linear;
+}
+
+.select-item {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+.select-item:hover {
+  background: #f3f3f3;
+}
+
+.select-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.select-item-value {
+  white-space: nowrap;
+  color: #000;
+}
+
+/*# sourceMappingURL=styles.css.map */
