@@ -29,8 +29,10 @@ h2
 	font-size: 22px
 	margin: 68px 0 60px 0
 
-#phone-form
+.hidden
 	display: none
+
+#phone-form
 	width: 300px
 	position: fixed
 	top: 50%
@@ -47,8 +49,8 @@ h2
 		margin: 10px
 		width: calc(100% - 30px)
 		background: none
-	input[type="submit"]
-		cursor: pointer
+		&[type="submit"]
+			cursor: pointer
 
 #phone-form-close
 	font-size: 30px
@@ -76,11 +78,7 @@ h2
 	margin: 0 auto
 
 .flex-grid
-	display: -webkit-flex
-		display: -moz-flex
-		display: -ms-flex
-		display: -o-flex
-		display: flex
+	display: flex
 	align-items: center
 
 .half-size
@@ -215,8 +213,8 @@ nav
 		margin: 0 auto 10px
 		&:last-child
 			margin-bottom: 0
-		&:placeholder
-				color: #a9a9a9
+		&::placeholder
+			color: #a9a9a9
 	textarea
 		resize: none
 	button
@@ -231,7 +229,9 @@ nav
 		&:hover
 			border-color: $active-item-color
 			color: $active-item-color
-
+.input-form
+	h2
+		margin: 20px 0 5px 0
 @import "_media.sass"
 
 
