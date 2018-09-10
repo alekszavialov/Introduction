@@ -1,5 +1,9 @@
 @import url(normalize.css);
 @import url(../libs/Fonts-Awesome/css/all.css);
+p, a, span {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 p, a {
   color: #fff;
 }
@@ -19,7 +23,6 @@ a:hover {
 
 h2 {
   color: #fff;
-  margin: 0;
   font-size: 22px;
   margin: 68px 0 60px 0;
 }
@@ -335,7 +338,7 @@ nav a {
   }
 
   .phone-text p {
-    font-size: 22;
+    font-size: 22px;
   }
   .phone-text a {
     font-size: 26px;
