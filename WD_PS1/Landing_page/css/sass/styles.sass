@@ -1,6 +1,3 @@
-@import "normalize.css"
-@import "../libs/Fonts-Awesome/css/all.css"
-
 $bg-color-first: #fff
 $bg-color-second: #1abc9c
 $text-color-first: #fff
@@ -75,8 +72,8 @@ h2
 .bg-color-second
 	background: $bg-color-second
 
-.wrapper
-	width: 1100px
+.container
+	width: 960px
 	margin: 0 auto
 
 .flex-grid
@@ -180,6 +177,7 @@ nav
 	text-align: center
 	.custom-size
 		padding: 60px 0
+		margin: 0 1px
 	span
 		display: block
 		font-weight: bold
@@ -234,6 +232,19 @@ nav
 .input-form
 	h2
 		margin: 20px 0 5px 0
+
+.checkbox-block, .radio-block
+	display: flex
+	flex-flow: row wrap
+	align-items: baseline
+	input, 
+		width: auto
+		flex: 1 0 20%
+	label
+		flex: 1 0 80%
+		text-align: left	
+	h2
+		flex: 1 0 100%	
 @import "_media.sass"
 
 

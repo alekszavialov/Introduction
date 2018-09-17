@@ -4,7 +4,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Landing page</title>
+	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="libs/Fonts-Awesome/css/all.css">
 </head>
 <body>
 	<div id="phone-form" class="hidden">
@@ -17,7 +19,7 @@
 		</div>
 	</div>
 	<header class="bg-color-first">
-		<div class="wrapper flex-grid">
+		<div class="container flex-grid">
 			<div class="logo half-size">
 				<h1>N++</h1>
 			</div>
@@ -29,7 +31,7 @@
 		</div>
 	</header>
 	<section class="phone-app bg-color-second">
-		<div class="wrapper flex-grid">
+		<div class="container flex-grid">
 			<div class="phone-block half-size">
 				<div class="phone-block-form">
 					<div class="phone-block-form-way">
@@ -54,7 +56,7 @@
 		</div>
 	</section>
 	<section class="about bg-color-first">
-		<div class="wrapper flex-grid">
+		<div class="container flex-grid">
 			<div class="custom-size">
 				<i class="fas fa-code"></i>
 				<span>Web development</span>
@@ -73,7 +75,7 @@
 		</div>
 	</section>
 	<section class="contact bg-color-second">
-		<div class="wrapper">
+		<div class="container">
 			<h2>Contact us!</h2>
 			<form action="#">
 				<input type="text" placeholder="Type here your name, please">
@@ -92,13 +94,21 @@
 				<h2>Input type reset</h2>
 				<input type="text" placeholder="test" value="test">
 				<input type="reset">
-				<h2>Input type radio</h2>
-				<input type="radio" name="test" value="test1">
-				<input type="radio" name="test" value="test2">
-				<input type="radio" name="test" value="test3">
-				<h2>Input type checkbox</h2>
-				<input type="checkbox" name="test1" value="test1">
-				<input type="checkbox" name="test2" value="test2">
+				<div class="radio-block">
+					<h2>Input type radio</h2>
+					<input id="radio1" type="radio" name="test" value="test1"><label for="radio1">Option 1</label>
+					<input id="radio2" type="radio" name="test" value="test2">
+					<label for="radio2">Option 2</label>
+					<input id="radio3" type="radio" name="test" value="test3">
+					<label for="radio3">Option 3</label>					
+				</div>
+				<div class="checkbox-block">
+					<h2>Input type checkbox</h2>
+					<input type="checkbox" id="checkbox1" name="test1" value="test1">
+					<label for="checkbox1">Option 1</label>
+					<input type="checkbox" id="checkbox2" name="test2" value="test2">
+					<label for="checkbox2">Option 2</label>
+				</div>			
 				<h2>Input type button</h2>
 				<input type="button" value="button">
 				<h2>Input type color</h2>

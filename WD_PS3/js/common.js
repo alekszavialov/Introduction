@@ -26,12 +26,15 @@ $(function() {
 
 $('.select-head').on({
 	click: function () {
+		if($('.select.select-active').is(':focus')){
+			$('.select').blur();
+		}
 		$('.select').toggleClass('select-active');
 		$('.select-items').fadeToggle( "slow" ); 		
 	}
 });
 
-$('.select').on('focusout', function () {
+$('.select').on('blur', function () {
 	$('.select-items').fadeToggle( "slow" ); 
 	$('.select-active').toggleClass('select-active');
 });
