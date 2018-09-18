@@ -31,7 +31,7 @@ h2
 .hidden
 	display: none
 
-#phone-form
+.phone-form
 	width: 300px
 	position: fixed
 	top: 50%
@@ -51,7 +51,7 @@ h2
 		&[type="submit"]
 			cursor: pointer
 
-#phone-form-close
+.phone-form-close
 	font-size: 30px
 	position: absolute
 	top: -15px
@@ -73,7 +73,7 @@ h2
 	background: $bg-color-second
 
 .container
-	width: 960px
+	width: 1100px
 	margin: 0 auto
 
 .flex-grid
@@ -88,20 +88,24 @@ h2
 
 .logo
 	color: $bg-color-second
+	padding: 0 0 7px 0
 	h1
-		font-size: 47px
-		margin: 0
+		font-size: 67px
+		margin: 0 0 0 17px
 	&:first-letter
 		color: $text-color-second
 
 nav
 	text-transform: uppercase
 	justify-content: flex-end
+	margin: 4px 0px 0 0
 	a
 		color: $text-color-second
 		font-size: 16px
-		margin-right: 70px
 		transition: $default-transition
+		margin: 0 63px 0 0
+		&:last-child
+			margin: 0
 
 .phone-app
 	padding: 60px 0
@@ -114,62 +118,74 @@ nav
 	width: 205px
 	height: 437px
 	position: relative
-	margin: 0 auto
+	margin: 0 0px 0 184px
 .phone-block-form-way
 	position: relative
 	text-align: center
 	top: 64px
+	font-size: 0
 	background: linear-gradient(45deg, #013560 0%,#86a6ee 34%,#86a6ee 57%,#013560 100%)
 	margin: 0 13px 0 17px
+	height: 312px
 	span
 		display: block
 	p
 		margin-top: 26px
-		font-size: 12px
+		font-size: 11px
 		font-weight: bold
+		margin-bottom: 4px
 	i
 		color: #3e9b50
+		font-size: 12px
 
 .phone-block-form-way-head
-	font-size: 21px
-	padding: 10px 0
+	font-size: 18px
+	padding: 8px 0
 	color: $text-color-first
 	background: linear-gradient(to right, #4d8ba5 0%,#4c5f70 100%)
 	font-style: italic
 
 .phone-block-form-way-item
-	font-size: 11px
-	padding: 4px 0
+	font-size: 6px
+	padding: 6px 0
 	border: 1px solid $bg-color-second
 	border-radius: 4px
 	background: $text-color-first
 	color: $text-color-second
-	margin: 0 4px
+	margin: 0 auto 0px
+	width: 112px
 
 .phone-block-form-way-submit
 	background: #5ac0de
 	color: $text-color-first
-	padding: 4px 6px
+	padding: 3px 2px
 	border: 1px solid #4cb9d9
 	border-radius: 5px
-	font-size: 14px
-	margin-top: 13px
+	font-size: 8px
+	margin-top: 2px
 	margin-bottom: 35px
 	cursor: pointer
+	width: 70px
 	transition: $default-transition
 	&:hover
 		color: $text-color-second
 .phone-text
+	h2
+		margin: 64px 0 49px 8px
+		font-size: 35px
+		letter-spacing: 1px
 	p
-		font-size: 16px
+		font-size: 19px
 		margin-bottom: 44px
+		margin-left: 10px
 	a
 		border: 2px solid $text-color-first
-		border-radius: 3px
-		font-size: 14px
-		padding: 15px
+		border-radius: 6px
+		font-size: 23px
+		padding: 11px 17px
 		font-weight: bold
 		display: inline-block
+		margin: 11px 0 0 10px
 		&:hover
 			border-color: $active-item-color
 			color: $active-item-color
@@ -181,17 +197,22 @@ nav
 	span
 		display: block
 		font-weight: bold
-		font-size: 16px
+		font-size: 18px
+		margin-left: 19px
 	p, span
 		color: $text-color-second
 	p
-		font-size: 14px
+		font-size: 16px
+		letter-spacing: 1px
+		margin-top: 22px
+		line-height: 19px
 	i
 		background: $bg-color-second
 		font-size: 38px
+		margin-left: 29px
 		color: $text-color-first
 		border-radius: 50%
-		margin-bottom: 20px
+		margin-bottom: 15px
 		height: 85px
 		width: 85px
 		position: relative
@@ -201,10 +222,12 @@ nav
 			top: 50%
 			transform: $center-element
 .contact
-	padding: 60px
+	padding: 36px
 	text-align: center
 	h2
 		margin-top: 0
+		font-size: 34px
+		margin-bottom: 42px
 	input, textarea
 		display: block
 		width: 600px
@@ -245,6 +268,19 @@ nav
 		text-align: left	
 	h2
 		flex: 1 0 100%	
+.input-box
+	display: flex
+	align-items: center	
+	margin: 5px 0
+	label
+		font-size: 22px
+		flex: 1 0 20%
+		color: $text-color-first
+	input
+		margin: 0
+		flex: 1 0 80%	
+		box-sizing: border-box
+		height: auto
 @import "_media.sass"
 
 
