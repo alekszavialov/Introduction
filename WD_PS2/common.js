@@ -38,7 +38,7 @@ function getSummEnd() {
 /** Create list of elements */
 function steps() {
 	let firstValue = +document.getElementById("steps-first-val").value;
-	if (!checkInteger(firstValue)) {
+	if (!checkInteger(firstValue) || !checkNegative(firstValue)) {
 		return;
 	}
 	let result = "";
@@ -54,7 +54,7 @@ function steps() {
 /** Conver seconds to hh:mm:ss format */
 function seconds() {
 	let firstValue = +document.getElementById("seconds-first-val").value;
-	if (!checkInteger(firstValue)) {
+	if (!checkInteger(firstValue) || !checkNegative(firstValue)) {
 		return;
 	}
 	let result = new Date(null);
@@ -66,7 +66,7 @@ function seconds() {
 /** Decline values  */
 function dateYears() {
 	let firstValue = +document.getElementById("date-years-first-val").value;
-	if (!checkInteger(firstValue)) {
+	if (!checkInteger(firstValue) || !checkNegative(firstValue)) {
 		return;
 	}
 	const yearText = ["Года", "Год", "Лет"];
@@ -114,7 +114,7 @@ function dateDifferense() {
 	dateDiff.push(firsDate.getMinutes() - secondDate.getMinutes());
 	dateDiff.push(firsDate.getSeconds() - secondDate.getSeconds());
 	const dateValues = [12, new Date(dateDiff[0], dateDiff[1], 0).getDate(), 24, 60, 60];
-	for (let i = dateDiff.length - 1; i > 1; i--) {
+	for (let i = dateDiff.length - 1; i > 0; i--) {
 		if (dateDiff[i] < 0) {
 			if (dateDiff[i] == 2) {
 				--dateDiff[i - 1];
@@ -242,9 +242,12 @@ function zodiacSign() {
 
 /** Create chess desc */
 function chess() {
-	let firstValue = document.getElementById("chess-first-val").value;
-	let secondValue = document.getElementById("chess-second-val").value;
+	let firstValue = +document.getElementById("chess-first-val").value;
+	let secondValue = +document.getElementById("chess-second-val").value;
 	if (!checkInteger(firstValue) || !checkInteger(secondValue)) {
+		return;
+	}
+	if (!checkNegative(firstValue) || !checkNegative(secondValue)) {
 		return;
 	}
 	let chessBox = document.getElementById('chess-box');
@@ -268,11 +271,17 @@ function chess() {
 }
 
 function room() {
-	let houseValue = document.getElementById("room-first-val").value;
-	let apatmentValue = document.getElementById("room-second-val").value;
-	let florValue = document.getElementById("room-third-val").value;
-	let searchApartmentValue = document.getElementById("room-four-val").value;
+	let houseValue = +document.getElementById("room-first-val").value;
+	let apatmentValue = +document.getElementById("room-second-val").value;
+	let florValue = +document.getElementById("room-third-val").value;
+	let searchApartmentValue = +document.getElementById("room-four-val").value;
 	if (!checkInteger(houseValue) || !checkInteger(apatmentValue) || !checkInteger(florValue) || !checkInteger(searchApartmentValue)) {
+		return;
+	}
+	if (!checkNegative(houseValue) || !checkNegative(apatmentValue) || !checkNegative(florValue) || !checkNegative(searchApartmentValue)) {
+		return;
+	}
+	if (houseValue === 0 || apatmentValue === 0 || florValue === 0 || searchApartmentValue === 0) {
 		return;
 	}
 	let appartmentsInHouse = florValue * apatmentValue;
@@ -303,6 +312,11 @@ function calcValue() {
 /** Check if value is integer */
 function checkInteger(value) {
 	return parseInt(value, 10) == value ? true : alert("value '" + value + "' is incorrect! Enter correct value");
+}
+
+/** Check if value is negative */
+function checkNegative(value) {
+	return value > 0 ? true : alert("value '" + value + "' is incorrect! Enter correct value");
 }
 
 /** When focusout textarea = remove http:// and https:// from textarean values, sort values and add it to textarea */
