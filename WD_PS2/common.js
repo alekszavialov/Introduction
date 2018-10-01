@@ -1,8 +1,15 @@
-/** Calculate summ of few values */
+var answerText = "";
+
+/**
+First task
+Calculate summ of few values
+*/
 function getSumm() {
-	let firstValue = +document.getElementById("get-sum-first-val").value;
-	let secondValue = +document.getElementById("get-sum-second-val").value;
-	if (!checkInteger(firstValue) || !checkInteger(secondValue)) {
+	let firstValue = getInteger("get-sum-first-val");
+	let secondValue = getInteger("get-sum-second-val");
+	const answerBlock = document.getElementById("get-sum-answer");
+	if (answerText !== ""){
+		printAnswer(answerBlock, answerText);
 		return;
 	}
 	let result = 0;
@@ -12,14 +19,39 @@ function getSumm() {
 	for (let i = firstValue; i <= secondValue; i++) {
 		result += i;
 	}
-	document.getElementById("get-sum-answer").innerText = `Result is : ${result}`;
+	answerText = `Result is : ${result}`;
+	printAnswer(answerBlock, answerText);
 }
 
-/** Calculate summ of few values ending with 2, 3 or 7 */
+function getInteger(object){
+	let inputData = document.getElementById(object).value;
+	if (inputData === "" || !Number.isInteger(+inputData)){
+		if (inputData === ""){
+			answerText += `"Some value is empty or "e" `;
+		} else {
+			answerText += `"Incorrect value : ${inputData}" `;
+		}
+		return;
+	}
+	return +inputData;
+}
+
+/** Print ansver */
+function printAnswer(object, text){
+	object.innerText = text;
+	answerText = "";
+}
+
+/**
+Second task
+Calculate summ of few values ending with 2, 3 or 7
+*/
 function getSummEnd() {
-	let firstValue = +document.getElementById("get-sum-end-first-val").value;
-	let secondValue = +document.getElementById("get-sum-end-second-val").value;
-	if (!checkInteger(firstValue) || !checkInteger(secondValue)) {
+	let firstValue = getInteger("get-sum-end-first-val");
+	let secondValue = getInteger("get-sum-end-second-val");
+	const answerBlock = document.getElementById("get-sum-end-answer");
+	if (answerText !== ""){
+		printAnswer(answerBlock, answerText);
 		return;
 	}
 	let result = 0;
@@ -32,72 +64,120 @@ function getSummEnd() {
 			result += i;
 		}
 	}
-	document.getElementById("get-sum-end-answer").innerText = `Result is : ${result}`;
+	answerText = result;
+	printAnswer(answerBlock, answerText);
 }
 
-/** Create list of elements */
-function steps() {
-	let firstValue = +document.getElementById("steps-first-val").value;
-	if (!checkInteger(firstValue) || !checkNegative(firstValue)) {
+/**
+Third task
+Create list of elements
+*/
+function createSteps() {
+	const stepsValue = getInteger("steps-val");
+	const answerBlock = document.getElementById("steps-answer");
+	if (!checkNegative(stepsValue) || answerText !== "") {
+		printAnswer(answerBlock, answerText);
 		return;
 	}
 	let result = "";
-	for (let i = 1; i <= firstValue; i++) {
+	for (let i = 1; i <= stepsValue; i++) {
 		for (let j = 1; j <= i; j++) {
 			result += '*';
 		}
 		result += "</br>";
 	}
-	document.getElementById("steps-answer").innerHTML = result;
+	answerBlock.innerHTML = result;
 }
 
-/** Conver seconds to hh:mm:ss format */
-function seconds() {
-	let firstValue = +document.getElementById("seconds-first-val").value;
-	if (!checkInteger(firstValue) || !checkNegative(firstValue)) {
+/** Check negative values */
+function checkNegative(value){
+	if (value < 0){
+		answerText += `"Incorrect value : ${value}, must be positive number"`;
 		return;
 	}
-	let result = new Date(null);
-	result.setSeconds(firstValue);
-	result = result.toISOString().substr(11, 8); // convert date represent to 1970-01-01T00:01:00.000Z and trim h:m:s
-	document.getElementById("seconds-answer").innerText = result;
+	return true;
 }
 
-/** Decline values  */
+/**
+Conver seconds to hh:mm:ss format
+*/
+function convertSeconds() {
+	let secondsValue = getInteger("seconds-val");
+	const answerBlock = document.getElementById("seconds-answer");
+	if (answerText !== ""){
+		printAnswer(answerBlock, answerText);
+		return;
+	}
+	let negativeSeconds = false;
+	if (!checkNegative(secondsValue)) {
+		answerText = "";
+		negativeSeconds = true;
+		secondsValue *= -1;
+	}
+	let result = new Date(null);
+	result.setSeconds(secondsValue);
+	result = result.toISOString().substr(11, 8); // convert date represent to 1970-01-01T00:01:00.000Z and trim h:m:s
+	if (negativeSeconds){
+		answerText = '-'+result;
+	} else {
+		answerText = result;
+	}
+	printAnswer(answerBlock, answerText);
+}
+
+/**
+Decline values
+*/
 function dateYears() {
-	let firstValue = +document.getElementById("date-years-first-val").value;
-	if (!checkInteger(firstValue) || !checkNegative(firstValue)) {
+	let dateValue = getInteger("date-years-val");
+	const answerBlock = document.getElementById("date-years-answer");
+	const impressiveAge = " Это невероятно!";
+	if (!checkNegative(dateValue) || answerText !== "") {
+		printAnswer(answerBlock, answerText);
 		return;
 	}
 	const yearText = ["Года", "Год", "Лет"];
-	manYears = +firstValue % 100;
+	manYears = dateValue % 100;
+	if (dateValue > 100){
+		dateValue = `${impressiveAge} ${dateValue}`;
+	}
 	if (manYears >= 11 && manYears <= 19) {
-		firstValue = firstValue + " " + yearText[2];
+		dateValue = dateValue + " " + yearText[2];
 	} else {
 		manYears = manYears % 10;
 		switch (manYears) {
 			case 1:
-				firstValue = firstValue + " " + yearText[1];
-				break;
+			dateValue += ` ${yearText[1]}`;
+			break;
 			case 2:
 			case 3:
 			case 4:
-				firstValue = firstValue + " " + yearText[0];
-				break;
-			default:
-				firstValue = firstValue + " " + yearText[2];
-				break;
+			dateValue += ` ${yearText[0]}`
+			   // firstValue = firstValue + " " + yearText[0];
+			   break;
+			   default:
+			   dateValue += ` ${yearText[2]}`
+			  //  firstValue = firstValue + " " + yearText[2];
+			  break;
+			}
 		}
+
+		printAnswer(answerBlock, dateValue);
 	}
-	document.getElementById("date-years-answer").innerText = firstValue;
-}
 
-
-/** Calculate difference between dates */
+/**
+Calculate difference between dates
+*/
 function dateDifferense() {
-	let firstValue = document.getElementById("date-difference-first-val").value;
-	let secondValue = document.getElementById("date-difference-second-val").value;
-	if (!checkDate(firstValue) || !checkDate(secondValue) || !checkCorrectDate(firstValue) || !checkCorrectDate(secondValue)) {
+	const firstValue = document.getElementById("date-difference-first-val").value;
+	const secondValue = document.getElementById("date-difference-second-val").value;
+	const checkFirstVal = firstValue.split(/ |\, /);
+	const checkSecondVal = secondValue.split(/ |\, /);
+	const answerBlock = document.getElementById("date-difference-answer");
+	if (!checkDate(checkFirstVal) || !checkDate(checkSecondVal) ||
+		!checkCorrectDate(checkFirstVal[2], checkFirstVal[0], checkFirstVal[1]) ||
+		!checkCorrectDate(checkSecondVal[2], checkSecondVal[0], checkSecondVal[1]) || answerText !== "") {
+		printAnswer(answerBlock, answerText);
 		return;
 	}
 	let firsDate = new Date(firstValue);
@@ -105,14 +185,15 @@ function dateDifferense() {
 	if (firsDate < secondDate) {
 		[secondDate, firsDate] = [firsDate, secondDate];
 	}
-	const dateValuesName = ['Years', 'Month', 'Days', 'Hours', 'Minutes', 'Seconds'];
-	let dateDiff = [];
-	dateDiff.push(firsDate.getFullYear() - secondDate.getFullYear());
-	dateDiff.push(firsDate.getMonth() - secondDate.getMonth());
-	dateDiff.push(firsDate.getDate() - secondDate.getDate());
-	dateDiff.push(firsDate.getHours() - secondDate.getHours());
-	dateDiff.push(firsDate.getMinutes() - secondDate.getMinutes());
-	dateDiff.push(firsDate.getSeconds() - secondDate.getSeconds());
+	const dateValuesName = ['Года', 'Месяц', 'Дней', 'Часов', 'Минут', 'Секунд'];
+	let dateDiff = [
+		firsDate.getFullYear() - secondDate.getFullYear(),
+		firsDate.getMonth() - secondDate.getMonth(),
+		firsDate.getDate() - secondDate.getDate(),
+		firsDate.getHours() - secondDate.getHours(),
+		firsDate.getMinutes() - secondDate.getMinutes(),
+		firsDate.getSeconds() - secondDate.getSeconds()
+	];
 	const dateValues = [12, new Date(dateDiff[0], dateDiff[1], 0).getDate(), 24, 60, 60];
 	for (let i = dateDiff.length - 1; i > 0; i--) {
 		if (dateDiff[i] < 0) {
@@ -124,69 +205,65 @@ function dateDifferense() {
 			}
 		}
 	}
-	let ansver = '';
+	answerText = 'Прошло ';
 	for (let i = 0; i < dateDiff.length; i++) {
-		ansver += dateValuesName[i] + " " + dateDiff[i] + " ";
+		answerText += `${dateDiff[i]} ${dateValuesName[i]} `;
 	}
-	document.getElementById("date-difference-answer").innerText = ansver;
+	printAnswer(answerBlock, answerText);
 }
 
-/** Check difference between dates for correct expression like October 13, 2014 11:13:00 */
+/**
+Check difference between dates for correct expression like October 13, 2014 11:13:00
+*/
 function checkDate(value) {
-	let checkDate = value.split(/ |\, /);
-	if (isNaN(checkDate[1])) {
-		alert("invalid date " + value);
-		return;
-	}
-	if (checkDate.length !== 4) {
-		alert("invalid date " + value);
+	const timeExp = /^(([0-1]?[0-9])|(2[0-3])):[0-5][0-9]:[0-5][0-9]$/;
+	if (value.length !== 4 || !timeExp.test(value[3]) || !isNaN(checkDate[0])) {
+		answerText += `"invalid date : ${value},`;
 		return;
 	}
 	return true;
 }
 
 /** Check sign date for correct data */
-function checkCorrectDate(value) {
-	let date = new Date(value);
-	if (isNaN(date.getTime()) || isNaN(date.getDate()) || isNaN(date.getFullYear()) ||
-		isNaN(date.getMonth())) {
-		alert("invalid date " + value);
-		return;
-	}
-	let month = parseInt(date.getMonth(), 10);
-	let days = parseInt(date.getDate(), 10);
-	let year = parseInt(date.getFullYear(), 10);
-	let dayInCurrentMonth = parseInt(date.getFullYear());
-	switch (month) {
-		case 1:
-			dayInCurrentMonth = (year % 4 == 0 && year % 100) || year % 400 == 0 ? 29 : 28;
+function checkCorrectDate(year, month, date) {
+	const checkDate = new Date(`${year} ${month} 1`);
+	if (checkDate instanceof Date){
+		const checkMonth = parseInt(checkDate.getMonth(), 10);
+		const checkDays = date;
+		const checkYear = parseInt(checkDate.getFullYear(), 10);
+		let dayInCurrentMonth ;
+		switch (checkMonth) {
+			case 1:
+			dayInCurrentMonth = (checkYear % 4 == 0 && checkYear % 100) || checkYear % 400 == 0 ? 29 : 28;
 			break;
-		case 8:
-		case 3:
-		case 5:
-		case 10:
+			case 8:
+			case 3:
+			case 5:
+			case 10:
 			dayInCurrentMonth = 30;
 			break;
-		default:
+			default:
 			dayInCurrentMonth = 31;
 			break;
+		}
+		return checkDays > 0 && checkDays <= dayInCurrentMonth ? true : answerText += `"invalid date : ${year}  ${month}  ${date}`;
 	}
-	return month >= 0 && month < 12 && days > 0 && days <= dayInCurrentMonth;
+	answerText += `"invalid date : ${value},`;
+	return;
 }
 
 /** Check sign date for correct expression like 2014-12-31 */
 function checkCorrectSignDate(value) {
-	let checkDate = value.split('-');
-	if (checkDate.length !== 3) {
-		alert("invalid date " + value);
+	if (value.length !== 3) {
+		answerText += `invalid date ${value} `;
 		return;
 	}
-	if (checkDate[0].length !== 4) {
-		alert("invalid date " + value);
+	if (value[0].length !== 4) {
+		answerText += `invalid date ${value} `;
 		return;
 	}
-	if (checkDate[1].length !== 2 || checkDate[2].length !== 2) {
-		alert("invalid date " + value);
+	if (value[1].length !== 2 || value[2].length !== 2) {
+		answerText += `invalid date ${value} `;
 		return;
 	}
 	return true;
@@ -194,135 +271,181 @@ function checkCorrectSignDate(value) {
 
 /** Find zodiac sign by input date */
 function zodiacSign() {
-	let firstValue = document.getElementById("zodiac-first-val").value;
-	if (!checkCorrectDate(firstValue) || !checkCorrectSignDate(firstValue)) {
+	const zodiacDate = document.getElementById("zodiac-first-val").value.split('-');
+	const answerBlock = document.getElementById("zodiac-answer");
+	if (!checkCorrectDate(zodiacDate[0], zodiacDate[1], zodiacDate[2]) || !checkCorrectSignDate(zodiacDate) || answerText != "") {
+		printAnswer(answerBlock, answerText);
 		return;
 	}
 	const zodiacSignNames = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"];
 	const zodiacDates = [
-		[21, 19],
-		[20, 20],
-		[21, 20],
-		[21, 22],
-		[23, 22],
-		[23, 22],
-		[23, 22],
-		[23, 21],
-		[22, 21],
-		[22, 19],
-		[20, 18],
-		[19, 20]
+	[21, 19],
+	[20, 20],
+	[21, 20],
+	[21, 22],
+	[23, 22],
+	[23, 22],
+	[23, 22],
+	[23, 21],
+	[22, 21],
+	[22, 19],
+	[20, 18],
+	[19, 20]
 	];
 	const zodiacMonth = [
-		[3, 4],
-		[4, 5],
-		[5, 6],
-		[6, 7],
-		[7, 8],
-		[8, 9],
-		[9, 10],
-		[10, 11],
-		[11, 12],
-		[12, 1],
-		[1, 2],
-		[2, 3]
+	[3, 4],
+	[4, 5],
+	[5, 6],
+	[6, 7],
+	[7, 8],
+	[8, 9],
+	[9, 10],
+	[10, 11],
+	[11, 12],
+	[12, 1],
+	[1, 2],
+	[2, 3]
 	];
-	firstValue = firstValue.split('-');
 	let ansver = 0;
 	for (let i = 0; i < zodiacSignNames.length; i++) {
-		if ((firstValue[1] == zodiacMonth[i][0] && firstValue[2] >= zodiacDates[i][0]) ||
-			(firstValue[1] == zodiacMonth[i][1] && firstValue[2] <= zodiacDates[i][1])) {
+		if ((zodiacDate[1] == zodiacMonth[i][0] && zodiacDate[2] >= zodiacDates[i][0]) ||
+			(zodiacDate[1] == zodiacMonth[i][1] && zodiacDate[2] <= zodiacDates[i][1])) {
 			ansver = i;
 			break;
 		}
 	}
-	document.getElementById("zodiac-answer").innerText = zodiacSignNames[ansver];
+	answerText += zodiacSignNames[ansver];
+	printAnswer(answerBlock, answerText);
 	document.getElementById("zodiac-answer-img").src = "images/" + ansver + ".png";
 }
 
 /** Create chess desc */
 function chess() {
-	let firstValue = +document.getElementById("chess-first-val").value;
-	let secondValue = +document.getElementById("chess-second-val").value;
-	if (!checkInteger(firstValue) || !checkInteger(secondValue)) {
+	const firstValue = getInteger("chess-first-val");
+	const secondValue = getInteger("chess-second-val");
+	const answerBlock = document.getElementById("chess-box");
+	if (!checkNegative(firstValue) || !checkNegative(secondValue) || answerText !== "") {
+		printAnswer(answerBlock, answerText);
 		return;
 	}
-	if (!checkNegative(firstValue) || !checkNegative(secondValue)) {
-		return;
-	}
-	let chessBox = document.getElementById('chess-box');
-	chessBox.innerHTML = "";
+	answerBlock.innerHTML = "";
+	const boxWidth = answerBlock.offsetWidth / firstValue;
+	const boxHeight = answerBlock.offsetHeight / secondValue;
 	let box;
 	let br;
-	var blackBox = document.createElement('div');
-	for (let i = 0; i < firstValue; i++) {
+	//var blackBox = document.createElement('div');
+	for (let i = 0; i < secondValue; i++) {
 		br = document.createElement('br');
-		for (let j = 0; j < secondValue; j++) {
+		for (let j = 0; j < firstValue; j++) {
 			box = document.createElement('div');
+			box.style.width = boxWidth+"px";
+			box.style.height = boxHeight+"px";
 			if (((i + j) % 2 == 0)) {
 				box.className = 'white';
 			} else {
 				box.className = 'black';
 			}
-			chessBox.appendChild(box);
+			answerBlock.appendChild(box);
 		}
-		chessBox.appendChild(br);
+		answerBlock.appendChild(br);
 	}
 }
 
 function room() {
-	let houseValue = +document.getElementById("room-first-val").value;
-	let apatmentValue = +document.getElementById("room-second-val").value;
-	let florValue = +document.getElementById("room-third-val").value;
-	let searchApartmentValue = +document.getElementById("room-four-val").value;
-	if (!checkInteger(houseValue) || !checkInteger(apatmentValue) || !checkInteger(florValue) || !checkInteger(searchApartmentValue)) {
+	let houseValue = getInteger("room-first-val");
+	let apatmentValue = getInteger("room-second-val");
+	let florValue = getInteger("room-third-val");
+	let searchApartmentValue = getInteger("room-four-val");
+	const answerBlock = document.getElementById("room-answer");
+	if (!checkNegative(houseValue) || !checkNegative(apatmentValue) ||
+		!checkNegative(florValue) || !checkNegative(searchApartmentValue)
+		|| answerText !== "") {
+		printAnswer(answerBlock, answerText);
+	return;
+}
+if (!checkZero(houseValue) || !checkZero(apatmentValue) ||
+	!checkZero(florValue) ||
+	!checkZero(searchApartmentValue) || answerText !== "") {
+	printAnswer(answerBlock, answerText);
+return;
+}
+const appartmentsInHouse = florValue * apatmentValue;
+if (searchApartmentValue > appartmentsInHouse * houseValue) {
+	alert("value " + searchApartmentValue + " is incorrect! Enter correct value");
+	return;
+}
+const temp = searchApartmentValue % appartmentsInHouse;
+const test = (searchApartmentValue - temp) / appartmentsInHouse;
+const entryNumb = temp == 0 ? test : test + 1;
+const florNumb = (((searchApartmentValue-1-((searchApartmentValue-1)%apatmentValue))/apatmentValue)%florValue)+1;
+answerText = `Подъезд ${entryNumb} этаж ${florNumb}`;
+printAnswer(answerBlock, answerText);
+}
+
+function checkZero(value){
+	if (value === 0){
+		answerText += `"Incorrect value : ${value}" `;
 		return;
 	}
-	if (!checkNegative(houseValue) || !checkNegative(apatmentValue) || !checkNegative(florValue) || !checkNegative(searchApartmentValue)) {
-		return;
-	}
-	if (houseValue === 0 || apatmentValue === 0 || florValue === 0 || searchApartmentValue === 0) {
-		return;
-	}
-	let appartmentsInHouse = florValue * apatmentValue;
-	if (searchApartmentValue > appartmentsInHouse * houseValue) {
-		alert("value " + searchApartmentValue + " is incorrect! Enter correct value");
-		return;
-	}
-	let temp = searchApartmentValue % appartmentsInHouse;
-	let test = (searchApartmentValue - temp) / appartmentsInHouse;
-	let entryNumb = temp == 0 ? test : test + 1;
-	let florNumb = (((searchApartmentValue-1-((searchApartmentValue-1)%apatmentValue))/apatmentValue)%florValue)+1;
-	document.getElementById("room-answer").innerText = `Подъезд ${entryNumb} этаж ${florNumb}`;
+	return true;
 }
 
 /** Calculate all numbers from value */
 function calcValue() {
-	let firstValue = document.getElementById("find-val-first-val").value;
-	if (!checkInteger(firstValue)) {
+	let calcValue = document.getElementById("find-val-first-val").value;
+	const answerBlock = document.getElementById("find-val-answer");
+	if (isNaN(calcValue)) {
+		answerText = "incorret value!";
+		printAnswer(answerBlock, answerText);
 		return;
 	}
-	let ansver = 0;
-	for (let i = 0; i < firstValue.length; i++) {
-		ansver += +firstValue[i];
+	let negativeNumb = false;
+	if (calcValue.charAt(0) === "-") {
+		negativeNumb = true;
 	}
-	document.getElementById("find-val-answer").innerText = ansver;
-}
-
-/** Check if value is integer */
-function checkInteger(value) {
-	return parseInt(value, 10) == value ? true : alert("value '" + value + "' is incorrect! Enter correct value");
-}
-
-/** Check if value is negative */
-function checkNegative(value) {
-	return value > 0 ? true : alert("value '" + value + "' is incorrect! Enter correct value");
+	calcValue = calcValue.replace(/\-|\./g, "").split(/(?!$)/u);
+	answerText = calcValue.reduce(function(sum, current, index) {
+		if (index === 0 && negativeNumb){
+			current *= -1;
+		}
+		return sum + parseInt(current, 10);
+	}, 0);
+	printAnswer(answerBlock, answerText);
 }
 
 /** When focusout textarea = remove http:// and https:// from textarean values, sort values and add it to textarea */
 var textAreaFocus = document.getElementById('sortsrc');
 textAreaFocus.addEventListener("focusout", function() {
-	let textValue = textAreaFocus.value;
-	textValue = textValue.replace(/(http:\/\/)|(https:\/\/)/g, "").split(',').sort();
-	textAreaFocus.value = textValue.join("\n");
+	if (textAreaFocus.value !== ""){
+		let textValue = textAreaFocus.value;
+		textValue = textValue.replace(/(http:\/\/)|(https:\/\/)/g, "").split(',');
+		textValue.sort(function(a, b){
+			if(a < b) return -1;
+			if(a > b) return 1;
+			return 0;
+		});
+		const answerBlock = document.getElementById('link');
+		let linkArray;
+		if (typeof(linkArray = answerBlock.getElementsByTagName('ul')[0]) !== "undefined"){
+			linkArray.innerHTML = "";
+		} else {
+			linkArray = document.createElement('ul');
+			linkArray.style.listStyleType = "none";
+		}
+		let box;
+		let link;
+		for (item in textValue){
+			box = document.createElement('li');
+			link = document.createElement('a');
+			link.href = textValue[item];
+			link.innerText = textValue[item];
+			link.setAttribute('target', '_blank');
+			box.appendChild(link);
+			linkArray.appendChild(box);
+		}
+		textAreaFocus.value = "";
+		answerBlock.appendChild(linkArray);
+	}
 });
+
+

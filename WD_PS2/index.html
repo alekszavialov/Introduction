@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>WD_PS2</title>
@@ -22,18 +22,18 @@
 	#steps-answer{
 		text-align: left;
 	}
+	.chess-box-wrap{
+		min-width: 300px;
+		min-height: 300px;
+	}
 	.white{
 		display: inline-block;
 		vertical-align: middle;
-		width: 60px;
-		height: 60px;
 		background: #f9b7b7;
 	}
 	.black{
 		display: inline-block;
 		vertical-align: middle;
-		width: 60px;
-		height: 60px;
 		background: #000;
 	}
 </style>
@@ -56,19 +56,19 @@
 		</div>
 		<div class="wrapper">
 			<h3>Вывести на страницу список из 50 элементов вида:</h3>
-			<input id="steps-first-val" type="number">
-			<button onclick="steps()">Create steps</button>
+			<input id="steps-val" type="number">
+			<button onclick="createSteps()">Create steps</button>
 			<p id="steps-answer"></p>
 		</div>
 		<div class="wrapper">
 			<h3>Пользователь вводит время в секундах. Вывести в формате: hh:mm:ss (01:05:20)</h3>
-			<input id="seconds-first-val" type="text">
-			<button onclick="seconds()">Create steps</button>
+			<input id="seconds-val" type="number">
+			<button onclick="convertSeconds()">Convert time</button>
 			<p id="seconds-answer"></p>
 		</div>
 		<div class="wrapper">
 			<h3>Для указанного возраста студента вывести фразу вида "22 года" ( 1 год, 20 лет....)</h3>
-			<input id="date-years-first-val" type="text">
+			<input id="date-years-val" type="text">
 			<button onclick="dateYears()">Get years</button>
 			<p id="date-years-answer"></p>
 		</div>
@@ -91,7 +91,7 @@
 			<input id="chess-first-val" type="number" value="8" min="1">
 			<input id="chess-second-val" type="number" value="8" min="1">
 			<button onclick="chess()">Create desc</button>
-			<div id="chess-box"></div>
+			<div class="chess-box-wrap" id="chess-box"></div>
 		</div>
 		<div class="wrapper">
 			<h3>Определить номер подъезда и этаж по номеру квартиры</h3>
@@ -112,9 +112,10 @@
 			<button onclick="calcValue()">Calc value</button>
 			<p id="find-val-answer"></p>
 		</div>
-		<div class="wrapper">
+		<div class="wrapper" id="link">
 			<h3>Дан некий textarea, в который пользователь вводит ссылки через запятую. Когда textarea станет неактивным удалить http:// и https:// из ссылок и вывести их отсортированным по алфавиту списком ссылок.</h3>
 			<textarea name="text" cols="30" rows="10" id="sortsrc"></textarea>
+			<div id="link-answer"></div>
 		</div>
 	</section>
 	<script src="common.js"></script>
