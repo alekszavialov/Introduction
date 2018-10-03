@@ -39,8 +39,10 @@ $(function(){
 	}
 
 	navigationBody.on("click", "img", function(){
+		$('.current').removeClass('current');
+		$(this).closest("li").addClass('current')
 		imgSRC = $(this).attr('src').replace(`/${SMALL_SIZE}/?`, `/${BIG_SIZE}/?`);
-		bigImg.attr('src', imgSRC);
+		changeSlide(bigImg, imgSRC);
 	});
 
 	function swipeRight(){
