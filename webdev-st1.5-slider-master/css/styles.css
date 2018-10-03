@@ -1,0 +1,32 @@
+.slider {
+	text-align: center;
+}
+.slider-current{
+	min-width: 600px;
+	min-height: 400px;
+	font-size: 0;
+}
+.slider .slider-indicators {
+	padding: 0;
+}
+
+.slider .slider-previews li {
+	display: inline-block;
+	list-style-type: none;
+	margin: 0 1rem;
+	vertical-align: middle;
+	border: 5px solid transparent;
+	transition: all 0.2s linear;
+}
+
+.slider .slider-previews li img {
+	display: block;
+	cursor: pointer;
+}
+
+.slider .slider-previews li.current {
+	border: 5px solid rgba(0,0,0,0.2);
+}
+ul {
+	padding: 0;
+}
