@@ -1,4 +1,5 @@
-var answerText = "";
+const errorMsg = "Incorrect input data";
+let answerText = "Incorrect input data";
 
 /**
 First task
@@ -8,8 +9,8 @@ function getSumm() {
 	let firstValue = getInteger("get-sum-first-val");
 	let secondValue = getInteger("get-sum-second-val");
 	const answerBlock = document.getElementById("get-sum-answer");
-	if (answerText !== ""){
-		printAnswer(answerBlock, answerText);
+	if (!Number.isInteger(firstValue) || !Number.isInteger(secondValue)){
+		printAnswer(answerBlock, errorMsg);
 		return;
 	}
 	let result = 0;
@@ -19,19 +20,14 @@ function getSumm() {
 	for (let i = firstValue; i <= secondValue; i++) {
 		result += i;
 	}
-	answerText = `Result is : ${result}`;
+	result = `Result is : ${result}`;
 	printAnswer(answerBlock, answerText);
 }
 
-function getInteger(object){
+function getInteger(object) {
 	let inputData = document.getElementById(object).value;
 	if (inputData === "" || !Number.isInteger(+inputData)){
-		if (inputData === ""){
-			answerText += `"Some value is empty or "e" `;
-		} else {
-			answerText += `"Incorrect value : ${inputData}" `;
-		}
-		return;
+		return NaN;
 	}
 	return +inputData;
 }
@@ -50,8 +46,8 @@ function getSummEnd() {
 	let firstValue = getInteger("get-sum-end-first-val");
 	let secondValue = getInteger("get-sum-end-second-val");
 	const answerBlock = document.getElementById("get-sum-end-answer");
-	if (answerText !== ""){
-		printAnswer(answerBlock, answerText);
+	if (!Number.isInteger(firstValue) || !Number.isInteger(secondValue)){
+		printAnswer(answerBlock, errorMsg);
 		return;
 	}
 	let result = 0;
@@ -64,8 +60,8 @@ function getSummEnd() {
 			result += i;
 		}
 	}
-	answerText = result;
-	printAnswer(answerBlock, answerText);
+	result = `Result is : ${result}`;
+	printAnswer(answerBlock, result);
 }
 
 /**
@@ -75,8 +71,10 @@ Create list of elements
 function createSteps() {
 	const stepsValue = getInteger("steps-val");
 	const answerBlock = document.getElementById("steps-answer");
-	if (!checkNegative(stepsValue) || answerText !== "") {
-		printAnswer(answerBlock, answerText);
+	const maxElements = 50;
+	if (!checkNegative(stepsValue) || !Number.isInteger(stepsValue) ||
+		maxElements < stepsValue) {
+		printAnswer(answerBlock, errorMsg);
 		return;
 	}
 	let result = "";
@@ -92,8 +90,7 @@ function createSteps() {
 /** Check negative values */
 function checkNegative(value){
 	if (value < 0){
-		answerText += `"Incorrect value : ${value}, must be positive number"`;
-		return;
+		return false;
 	}
 	return true;
 }
@@ -104,25 +101,23 @@ Conver seconds to hh:mm:ss format
 function convertSeconds() {
 	let secondsValue = getInteger("seconds-val");
 	const answerBlock = document.getElementById("seconds-answer");
-	if (answerText !== ""){
-		printAnswer(answerBlock, answerText);
+	const maxValue = 10;
+	if (!Number.isInteger(secondsValue) || !checkNegative(secondsValue) ||
+		secondsValue.toString().length > maxValue){
+		printAnswer(answerBlock, errorMsg);
 		return;
 	}
-	let negativeSeconds = false;
-	if (!checkNegative(secondsValue)) {
-		answerText = "";
-		negativeSeconds = true;
-		secondsValue *= -1;
-	}
-	let result = new Date(null);
-	result.setSeconds(secondsValue);
-	result = result.toISOString().substr(11, 8); // convert date represent to 1970-01-01T00:01:00.000Z and trim h:m:s
-	if (negativeSeconds){
-		answerText = '-'+result;
-	} else {
-		answerText = result;
-	}
-	printAnswer(answerBlock, answerText);
+	const secInHour = 3600;
+	const secInMinute = 60;
+	const hours = setTime(Math.floor(secondsValue / secInHour));
+	const minutes = setTime(Math.floor((secondsValue - (hours * secInHour)) / secInMinute));
+	const seconds = setTime(secondsValue - (hours * secInHour) - (minutes * secInMinute));
+	const result = `${hours}:${minutes}:${seconds}`;
+	printAnswer(answerBlock, result);
+}
+
+function setTime(value){
+	return value < 10 ? "0" + value : value;
 }
 
 /**
@@ -131,16 +126,14 @@ Decline values
 function dateYears() {
 	let dateValue = getInteger("date-years-val");
 	const answerBlock = document.getElementById("date-years-answer");
-	const impressiveAge = " Это невероятно!";
-	if (!checkNegative(dateValue) || answerText !== "") {
-		printAnswer(answerBlock, answerText);
+	const maxValue = 150;
+	if (!checkNegative(dateValue) || !Number.isInteger(dateValue) ||
+		dateValue > maxValue) {
+		printAnswer(answerBlock, errorMsg);
 		return;
 	}
 	const yearText = ["Года", "Год", "Лет"];
 	manYears = dateValue % 100;
-	if (dateValue > 100){
-		dateValue = `${impressiveAge} ${dateValue}`;
-	}
 	if (manYears >= 11 && manYears <= 19) {
 		dateValue = dateValue + " " + yearText[2];
 	} else {
@@ -152,18 +145,15 @@ function dateYears() {
 			case 2:
 			case 3:
 			case 4:
-			dateValue += ` ${yearText[0]}`
-			   // firstValue = firstValue + " " + yearText[0];
-			   break;
-			   default:
-			   dateValue += ` ${yearText[2]}`
-			  //  firstValue = firstValue + " " + yearText[2];
-			  break;
+				dateValue += ` ${yearText[0]}`;
+				break;
+			default:
+				dateValue += ` ${yearText[2]}`;
+				break;
 			}
 		}
-
-		printAnswer(answerBlock, dateValue);
-	}
+	printAnswer(answerBlock, dateValue);
+}
 
 /**
 Calculate difference between dates
@@ -274,7 +264,7 @@ function zodiacSign() {
 	const zodiacDate = document.getElementById("zodiac-first-val").value.split('-');
 	const answerBlock = document.getElementById("zodiac-answer");
 	if (!checkCorrectDate(zodiacDate[0], zodiacDate[1], zodiacDate[2]) || !checkCorrectSignDate(zodiacDate) || answerText != "") {
-		printAnswer(answerBlock, answerText);
+		printAnswer(answerBlock, errorMsg);
 		return;
 	}
 	const zodiacSignNames = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"];
@@ -324,13 +314,15 @@ function chess() {
 	const firstValue = getInteger("chess-first-val");
 	const secondValue = getInteger("chess-second-val");
 	const answerBlock = document.getElementById("chess-box");
-	if (!checkNegative(firstValue) || !checkNegative(secondValue) || answerText !== "") {
-		printAnswer(answerBlock, answerText);
+	if (!Number.isInteger(firstValue) || !Number.isInteger(secondValue) ||
+		!checkNegative(firstValue) ||  !checkNegative(secondValue)) {
+		printAnswer(answerBlock, errorMsg);
 		return;
 	}
 	answerBlock.innerHTML = "";
 	const boxWidth = answerBlock.offsetWidth / firstValue;
 	const boxHeight = answerBlock.offsetHeight / secondValue;
+	const boxSize = boxWidth > boxHeight ? boxWidth : boxHeight;
 	let box;
 	let br;
 	//var blackBox = document.createElement('div');
@@ -338,8 +330,8 @@ function chess() {
 		br = document.createElement('br');
 		for (let j = 0; j < firstValue; j++) {
 			box = document.createElement('div');
-			box.style.width = boxWidth+"px";
-			box.style.height = boxHeight+"px";
+			box.style.width = boxSize+"px";
+			box.style.height = boxSize+"px";
 			if (((i + j) % 2 == 0)) {
 				box.className = 'white';
 			} else {
