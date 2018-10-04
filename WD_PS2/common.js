@@ -87,10 +87,7 @@ function createSteps() {
 
 /** Check negative values */
 function checkNegative(value) {
-	if (value < 0) {
-		return false;
-	}
-	return true;
+	return value > 0;
 }
 
 /**
