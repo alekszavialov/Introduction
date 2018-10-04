@@ -12,6 +12,8 @@ $center-element: translateX(-50%) translateY(-50%)
 
 .select-items
 	display: none
+	margin: 0
+	padding: 0
 
 .select-head
 	padding: 10px
@@ -22,10 +24,10 @@ $center-element: translateX(-50%) translateY(-50%)
 	&:hover
 		.select-arrow
 			border-top-color: red
-		.select-selected
+		.select-head-selected
 			color: #000
 
-.select-selected
+.select-head-selected
 	color: #cacaca
 	transition: $default-transition
 
@@ -62,5 +64,7 @@ $center-element: translateX(-50%) translateY(-50%)
 		background: #a7a2a2
 
 .select-active
-	.select-selected
+	.select-arrow
+		transform: rotate(180deg)
+	.select-head-selected
 		color: #000
