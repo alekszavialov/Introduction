@@ -260,17 +260,17 @@ nav
 	display: flex
 	flex-flow: row wrap
 	align-items: baseline
-	input, 
+	input,
 		width: auto
 		flex: 1 0 20%
 	label
 		flex: 1 0 80%
-		text-align: left	
+		text-align: left
 	h2
-		flex: 1 0 100%	
+		flex: 1 0 100%
 .input-box
 	display: flex
-	align-items: center	
+	align-items: center
 	margin: 5px 0
 	label
 		font-size: 22px
@@ -278,10 +278,31 @@ nav
 		color: $text-color-first
 	input
 		margin: 0
-		flex: 1 0 80%	
+		flex: 1 0 80%
 		box-sizing: border-box
 		height: auto
-@import "_media.sass"
+.up-page
+	width: 60px
+	height: 60px
+	background: #292929
+	position: fixed
+	bottom: 20px
+	right: 20px
+	border-radius: 50%
+	font-size: 50px
+	color: #8f8f8f
+	opacity: 0.6
+	transition: all 0.3s ease
+	cursor: pointer
+	i
+		position: absolute
+		top: 50%
+		left: 50%
+		transform: $center-element
+	&:hover
+		opacity: 1
+
+
 
 
 

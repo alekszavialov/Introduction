@@ -339,84 +339,28 @@ nav a:last-child {
   height: auto;
 }
 
-@media only screen and (max-width: 768px) {
-  .half-size, .custom-size {
-    width: 100%;
-  }
-
-  .flex-grid {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .logo h1 {
-    font-size: 60px;
-    margin-bottom: 20px;
-  }
-
-  nav a {
-    margin: 0 0 10px 0;
-    font-size: 20px;
-  }
-
-  .phone-block-form {
-    width: 280px;
-    height: 585px;
-  }
-
-  .phone-block-form-way {
-    margin: 0 21px 0 23px;
-    top: 86px;
-  }
-  .phone-block-form-way p {
-    font-size: 18px;
-  }
-
-  .phone-form-head {
-    font-size: 30px;
-  }
-
-  .phone-block-form-way-item {
-    font-size: 15px;
-  }
-
-  .phone-block-form-way-submit {
-    font-size: 18px;
-    margin-bottom: 103px;
-  }
-
-  h2 {
-    font-size: 32px;
-  }
-
-  .phone-text p {
-    font-size: 22px;
-  }
-  .phone-text a {
-    font-size: 26px;
-  }
-
-  .about span {
-    font-size: 22px;
-  }
-  .about p {
-    font-size: 20px;
-  }
-  .about .custom-size {
-    padding: 20px 0;
-  }
-
-  .contact {
-    padding: 60px 0;
-  }
-  .contact input, .contact textarea {
-    font-size: 18px;
-    width: calc(100% - 20px);
-    margin: 0 0 10px 0;
-  }
-  .contact button {
-    font-size: 22px;
-  }
+.up-page {
+  width: 60px;
+  height: 60px;
+  background: #292929;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  font-size: 50px;
+  color: #8f8f8f;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.up-page i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.up-page:hover {
+  opacity: 1;
 }
 
 /*# sourceMappingURL=styles.css.map */
