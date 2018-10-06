@@ -1,0 +1,20 @@
+{
+  "Users": [
+    {
+      "name": "Ivan",
+      "votes": 174
+    },
+    {
+      "name": "Alex",
+      "votes": 11
+    },
+    {
+      "name": "Nikolai",
+      "votes": 12
+    },
+    {
+      "name": "Dora",
+      "votes": 14
+    }
+  ]
+}
