@@ -9,6 +9,9 @@
 	<link rel="stylesheet" href="libs/Fonts-Awesome/css/all.css">
 </head>
 <body>
+	<div class="up-page hidden">
+		<i class="fas fa-angle-up"></i>
+	</div>
 	<div id="phone-form" class="hidden phone-form">
 		<form action="#">
 			<input type="text" placeholder="Where are you?">
@@ -24,13 +27,13 @@
 				<h1>N++</h1>
 			</div>
 			<nav class="flex-grid half-size">
-				<a href="#">products</a>
-				<a href="#">about us</a>
-				<a href="#">contact us</a>
+				<a href="#product">products</a>
+				<a href="#about">about us</a>
+				<a href="#contact">contact us</a>
 			</nav>
 		</div>
 	</header>
-	<section class="phone-app bg-color-second">
+	<section class="phone-app bg-color-second" id="product">
 		<div class="container flex-grid">
 			<div class="phone-block half-size">
 				<div class="phone-block-form">
@@ -55,7 +58,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="about bg-color-first">
+	<section class="about bg-color-first" id="about">
 		<div class="container flex-grid">
 			<div class="custom-size">
 				<i class="fas fa-code"></i>
@@ -74,7 +77,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="contact bg-color-second">
+	<section class="contact bg-color-second" id="contact">
 		<div class="container">
 			<h2>Contact us!</h2>
 			<form action="#">
@@ -87,19 +90,19 @@
 			<form action="#" class="input-form">
 				<div class="input-box">
 					<label for="text">Input type text</label>
-					<input type="text" name="text" id="text" placeholder="Enter some text">						
+					<input type="text" name="text" id="text" placeholder="Enter some text">
 				</div>
 				<div class="input-box">
 					<label for="text">Input type password</label>
-					<input type="password" name="password" id="password" placeholder="Enter some password">						
+					<input type="password" name="password" id="password" placeholder="Enter some password">
 				</div>
 				<div class="input-box">
 					<label for="submit">Input type submit</label>
-					<input type="submit" name="submit" id="submit" value="submit">						
+					<input type="submit" name="submit" id="submit" value="submit">
 				</div>
 				<div class="input-box">
 					<label for="reset">Input type reset</label>
-					<input type="reset" name="reset" id="reset">						
+					<input type="reset" name="reset" id="reset">
 				</div>
 				<div class="radio-block">
 					<h2>Input type radio</h2>
@@ -107,7 +110,7 @@
 					<input id="radio2" type="radio" name="test" value="test2">
 					<label for="radio2">Option 2</label>
 					<input id="radio3" type="radio" name="test" value="test3">
-					<label for="radio3">Option 3</label>					
+					<label for="radio3">Option 3</label>
 				</div>
 				<div class="checkbox-block">
 					<h2>Input type checkbox</h2>
@@ -115,69 +118,63 @@
 					<label for="checkbox1">Option 1</label>
 					<input type="checkbox" id="checkbox2" name="test2" value="test2">
 					<label for="checkbox2">Option 2</label>
-				</div>			
+				</div>
 				<div class="input-box">
 					<label for="button">Input type button</label>
-					<input type="button" name="button" id="button" >						
+					<input type="button" name="button" id="button" >
 				</div>
 				<div class="input-box">
 					<label for="color">Input type color</label>
-					<input type="color" name="color" id="color" value="#ff0000">						
+					<input type="color" name="color" id="color" value="#ff0000">
 				</div>
 				<div class="input-box">
 					<label for="date">Input type date</label>
-					<input type="date" name="date" id="date" min="1990-01-01" max="2020-01-01">						
+					<input type="date" name="date" id="date" min="1990-01-01" max="2020-01-01">
 				</div>
 				<div class="input-box">
 					<label for="datetime-local">Input type datetime-local</label>
-					<input type="datetime-local" name="datetime-local" id="datetime-local">						
+					<input type="datetime-local" name="datetime-local" id="datetime-local">
 				</div>
 				<div class="input-box">
 					<label for="email">Input type email</label>
-					<input type="email" name="email" id="email">						
+					<input type="email" name="email" id="email">
 				</div>
 				<div class="input-box">
 					<label for="month">Input type month</label>
-					<input type="month" name="month" id="month">						
+					<input type="month" name="month" id="month">
 				</div>
 				<div class="input-box">
 					<label for="number">Input type number</label>
-					<input type="number" name="number" id="number" min="0" max="10" step="1" value="1">						
+					<input type="number" name="number" id="number" min="0" max="10" step="1" value="1">
 				</div>
 				<div class="input-box">
 					<label for="range">Input type range</label>
-					<input type="range" name="range" id="range" min="0" max="10" step="1">						
+					<input type="range" name="range" id="range" min="0" max="10" step="1">
 				</div>
 				<div class="input-box">
 					<label for="search">Input type search</label>
-					<input type="search" name="search" id="search">						
+					<input type="search" name="search" id="search">
 				</div>
 				<div class="input-box">
 					<label for="tel">Input type tel</label>
-					<input type="tel" name="tel" id="tel">						
+					<input type="tel" name="tel" id="tel">
 				</div>
 				<div class="input-box">
 					<label for="time">Input type time</label>
-					<input type="time" name="time" id="time">						
+					<input type="time" name="time" id="time">
 				</div>
 				<div class="input-box">
 					<label for="url">Input type url</label>
-					<input type="url" name="url" id="url">						
+					<input type="url" name="url" id="url">
 				</div>
 				<div class="input-box">
 					<label for="week">Input type week</label>
-					<input type="week" id="week" name="week">						
+					<input type="week" id="week" name="week">
 				</div>
 			</form>
 		</div>
 	</section>
-	<script>
-		document.getElementById('show-form').onclick=function(){
-			document.getElementById('phone-form').classList.remove('hidden');
-		};
-		document.getElementById('phone-form-close').onclick=function(){
-			document.getElementById('phone-form').classList.add('hidden');
-		};
-	</script>
+	<script src="libs/jquery/jquery-3.3.1.js"></script>
+	<script src="js/common.js"></script>
 </body>
 </html>
