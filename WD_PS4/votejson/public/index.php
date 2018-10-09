@@ -1,16 +1,6 @@
 <?php
-session_start();
-include_once("../private/handler/handle.php");
+include_once("header.php");
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
 <body>
 <form action="" method="post">
     <label for="name1"><input type="radio" id="name1" name="name" value
