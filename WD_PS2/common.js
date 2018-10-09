@@ -1,15 +1,16 @@
 const errorMsg = "Incorrect input data";
+const isNotZero = val => val !== 0;
 
 /**
 First task
 Calculate summ of few values
 */
 function getSumm() {
-	let firstValue = getInteger("get-sum-first-val");
-	let secondValue = getInteger("get-sum-second-val");
+	let firstValue = getIntegerFromInput("get-sum-first-val");
+	let secondValue = getIntegerFromInput("get-sum-second-val");
 	const answerBlock = document.getElementById("get-sum-answer");
 	if (isNaN(firstValue) || isNaN(secondValue)) {
-		printAnswer(answerBlock, errorMsg);
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	let result = 0;
@@ -20,10 +21,10 @@ function getSumm() {
 		result += i;
 	}
 	result = `Result is : ${result}`;
-	printAnswer(answerBlock, result);
+	setAnswer(answerBlock, result);
 }
 
-function getInteger(object) {
+function getIntegerFromInput(object) {
 	let inputData = document.getElementById(object).value;
 	if (inputData === "" || !Number.isInteger(+inputData)) {
 		return NaN;
@@ -32,7 +33,7 @@ function getInteger(object) {
 }
 
 /** Print ansver */
-function printAnswer(object, text) {
+function setAnswer(object, text) {
 	object.innerText = text;
 }
 
@@ -41,11 +42,11 @@ Second task
 Calculate summ of few values ending with 2, 3 or 7
 */
 function getSummEnd() {
-	let firstValue = getInteger("get-sum-end-first-val");
-	let secondValue = getInteger("get-sum-end-second-val");
+	let firstValue = getIntegerFromInput("get-sum-end-first-val");
+	let secondValue = getIntegerFromInput("get-sum-end-second-val");
 	const answerBlock = document.getElementById("get-sum-end-answer");
 	if (isNaN(firstValue) || isNaN(secondValue)) {
-		printAnswer(answerBlock, errorMsg);
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	let result = 0;
@@ -59,7 +60,7 @@ function getSummEnd() {
 		}
 	}
 	result = `Result is : ${result}`;
-	printAnswer(answerBlock, result);
+	setAnswer(answerBlock, result);
 }
 
 /**
@@ -67,12 +68,12 @@ Third task
 Create list of elements
 */
 function createSteps() {
-	const stepsValue = getInteger("steps-val");
+	const stepsValue = getIntegerFromInput("steps-val");
 	const answerBlock = document.getElementById("steps-answer");
 	const maxElements = 50;
-	if (isNaN(stepsValue) || !checkNegative(stepsValue) ||
+	if (isNaN(stepsValue) || !isPositive(stepsValue) ||
 		maxElements < stepsValue) {
-		printAnswer(answerBlock, errorMsg);
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	let result = "";
@@ -86,7 +87,7 @@ function createSteps() {
 }
 
 /** Check negative values */
-function checkNegative(value) {
+function isPositive(value) {
 	return value > 0;
 }
 
@@ -94,12 +95,12 @@ function checkNegative(value) {
 Conver seconds to hh:mm:ss format
 */
 function convertSeconds() {
-	let secondsValue = getInteger("seconds-val");
+	let secondsValue = getIntegerFromInput("seconds-val");
 	const answerBlock = document.getElementById("seconds-answer");
 	const maxValue = 10;
-	if (isNaN(secondsValue) || !checkNegative(secondsValue) ||
+	if (isNaN(secondsValue) || !isPositive(secondsValue) ||
 		secondsValue.toString().length > maxValue) {
-		printAnswer(answerBlock, errorMsg);
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	const secInHour = 3600;
@@ -108,7 +109,7 @@ function convertSeconds() {
 	const minutes = setTime(Math.floor((secondsValue - (hours * secInHour)) / secInMinute));
 	const seconds = setTime(secondsValue - (hours * secInHour) - (minutes * secInMinute));
 	const result = `${hours}:${minutes}:${seconds}`;
-	printAnswer(answerBlock, result);
+	setAnswer(answerBlock, result);
 }
 
 function setTime(value) {
@@ -119,17 +120,17 @@ function setTime(value) {
 Decline values
 */
 function dateYears() {
-	let dateValue = getInteger("date-years-val");
+	let dateValue = getIntegerFromInput("date-years-val");
 	const answerBlock = document.getElementById("date-years-answer");
 	const maxValue = 150;
-	if (isNaN(dateValue) || !checkNegative(dateValue) ||
+	if (isNaN(dateValue) || !isPositive(dateValue) ||
 		dateValue > maxValue) {
-		printAnswer(answerBlock, errorMsg);
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	const yearText = ["Года", "Год", "Лет"];
 	let manYears = dateValue % 100;
-	printAnswer(answerBlock, wordDeclination(dateValue, yearText));
+	setAnswer(answerBlock, wordDeclination(dateValue, yearText));
 }
 
 
@@ -168,7 +169,7 @@ function dateDifferense() {
 	if (!checkDate(checkFirstVal) || !checkDate(checkSecondVal) ||
 		!checkCorrectDate(checkFirstVal[2], checkFirstVal[0], checkFirstVal[1]) ||
 		!checkCorrectDate(checkSecondVal[2], checkSecondVal[0], checkSecondVal[1])) {
-		printAnswer(answerBlock, errorMsg);
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	let firsDate = new Date(firstValue);
@@ -207,7 +208,7 @@ function dateDifferense() {
 	for (let i = 0; i < dateDiff.length; i++) {
 		answerText += wordDeclination(dateDiff[i], dateValuesName[i]) + " ";
 	}
-	printAnswer(answerBlock, answerText);
+	setAnswer(answerBlock, answerText);
 }
 
 /**
@@ -263,7 +264,7 @@ function zodiacSign() {
 	const answerBlockImg = document.getElementById("zodiac-answer-img");
 	answerBlockImg.src = "";
 	if (!checkCorrectDate(zodiacDate[0], zodiacDate[1], zodiacDate[2]) || !checkCorrectSignDate(zodiacDate)) {
-		printAnswer(answerBlock, errorMsg);
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	const zodiacSignNames = ["Овен", "Телец", "Близнецы", "Рак", "Лев", "Дева", "Весы", "Скорпион", "Стрелец", "Козерог", "Водолей", "Рыбы"];
@@ -303,20 +304,20 @@ function zodiacSign() {
 			break;
 		}
 	}
-	printAnswer(answerBlock, zodiacSignNames[ansver]);
+	setAnswer(answerBlock, zodiacSignNames[ansver]);
 	answerBlockImg.src = "images/" + ansver + ".png";
 }
 
 /** Create chess desc */
 function chess() {
-	const firstValue = getInteger("chess-first-val");
-	const secondValue = getInteger("chess-second-val");
+	const firstValue = getIntegerFromInput("chess-first-val");
+	const secondValue = getIntegerFromInput("chess-second-val");
 	const answerBlock = document.getElementById("chess-box");
 	const maxChessValue = 15;
 	if (!Number.isInteger(firstValue) || !Number.isInteger(secondValue) ||
-		!checkNegative(firstValue) || !checkNegative(secondValue) || firstValue > maxChessValue ||
+		!isPositive(firstValue) || !isPositive(secondValue) || firstValue > maxChessValue ||
 		secondValue > maxChessValue) {
-		printAnswer(answerBlock, errorMsg);
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	answerBlock.innerHTML = "";
@@ -343,24 +344,24 @@ function chess() {
 }
 
 function room() {
-	let houseValue = getInteger("room-first-val");
-	let apatmentValue = getInteger("room-second-val");
-	let florValue = getInteger("room-third-val");
-	let searchApartmentValue = getInteger("room-four-val");
+	let houseValue = getIntegerFromInput("room-first-val");
+	let apatmentValue = getIntegerFromInput("room-second-val");
+	let florValue = getIntegerFromInput("room-third-val");
+	let searchApartmentValue = getIntegerFromInput("room-four-val");
 	const answerBlock = document.getElementById("room-answer");
-	if (!checkNegative(houseValue) || !checkNegative(apatmentValue) ||
-		!checkNegative(florValue) || !checkNegative(searchApartmentValue)) {
-		printAnswer(answerBlock, errorMsg);
+	if (!isPositive(houseValue) || !isPositive(apatmentValue) ||
+		!isPositive(florValue) || !isPositive(searchApartmentValue)) {
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
-	if (!checkZero(houseValue) || !checkZero(apatmentValue) ||
-		!checkZero(florValue) || !checkZero(searchApartmentValue)) {
-		printAnswer(answerBlock, errorMsg);
+	if (!isNotZero(houseValue) || !isNotZero(apatmentValue) ||
+		!isNotZero(florValue) || !isNotZero(searchApartmentValue)) {
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	const appartmentsInHouse = florValue * apatmentValue;
 	if (searchApartmentValue > appartmentsInHouse * houseValue) {
-		printAnswer(answerBlock, `value ${searchApartmentValue} is incorrect! Enter correct value`);
+		setAnswer(answerBlock, `value ${searchApartmentValue} is incorrect! Enter correct value`);
 		return;
 	}
 	const temp = searchApartmentValue % appartmentsInHouse;
@@ -368,45 +369,35 @@ function room() {
 	const entryNumb = temp == 0 ? test : test + 1;
 	const florNumb = (((searchApartmentValue - 1 - ((searchApartmentValue - 1) % apatmentValue)) / apatmentValue) % florValue) + 1;
 	let answerText = `Подъезд ${entryNumb} этаж ${florNumb}`;
-	printAnswer(answerBlock, answerText);
-}
-
-function checkZero(value) {
-	if (value === 0) {
-		return false;
-	}
-	return true;
+	setAnswer(answerBlock, answerText);
 }
 
 /** Calculate all numbers from value */
 function calcValue() {
 	let calcValue = document.getElementById("find-val-first-val").value;
 	const answerBlock = document.getElementById("find-val-answer");
-	if (isNaN(calcValue) || calcValue.charAt(0) === "-") {
-		printAnswer(answerBlock, errorMsg);
+	if (isNaN(calcValue)) {
+		setAnswer(answerBlock, errorMsg);
 		return;
 	}
 	calcValue = calcValue.replace(/\-|\./g, "").split(/(?!$)/u);
 	let answerText = calcValue.reduce(function(sum, current, index) {
 		return sum + parseInt(current, 10);
 	}, 0);
-	printAnswer(answerBlock, answerText);
+	setAnswer(answerBlock, answerText);
 }
 
 /** When focusout textarea = remove http:// and https:// from textarean values, sort values and add it to textarea */
 var textAreaFocus = document.getElementById("sortsrc");
 textAreaFocus.addEventListener("focusout", function() {
 	if (textAreaFocus.value !== "") {
-		let textValue = textAreaFocus.value;
-		textValue = textValue.replace(/(http:\/\/)|(https:\/\/)/g, "").split(",");
-		textValue.sort(function(a, b) {
-			if (a < b) return -1;
-			if (a > b) return 1;
-			return 0;
-		});
+        const linkRegex = /^https?:\/\//;
+		const textValue = textAreaFocus.value.split(",").map((object) => {
+            return object.trim().replace(linkRegex, "");
+        }).sort();
 		const answerBlock = document.getElementById("link");
 		let linkArray;
-		if (typeof(linkArray = answerBlock.getElementsByTagName("ul")[0]) !== "undefined") {
+		if ((linkArray = answerBlock.getElementsByTagName("ul")[0])) {
 			linkArray.innerHTML = "";
 		} else {
 			linkArray = document.createElement("ul");
