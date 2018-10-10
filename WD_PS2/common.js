@@ -1,5 +1,5 @@
 const errorMsg = "Incorrect input data";
-const isNotZero = val => val !== 0;
+const isZero = val => val === 0;
 
 /**
 First task
@@ -26,7 +26,7 @@ function getSumm() {
 
 function getIntegerFromInput(object) {
 	let inputData = document.getElementById(object).value;
-	if (inputData === "" || !Number.isInteger(+inputData)) {
+	if (!inputData || !Number.isInteger(+inputData)) {
 		return NaN;
 	}
 	return +inputData;
@@ -354,8 +354,8 @@ function room() {
 		setAnswer(answerBlock, errorMsg);
 		return;
 	}
-	if (!isNotZero(houseValue) || !isNotZero(apatmentValue) ||
-		!isNotZero(florValue) || !isNotZero(searchApartmentValue)) {
+	if (isZero(houseValue) || isZero(apatmentValue) ||
+		isZero(florValue) || isZero(searchApartmentValue)) {
 		setAnswer(answerBlock, errorMsg);
 		return;
 	}
@@ -390,17 +390,18 @@ function calcValue() {
 /** When focusout textarea = remove http:// and https:// from textarean values, sort values and add it to textarea */
 var textAreaFocus = document.getElementById("sortsrc");
 textAreaFocus.addEventListener("focusout", function() {
-	if (textAreaFocus.value !== "") {
+	if (textAreaFocus.value) {
         const linkRegex = /^https?:\/\//;
 		const textValue = textAreaFocus.value.split(",").map((object) => {
-            return object.trim().replace(linkRegex, "");
+            return object.replace(linkRegex, "").trim();
         }).sort();
 		const answerBlock = document.getElementById("link");
 		let linkArray;
-		if ((linkArray = answerBlock.getElementsByTagName("ul")[0])) {
+		if ((linkArray = document.getElementById("textLinks"))) {
 			linkArray.innerHTML = "";
 		} else {
 			linkArray = document.createElement("ul");
+			linkArray.id = "textLinks";
 			linkArray.style.listStyleType = "none";
 		}
 		let box;
