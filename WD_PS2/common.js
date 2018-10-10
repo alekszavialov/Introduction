@@ -136,7 +136,7 @@ function dateYears() {
 
 function wordDeclination(value, text) {
 	let textValue = value % 100;
-	if (value >= 11 && value <= 19) {
+	if (textValue >= 11 && textValue <= 19) {
 		value = value + " " + text[2];
 	} else {
 		textValue = textValue % 10;
