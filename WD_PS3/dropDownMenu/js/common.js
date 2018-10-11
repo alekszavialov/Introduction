@@ -10,38 +10,54 @@ const selectItemsArray = [
 	["tile008.png", "Vikki O'Doherty"],
 	];
 
-const itemsContainer = $(".select-items");	
-const itemsHead = $(".select-head");
+const $itemsContainer = $(".select-items");	
+const $itemsHead = $(".select-head");
 const animationSpeed = "slow";
 
 $(function() {	
 	(function () {
-		let container, image, value;
+		let container;
 		$.each(selectItemsArray, function(key,value) {
-			container = $("<li> /").addClass("select-item").appendTo(itemsContainer);
-			image = $("<img />", {src :  `img/${value[0]}`, alt : `${value[1]}`}).addClass("select-image").appendTo(container);
-			value = $("<span>").addClass("select-item-value").text(value[1]).appendTo(container);
+			container = $("<li> /").addClass("select-item").appendTo($itemsContainer);
+			$("<img />", {src :  `img/${value[0]}`, alt : `${value[1]}`}).addClass("select-image").appendTo(container);
+			$("<span>").addClass("select-item-value").text(value[1]).appendTo(container);
 		});
 	})();
 });
 
-$(".select-head").click(function() {
+$itemsHead.click(function() {
 	toggleItems();
 });
 
 function toggleItems() {
-	if (!$(itemsContainer).is(':animated')) {
+	if (!$($itemsContainer).is(':animated')) {
 		$(".select").toggleClass("select-active");
-		itemsContainer.fadeToggle(animationSpeed);
+		$itemsContainer.slideToggle(animationSpeed);
 	}
 }
 
-itemsContainer.on("click", "li", function() {	
-	$(".selected").removeClass("selected");
-	$(this).addClass("selected");
-	$(".select-head-selected").text($(this).text());	
-	toggleItems();
+$itemsContainer.on("click", "li", function() {	
+	if (!$($itemsContainer).is(':animated')) {
+		const $selectedImg = $(this).find('img');
+		$(".selected").removeClass("selected");
+		$(this).addClass("selected");
+		$(".select-head-selected").text($(this).text());	
+		$(".select-head-image").attr({
+			src: $selectedImg.attr('src'),
+			alt: $selectedImg.attr('alt')
+		});
+		toggleItems();
+	}
 });
+
+$("body").click(function(event) {
+	if(event.target.className !== "select" && $('.select').hasClass('select-active')){
+		toggleItems();
+	}
+});
+
+
+
 
 
 
