@@ -2,7 +2,7 @@
 include_once("header.php");
 ?>
 <body>
-<form action="" method="post">
+<form action="handler/handle.php" method="post">
     <label for="name1"><input type="radio" id="name1" name="name" value
         ="Ivan">Ivan</label>
     <label for="name2"><input type="radio" id="name2" name="name" value
@@ -12,6 +12,11 @@ include_once("header.php");
     <label for="name4"><input type="radio" id="name4" name="name" value
         ="Dora">Dora</label>
     <input type="submit">
+    <p><?php
+        if ($_SESSION["error"]){
+            echo $_SESSION["error"];
+            session_destroy();
+        }?></p>
 </form>
 </body>
 </html>

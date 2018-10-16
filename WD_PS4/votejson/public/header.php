@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once("../private/handler/handle.php") ?>
+?>
 <!doctype html>
 <html lang="en">
 <head>
