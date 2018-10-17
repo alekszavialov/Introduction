@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpUnhandledExceptionInspection */
 
 class jsonManipulate
 {
@@ -14,23 +14,33 @@ class jsonManipulate
 
     public function makeVote()
     {
-        if (($this->database = $this->openAndReadJson()) !== FALSE) {
+        try {
+            $this->openAndReadJson();
             $this->changeVote();
             $this->writeJson();
+            $this->convertDbToCharts();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
+
     }
 
     private function openAndReadJson()
     {
-        $jsonFile = file_get_contents($this->filePath);
-        if ($jsonFile === false) {
-            return false;
+        if (!file_exists($this->filePath)) {
+            throw new Exception('Incorrect db path or db not exist!');
         }
-        return json_decode($jsonFile, true);
+        $this->database = json_decode(file_get_contents($this->filePath), true);
+        if (json_last_error()){
+            throw new Exception('Incorrect db type!');
+        }
     }
 
     private function changeVote()
     {
+        if (!array_search($this->userName, array_column($this->database["Users"], "name"))) {
+            throw new Exception('Incorrect name or db!');
+        }
         foreach ($this->database['Users'] as &$value) {
             if ($value["name"] === $this->userName) {
                 $value["votes"]++;
@@ -38,6 +48,7 @@ class jsonManipulate
                 break;
             }
         }
+
     }
 
     private function writeJson()
@@ -45,8 +56,12 @@ class jsonManipulate
         file_put_contents($this->filePath, json_encode($this->database, JSON_PRETTY_PRINT));
     }
 
-    public function getVotes()
+    public function convertDbToCharts()
     {
-        return !isset($this->database) || $this->database !== false ? $this->database : false;
+        $result[] = "['Name', 'Vote count']";
+        foreach ($this->database['Users'] as &$value) {
+            $result[] = "['{$value['name']}', {$value['votes']}]";
+        }
+        return implode(",\n", $result);
     }
 }

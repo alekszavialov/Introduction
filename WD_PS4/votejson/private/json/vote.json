@@ -2,19 +2,19 @@
     "Users": [
         {
             "name": "Ivan",
-            "votes": 22
+            "votes": 0
         },
         {
             "name": "Alex",
-            "votes": 21
+            "votes": 1
         },
         {
             "name": "Nikolai",
-            "votes": 23
+            "votes": 1
         },
         {
             "name": "Dora",
-            "votes": 104
+            "votes": 6
         }
     ]
 }
