@@ -38,7 +38,7 @@ class jsonManipulate
 
     private function changeVote()
     {
-        if (!array_search($this->userName, array_column($this->database["Users"], "name"))) {
+        if (!in_array($this->userName, array_column($this->database["Users"], "name"))) {
             throw new Exception('Incorrect name or db!');
         }
         foreach ($this->database['Users'] as &$value) {
