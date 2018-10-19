@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,14 +17,23 @@
     <div class="container">
         <div class="chat">
             <h1>Easy chat</h1>
-            <form action="">
+            <form action="handler/handler.php" method="POST">
                 <p>Enter your name</p>
-                <input type="text" placeholder="John Doe">
+                <input type="text" placeholder="John Doe" name="name">
                 <p>Enter your password</p>
-                <input type="password" placeholder="*****">
+                <input type="password" placeholder="*****" name="password">
                 <button>Submit</button>
             </form>
-
+            <p>
+                <?php
+                if ($_SESSION["error"]) {
+                    echo $_SESSION["error"];
+                    session_destroy();
+                } else {
+                    echo $_SESSION["votes"];
+                    session_destroy();
+                } ?>
+            </p>
         </div>
     </div>
 </section>
