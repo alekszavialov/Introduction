@@ -20,25 +20,27 @@ if (!isset($_SESSION["user_name"])) {
     <div class="container">
         <div class="chat chat-area">
             <h1>Easy chat</h1>
-            <div id="chat-Form">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+            <form id="chat-Form" method="post" action="handler/handler.php">
+                <textarea id="message-chat" name="" id="" cols="30" rows="10"></textarea>
                 <div class="chat-send-msg">
                     <input id="message-value" type="text" name="message-value">
-                    <button>Send</button>
+                    <input type="submit" value="Send">
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>
 <script src="libs/jquery/jquery-3.3.1.js"></script>
 <script>
-    $('#chat-Form button').on('click', function (e) {
+    $('#chat-Form').submit(function (e) {
         e.preventDefault();
-        var text = $("#message-value").val();
+        const m_method = $(this).attr('method');
+        const m_action = $(this).attr('action');
+        const m_data = 'userName=<?php echo $_SESSION["user_name"]?>' + '&userMessage=' + $('#message-value').val();
         $.ajax({
-            url: 'handler/handler.php',
-            type: 'POST',
-            date: 'userName=123',
+            type: m_method,
+            url: m_action,
+            data: m_data,
             success: function (result) {
                 alert(result);
             }

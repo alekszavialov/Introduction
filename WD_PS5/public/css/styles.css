@@ -98,9 +98,17 @@ button {
 .chat-area input {
   width: 450px;
 }
-.chat-area button {
+.chat-area input[type=submit] {
   width: 120px;
   margin-left: auto;
+  display: block;
+  background: #635960;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  outline: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

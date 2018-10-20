@@ -6,36 +6,37 @@ session_start();
 const ERROR = "Oops, smth go wrong(";
 const MIN_NAME_LENGTH = 4;
 const MIN_PASS_LENGTH = 6;
-if ($_SERVER["REQUEST_METHOD"] !== "POST" && (!isset($_POST["name"]) || !isset($_POST["UserName"]))) {
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     errorRedirection(ERROR);
 }
+
 $config = connectConfig();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["name"])) {
+if (isset($_POST["name"])) {
     loginUser($config);
+} else
+if (isset($_POST["userName"])) {
+    addMessage($config);
+} else {
+    errorRedirection(ERROR);
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["UserName"])) {
-    addMessage($config);
-}
+
 
 function addMessage($config)
 {
-    echo $_POST["UserName"];
     try {
-        if (strlen($_POST["UserMessage"]) === 0) {
+        if (strlen($_POST["userMessage"]) === 0) {
             throw new Exception('Empty message!');
         }
         include_once($config["sendMsgManipulate"]);
-        $jsonHandle = new sendMsgManipulate($config["usersDB"], $_POST["UserName"], $_POST["UserMessage"]);
-
-//        $jsonHandle->submitLogin();
-//        $_SESSION["user_name"] = $_POST["name"];
-//        header("location: ../chat.php");
+        $jsonHandle = new sendMsgManipulate($config["dataDB"], $_POST["userName"], $_POST["userMessage"]);
+        $jsonHandle->writeMessage();
     } catch (Exception $e) {
         errorRedirection($e->getMessage());
     }
-    echo $jsonHandle->writeMessage();
+    echo $jsonHandle->getUserMessage();
 }
 
 function loginUser($config)
