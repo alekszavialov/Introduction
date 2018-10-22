@@ -16,13 +16,32 @@ $config = connectConfig();
 if (isset($_POST["name"])) {
     loginUser($config);
 } else
-if (isset($_POST["userName"])) {
+if (isset($_POST["userMessage"]) && isset($_SESSION["user_name"])) {
     addMessage($config);
-} else {
+} else
+if (isset($_POST["getMsg"])) {
+    loadMessage($config);
+}
+else {
     errorRedirection(ERROR);
 }
 
+function loadMessage($config)
+{
+    try {
+        if (strlen($_POST["getMsg"]) === 0) {
+            throw new Exception('Empty query!');
+        }
+        include_once($config["loadMsgManipulate"]);
+        $jsonHandle = new loadMsgManipulate($config["dataDB"], $_SESSION["user_name"]);
+        $jsonHandle->loadMessages();
+        $_SESSION["message_count"] = $jsonHandle->getMessageCount();
+    } catch (Exception $e) {
+        echo "";
+    }
+    echo ($jsonHandle->getMessages());
 
+}
 
 function addMessage($config)
 {
@@ -31,7 +50,7 @@ function addMessage($config)
             throw new Exception('Empty message!');
         }
         include_once($config["sendMsgManipulate"]);
-        $jsonHandle = new sendMsgManipulate($config["dataDB"], $_POST["userName"], $_POST["userMessage"]);
+        $jsonHandle = new sendMsgManipulate($config["dataDB"], $_SESSION["user_name"], $_POST["userMessage"]);
         $jsonHandle->writeMessage();
     } catch (Exception $e) {
         errorRedirection($e->getMessage());

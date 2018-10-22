@@ -80,11 +80,11 @@ button {
   width: 600px;
   padding: 100px 0 0 0;
 }
-.chat-area button, .chat-area input, .chat-area textarea {
+.chat-area button, .chat-area input, #message-chat {
   padding: 15px;
   margin: 0;
 }
-.chat-area textarea {
+#message-chat {
   width: 100%;
   border: none;
   outline: none;
@@ -94,7 +94,13 @@ button {
   resize: none;
   overflow-x: hidden;
   box-sizing: border-box;
+  background: #fff;
 }
+
+strong{
+  font-weight: bold;
+}
+
 .chat-area input {
   width: 450px;
 }
@@ -110,5 +116,6 @@ button {
   cursor: pointer;
   outline: none;
 }
+
 
 /*# sourceMappingURL=styles.css.map */
