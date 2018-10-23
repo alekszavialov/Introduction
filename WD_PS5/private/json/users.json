@@ -8,23 +8,11 @@
         "password": "123456"
     },
     {
+        "name": "Alex!@#",
+        "password": "123456"
+    },
+    {
         "name": "Alex2",
-        "password": ""
-    },
-    {
-        "name": "Alex3",
-        "password": "1234567"
-    },
-    {
-        "name": "Alex6",
-        "password": "123456"
-    },
-    {
-        "name": "Alex7",
-        "password": "123456"
-    },
-    {
-        "name": "Alex8",
-        "password": "123456"
+        "password": "12345678"
     }
 ]

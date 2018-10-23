@@ -22,7 +22,7 @@ session_start();
                 <input type="text" placeholder="John Doe" name="name">
                 <p>Enter your password</p>
                 <input type="password" placeholder="*****" name="password">
-                <button>Submit</button>
+                <button class="chat-button">Submit</button>
             </form>
             <p>
                 <?php
