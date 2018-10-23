@@ -26,11 +26,8 @@ session_start();
             </form>
             <p>
                 <?php
-                if ($_SESSION["error"]) {
+                if (isset($_SESSION["error"])) {
                     echo $_SESSION["error"];
-                    session_destroy();
-                } else {
-                    echo $_SESSION["votes"];
                     session_destroy();
                 } ?>
             </p>

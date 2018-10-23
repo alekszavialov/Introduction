@@ -14,5 +14,9 @@
     {
         "name": "Alex2",
         "password": "12345678"
+    },
+    {
+        "name": "Alex123",
+        "password": "123456"
     }
 ]

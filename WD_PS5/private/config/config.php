@@ -9,5 +9,7 @@ return array(
     'loginManipulate' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'dbHandlers' .
         DIRECTORY_SEPARATOR . 'loginManipulate.php',
     'sendMsgManipulate' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'dbHandlers' .
-        DIRECTORY_SEPARATOR . 'sendMsgManipulate.php'
+        DIRECTORY_SEPARATOR . 'sendMsgManipulate.php',
+    'loadMsgManipulate' => __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'dbHandlers' .
+        DIRECTORY_SEPARATOR . 'loadMsgManipulate.php'
 );

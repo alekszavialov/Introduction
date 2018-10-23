@@ -21,14 +21,36 @@ if (isset($_POST["name"])) {
     include_once($config["jsonDBManipulate"]);
     loginUser($config);
 } else
-if (isset($_POST["userName"])) {
-    include_once($config["jsonDBManipulate"]);
-    addMessage($config);
-} else {
-    errorRedirection(ERROR);
+    if (isset($_POST["userMessage"])) {
+        include_once($config["jsonDBManipulate"]);
+        addMessage($config);
+    } else if (isset($_POST["getMsg"])) {
+        include_once($config["jsonDBManipulate"]);
+        loadMessage($config);
+    } else {
+        errorRedirection(ERROR);
+    }
+
+function loadMessage($config)
+{
+    try {
+        if (strlen($_POST["getMsg"]) === 0) {
+            throw new Exception('Empty query!');
+        }
+        include_once($config["loadMsgManipulate"]);
+        $jsonHandle = new loadMsgManipulate($config["dataDB"], $_SESSION["user_name"]);
+        $jsonHandle->loadMessages();
+        if (isset($_SESSION["messageCount"]) && $jsonHandle->getMessageCount() === $_SESSION["messageCount"]){
+            return;
+        }
+        $_SESSION["messageCount"] = $jsonHandle->getMessageCount();
+        echo($jsonHandle->getMessages());
+    } catch (Exception $e) {
+        echo "es";
+    }
+
+
 }
-
-
 
 function addMessage($config)
 {
@@ -37,7 +59,7 @@ function addMessage($config)
             throw new Exception("Empty message!");
         }
         include_once($config["sendMsgManipulate"]);
-        $jsonHandle = new sendMsgManipulate($config["dataDB"], $_POST["userName"], $_POST["userMessage"]);
+        $jsonHandle = new sendMsgManipulate($config["dataDB"], $_SESSION["user_name"], $_POST["userMessage"]);
         $jsonHandle->writeMessage();
     } catch (Exception $e) {
         errorRedirection($e->getMessage());
@@ -50,7 +72,7 @@ function addMessage($config)
 function loginUser($config)
 {
     try {
-        if (strlen($_POST["name"]) < MIN_NAME_LENGTH ||  preg_match(LOGIN_REG, $_POST["name"])) {
+        if (strlen($_POST["name"]) < MIN_NAME_LENGTH || preg_match(LOGIN_REG, $_POST["name"])) {
             throw new Exception("Name should exist 4 character at least or incorrect symbols!");
         }
         if (strlen($_POST["password"]) < MIN_PASS_LENGTH || preg_match(PASSWORD_REG, $_POST["password"])) {
@@ -72,7 +94,8 @@ function connectConfig()
         $config = require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR
             . "private" . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "config.php";
         if (!isset($config["dataDB"]) || !isset($config["usersDB"]) || !isset($config["jsonDBManipulate"]) ||
-            !isset($config["loginManipulate"]) || !isset($config["sendMsgManipulate"])) {
+            !isset($config["loginManipulate"]) || !isset($config["sendMsgManipulate"]) ||
+            !isset($config["loadMsgManipulate"])) {
             throw new Exception("Config file broken!");
         }
     } catch (Exception $e) {

@@ -32,8 +32,12 @@ class jsonDBManipulate
         file_put_contents($this->filePath, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
     }
 
-    public function getDB(){
+    final public function getDB(){
         return $this->database;
+    }
+
+    final public function getDBSize(){
+        return count($this->database);
     }
 
 }

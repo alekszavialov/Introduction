@@ -1,6 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION["user_name"])) {
+    $_SESSION["error"] = "Oops!";
     header("location: index.php");
 }
 ?>
@@ -21,7 +22,9 @@ if (!isset($_SESSION["user_name"])) {
         <div class="chat chat-area">
             <h1>Easy chat</h1>
             <form id="chat-Form" method="post" action="handler/handler.php">
-                <textarea id="message-chat" name="" id="" cols="30" rows="10"></textarea>
+                <div id="message-chat">
+
+                </div>
                 <div class="chat-send-msg">
                     <input id="message-value" type="text" name="message-value">
                     <input type="submit" value="Send">
@@ -31,21 +34,6 @@ if (!isset($_SESSION["user_name"])) {
     </div>
 </section>
 <script src="libs/jquery/jquery-3.3.1.js"></script>
-<script>
-    $('#chat-Form').submit(function (e) {
-        e.preventDefault();
-        const m_method = $(this).attr('method');
-        const m_action = $(this).attr('action');
-        const m_data = 'userName=<?php echo $_SESSION["user_name"]?>' + '&userMessage=' + $('#message-value').val();
-        $.ajax({
-            type: m_method,
-            url: m_action,
-            data: m_data,
-            success: function (result) {
-                alert(result);
-            }
-        });
-    });
-</script>
+<script src="js/common.js"></script>
 </body>
 </html>
