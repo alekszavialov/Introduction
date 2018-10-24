@@ -4,6 +4,9 @@ if (!isset($_SESSION["user_name"])) {
     $_SESSION["error"] = "Oops!";
     header("location: index.php");
 }
+if (isset($_SESSION["messageCount"])){
+    unset($_SESSION["messageCount"]);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,7 +15,7 @@ if (!isset($_SESSION["user_name"])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Chat</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -23,12 +26,12 @@ if (!isset($_SESSION["user_name"])) {
             <h1>Easy chat</h1>
             <form id="chat-Form" method="post" action="handler/handler.php">
                 <div id="message-chat">
-
                 </div>
                 <div class="chat-send-msg">
                     <input id="message-value" type="text" name="message-value">
                     <input type="submit" value="Send">
                 </div>
+                <p class="errorArea"></p>
             </form>
         </div>
     </div>

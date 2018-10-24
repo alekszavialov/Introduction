@@ -34,9 +34,6 @@ if (isset($_POST["name"])) {
 function loadMessage($config)
 {
     try {
-        if (strlen($_POST["getMsg"]) === 0) {
-            throw new Exception('Empty query!');
-        }
         include_once($config["loadMsgManipulate"]);
         $jsonHandle = new loadMsgManipulate($config["dataDB"], $_SESSION["user_name"]);
         $jsonHandle->loadMessages();
@@ -46,7 +43,7 @@ function loadMessage($config)
         $_SESSION["messageCount"] = $jsonHandle->getMessageCount();
         echo($jsonHandle->getMessages());
     } catch (Exception $e) {
-        echo "es";
+        return;
     }
 
 
@@ -62,10 +59,7 @@ function addMessage($config)
         $jsonHandle = new sendMsgManipulate($config["dataDB"], $_SESSION["user_name"], $_POST["userMessage"]);
         $jsonHandle->writeMessage();
     } catch (Exception $e) {
-        errorRedirection($e->getMessage());
-    }
-    if (isset($jsonHandle)) {
-        echo $jsonHandle->getUserMessage();
+        echo ($e->getMessage());
     }
 }
 

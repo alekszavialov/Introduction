@@ -1,6 +1,7 @@
 $(function () {
 
-    const $form = $('#chat-Form');
+    const $form = $("#chat-Form");
+    const $error = $(".errorArea");
     const method = $form.attr('method');
     const action = $form.attr('action');
 
@@ -17,22 +18,32 @@ $(function () {
                 }
             }
         });
-
         $chatBody.scrollTop($chatBody.prop("scrollHeight"));
-    };
+    }
 
     $form.submit(function (e) {
         e.preventDefault();
-        const $messageValue = $('#message-value');
-        const data = 'userMessage=' + $messageValue.val();
+        const $messageValue = $("#message-value");
+        const $messageValueData = $messageValue.val();
+        if (!$messageValueData) {
+            return;
+        }
+        const data = 'userMessage=' + $messageValueData;
         $.ajax({
             type: method,
             url: action,
-            data: data
+            data: data,
+            success: function (data) {
+                if (data) {
+                    $error.text(data);
+                    return;
+                }
+                $messageValue.val("");
+                loadMessage();
+            }
         });
-        $messageValue.val("");
-        loadMessage();
     });
+
     loadMessage();
     setInterval(loadMessage, 1000);
 

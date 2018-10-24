@@ -34,10 +34,9 @@ class loadMsgManipulate extends jsonDBManipulate
         $lastMessageTime = date_timestamp_get(date_create()) - $hourInSeconds;
         $this->lastMessages = array();
         foreach (array_reverse(parent::getDB()) as $key => &$value) {
-//            if ($value["time"] <= $lastMessageTime) {
-//                $this->lastMessages[] = $this->convertTextToHTML($value);
-//            }
-            $this->lastMessages[] = $this->convertTextToHTML($value);
+            if ($value["time"] >= $lastMessageTime) {
+                $this->lastMessages[] = $this->convertTextToHTML($value);
+            }
         }
         $this->lastMessages = array_reverse($this->lastMessages);
     }
