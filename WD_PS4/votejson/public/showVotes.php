@@ -1,5 +1,6 @@
 <?php
-include_once("header.php");
+include_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "private" . DIRECTORY_SEPARATOR . "template" .
+    DIRECTORY_SEPARATOR . "header.php");
 ?>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
