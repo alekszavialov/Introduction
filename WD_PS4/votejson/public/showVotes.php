@@ -28,4 +28,7 @@ include_once("header.php");
     <a href="index.php">Go back</a>
     </body>
     </html>
-<?php session_destroy(); ?>
+<?php
+session_unset();
+session_destroy();
+?>

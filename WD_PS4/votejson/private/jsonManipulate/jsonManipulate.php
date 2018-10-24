@@ -53,6 +53,9 @@ class jsonManipulate
 
     private function writeJson()
     {
+        if (!is_writable($this->filePath) || empty($this->database)){
+            throw new Exception('Cant write to file. Try again!');
+        }
         file_put_contents($this->filePath, json_encode($this->database, JSON_PRETTY_PRINT));
     }
 

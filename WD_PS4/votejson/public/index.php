@@ -22,8 +22,9 @@ include_once("header.php");
     <input type="submit" value="Make vote">
     <p>
         <?php
-        if ($_SESSION["error"]) {
+        if (isset($_SESSION["error"])) {
             echo $_SESSION["error"];
+            session_unset();
             session_destroy();
         } ?>
     </p>

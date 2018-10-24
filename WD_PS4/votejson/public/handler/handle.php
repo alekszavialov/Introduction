@@ -4,10 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 const ERROR = "Oops, smth go wrong(";
-if ($_SERVER["REQUEST_METHOD"] !== "POST" || !isset($_POST["name"])) {
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     errorRedirection(ERROR);
 }
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["name"])) {
+if (isset($_POST["name"])) {
     try {
         $config = require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR
             . "private" . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "config.php";
