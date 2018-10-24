@@ -14,15 +14,10 @@ class jsonManipulate
 
     public function makeVote()
     {
-        try {
-            $this->openAndReadJson();
-            $this->changeVote();
-            $this->writeJson();
-            $this->convertDbToCharts();
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-
+        $this->openAndReadJson();
+        $this->changeVote();
+        $this->writeJson();
+        $this->convertDbToCharts();
     }
 
     private function openAndReadJson()
@@ -31,7 +26,7 @@ class jsonManipulate
             throw new Exception('Incorrect db path or db not exist!');
         }
         $this->database = json_decode(file_get_contents($this->filePath), true);
-        if (json_last_error()){
+        if (json_last_error()) {
             throw new Exception('Incorrect db type!');
         }
     }
@@ -44,7 +39,6 @@ class jsonManipulate
         foreach ($this->database['Users'] as &$value) {
             if ($value["name"] === $this->userName) {
                 $value["votes"]++;
-                unset($value);
                 break;
             }
         }
@@ -53,7 +47,7 @@ class jsonManipulate
 
     private function writeJson()
     {
-        if (!is_writable($this->filePath) || empty($this->database)){
+        if (!is_writable($this->filePath) || empty($this->database)) {
             throw new Exception('Cant write to file. Try again!');
         }
         file_put_contents($this->filePath, json_encode($this->database, JSON_PRETTY_PRINT));

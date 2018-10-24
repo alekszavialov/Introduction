@@ -5,15 +5,9 @@ const ERROR = "Incorrect input data";
 if (isset($_POST['function'])) {
     switch ($_POST['function']) {
         case 'addNumbers':
-            if (!is_numeric($_POST['secondNumber']) || !is_numeric($_POST['secondNumber'])) {
-                return $_SESSION["addNumbers"] = ERROR;
-            }
-            return $_SESSION["addNumbers"] = addNumbers($_POST['firstNumber'], $_POST['secondNumber']);
+            return $_SESSION["addNumbers"] = addNumbers();
         case 'addRndNumbers':
-            if (!is_numeric($_POST['secondNumber']) || !is_numeric($_POST['secondNumber'])) {
-                return $_SESSION["addRndNumbers"] = ERROR;
-            }
-            return $_SESSION["addRndNumbers"] = addRndNumbers($_POST['firstNumber'], $_POST['secondNumber']);
+            return $_SESSION["addRndNumbers"] = addRndNumbers();
         case 'chrismassTree':
             if (!is_numeric($_POST['stars_count'])) {
                 return $_SESSION["addRndNumbers"] = ERROR;
@@ -35,8 +29,10 @@ if (isset($_POST['function'])) {
 }
 
 
-function addNumbers($firstValue, $secondValue)
+function addNumbers()
 {
+    $firstValue = -1000;
+    $secondValue = 1000;
     $result = 0;
     if ($firstValue > $secondValue) {
         [$firstValue, $secondValue] = [$secondValue, $firstValue];
@@ -47,8 +43,10 @@ function addNumbers($firstValue, $secondValue)
     return $result;
 }
 
-function addRndNumbers($firstValue, $secondValue)
+function addRndNumbers()
 {
+    $firstValue = -1000;
+    $secondValue = 1000;
     $result = 0;
     $endValues = [2, 3, 7];
     if ($firstValue > $secondValue) {
@@ -64,12 +62,10 @@ function addRndNumbers($firstValue, $secondValue)
 
 function chrismassTree($value)
 {
+    $star = "*";
     $result = "";
     for ($i = 1; $i <= $value; $i++) {
-        for ($j = 1; $j <= $i; $j++) {
-            $result .= "*";
-        }
-        $result .= "</br>";
+        $result .= str_repeat($star, $i) . "</br>";
     }
     return $result;
 }
@@ -84,9 +80,9 @@ function chessBoard($firstValue, $secondValue)
         $boxWidth / $firstValue;
     $whiteBox = "<div class='white-box' style='width: {$boxSize}px; height: {$boxSize}px'></div>";
     $blackBox = "<div class='black-box' style='width: {$boxSize}px; height: {$boxSize}px'></div>";
-    for ($i = 0; $i < $secondValue; $i++) {
-        for ($j = 0; $j < $firstValue; $j++) {
-            if ((($i + $j) % 2 == 0)) {
+    for ($col = 0; $col < $secondValue; $col++) {
+        for ($row = 0; $row < $firstValue; $row++) {
+            if ((($col + $row) % 2 == 0)) {
                 $result .= $whiteBox;
             } else {
                 $result .= $blackBox;

@@ -22,6 +22,8 @@ if (isset($_POST["name"])) {
     } catch (Exception $e) {
         errorRedirection($e->getMessage());
     }
+} else {
+    errorRedirection(ERROR);
 }
 
 function errorRedirection($errorMsg)

@@ -11,8 +11,6 @@ include_once "common.php";?>
     .desc {
         margin-top: 10px;
         display: block;
-        width: 500px;
-        height: 500px;
     }
     .black-box, .white-box{
         display: inline-block;
@@ -33,8 +31,6 @@ include_once "common.php";?>
         </h2>
         <form action="" method="POST" class="form_task1">
             <input type="hidden" name="function" value="addNumbers"/>
-            <input type="number" name="firstNumber" min="-1000" max="1000" step="1">
-            <input type="number" name="secondNumber" min="-1000" max="1000" step="1">
             <input type="submit" value="GetSumm"/>
             <p><?php echo isset($_SESSION["addNumbers"]) ? $_SESSION["addNumbers"] : "Run function" ?></p>
         </form>
@@ -44,8 +40,6 @@ include_once "common.php";?>
             Сумма от -1000 до 1000 которые заканчиваются на 2,3, и 7;
         </h2>
         <form action="#" method="POST" class="form_task1">
-            <input type="number" name="firstNumber" min="-1000" max="1000" step="1">
-            <input type="number" name="secondNumber" min="-1000" max="1000" step="1">
             <input type="hidden" name="function" value="addRndNumbers"/>
             <input type="submit" value="GetSumm"/>
             <p><?php echo isset($_SESSION["addRndNumbers"]) ? $_SESSION["addRndNumbers"] : "Run function" ?></p>
@@ -98,4 +92,7 @@ include_once "common.php";?>
 </div>
 </body>
 </html>
-<?php session_destroy() ?>
+<?php
+session_unset();
+session_destroy();
+?>

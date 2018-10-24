@@ -8,17 +8,17 @@ include_once("header.php");
 
         function drawChart() {
 
-            var data = google.visualization.arrayToDataTable([
+            const data = google.visualization.arrayToDataTable([
                 <?php
                 echo $_SESSION["votes"];
                 ?>
             ]);
 
-            var options = {
+            const options = {
                 title: 'My Votes'
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            const chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
             chart.draw(data, options);
         }
