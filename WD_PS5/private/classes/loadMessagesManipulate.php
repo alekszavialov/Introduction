@@ -2,30 +2,28 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-class loadMsgManipulate extends jsonDBManipulate
+class loadMessagesManipulate extends jsonDBManipulate
 {
 
     private $lastMessages;
-    private $currentUser;
 
-    public function __construct($filePath, $currentUser)
+    public function __construct()
     {
-        parent::__construct($filePath);
-        $this->currentUser = $currentUser;
+        parent::__construct(dataDB);
     }
 
-    public function loadMessages()
+    public function mainFunction()
     {
         try {
             parent::loadJson();
+            if (!$this->checkMessagesCount()){
+                return;
+            }
+            $_SESSION["messageCount"] = parent::getDBSize();
+            echo $this->getMessages();
         } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            pageRedirection::errorRedirection($e->getMessage());
         }
-    }
-
-    public function getMessageCount()
-    {
-        return parent::getDBSize();
     }
 
     private function readMessages()
@@ -41,7 +39,7 @@ class loadMsgManipulate extends jsonDBManipulate
         $this->lastMessages = array_reverse($this->lastMessages);
     }
 
-    public function getMessages()
+    private function getMessages()
     {
         $this->readMessages();
         return implode("\n", $this->lastMessages);
@@ -53,9 +51,17 @@ class loadMsgManipulate extends jsonDBManipulate
         $minute = $value["time"] / 60 % 60;
         $second = $value["time"] % 60;
         $minute = strlen($minute) > 1 ? $minute : "0" . $minute;
-        return $this->currentUser === $value["name"] ?
+        return $_SESSION["user_name"] === $value["name"] ?
             "<p style='text-align: right'>{$value["message"]} : <strong>You ({$value["name"]})</strong> [{$hour}:{$minute}:{$second}]</p>"
             : "<p>[{$hour}:{$minute}:{$second}] <strong>{$value["name"]}</strong>: {$value["message"]}</p>";
+    }
+
+    private function checkMessagesCount()
+    {
+        if (isset($_SESSION["messageCount"]) && parent::getDBSize() === $_SESSION["messageCount"]) {
+            return false;
+        }
+        return true;
     }
 
 }

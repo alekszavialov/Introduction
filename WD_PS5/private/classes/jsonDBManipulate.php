@@ -25,7 +25,10 @@ class jsonDBManipulate
     }
 
     final public function saveJson($data){
-        if (!is_writable($this->filePath) || empty($this->database)){
+        if (isset($this->database)){
+            $this->loadJson();
+        }
+        if (!is_writable($this->filePath)){
             throw new Exception('Cant write to file. Try again!');
         }
         $this->database[] = $data;
