@@ -9,11 +9,11 @@ include_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "private" . DIRECTORY_SEPAR
 
         function drawChart() {
 
-            const data = google.visualization.arrayToDataTable([
-                <?php
-                echo $_SESSION["votes"];
-                ?>
-            ]);
+            const data = google.visualization.arrayToDataTable(
+                JSON.parse('<?php
+                    echo $_SESSION["votes"];
+                    ?>')
+            );
 
             const options = {
                 title: 'My Votes'

@@ -2,15 +2,15 @@
     "Users": [
         {
             "name": "Ivan",
-            "votes": 5
+            "votes": 6
         },
         {
             "name": "Alex",
-            "votes": 9
+            "votes": 14
         },
         {
             "name": "Nikolai",
-            "votes": 9
+            "votes": 20
         },
         {
             "name": "Dora",

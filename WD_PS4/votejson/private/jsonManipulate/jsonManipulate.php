@@ -55,10 +55,10 @@ class jsonManipulate
 
     public function convertDbToCharts()
     {
-        $result[] = "['Name', 'Vote count']";
+        $result[] = ["Name", "Vote count"];
         foreach ($this->database['Users'] as &$value) {
-            $result[] = "['{$value['name']}', {$value['votes']}]";
+            $result[] = ["{$value['name']}", $value['votes']];
         }
-        return implode(",\n", $result);
+        return json_encode($result);
     }
 }

@@ -10,8 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 if (isset($_POST["name"])) {
     try {
         require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . "private" . DIRECTORY_SEPARATOR
-            . "config" . DIRECTORY_SEPARATOR . "config.php";
-        $jsonHandle = new jsonManipulate($config["voteDB"], $_POST["name"]);
+            . "configRequires" . DIRECTORY_SEPARATOR . "configRequires.php";
+        $jsonHandle = new jsonManipulate(VOTE_DB, $_POST["name"]);
         $jsonHandle->makeVote();
         $_SESSION["votes"] = $jsonHandle->convertDbToCharts();
         header("location: ../showVotes.php");
