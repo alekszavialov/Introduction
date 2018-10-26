@@ -4,9 +4,6 @@ if (!isset($_SESSION["user_name"])) {
     $_SESSION["error"] = "Oops!";
     header("location: index.php");
 }
-if (isset($_SESSION["messageCount"])){
-    unset($_SESSION["messageCount"]);
-}
 ?>
 <!doctype html>
 <html lang="en">
