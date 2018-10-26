@@ -25,7 +25,7 @@ if (isset($_SESSION["messageCount"])){
                 <p>Enter your name</p>
                 <input type="text" placeholder="John Doe" name="name">
                 <p>Enter your password</p>
-                <input type="password" placeholder="*****" name="password">
+                <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" name="password">
                 <div class="login-button">
                     <button class="submit-button">Submit</button>
                 </div>

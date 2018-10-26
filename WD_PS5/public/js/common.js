@@ -24,8 +24,8 @@ $(function () {
     $form.submit(function (e) {
         e.preventDefault();
         const $messageValue = $("#message-value");
-        const $messageValueData = $messageValue.val();
-        if (!$messageValueData) {
+        let $messageValueData = $messageValue.val();
+        if (!$messageValueData){
             return;
         }
         const data = 'userMessage=' + $messageValueData;

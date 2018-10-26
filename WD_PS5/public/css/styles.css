@@ -48,7 +48,7 @@ h1 {
 }
 .chat input {
   width: 100%;
-  padding: 15px;
+  padding: 16px;
   font-size: 16px;
   margin-bottom: 15px;
   box-sizing: border-box;
@@ -56,9 +56,15 @@ h1 {
   background: #fffecd;
   color: #635960;
   outline: none;
+  font-weight: bold;
 }
+
 .chat input::placeholder {
-  color: #635960;
+  color: #a9adb3;
+}
+
+.chat input:hover{
+  outline: auto;
 }
 
 .login-button{
@@ -71,24 +77,32 @@ h1 {
   width: 100%;
   background: #635960;
   color: #fff;
-  font-size: 14px;
   border: none;
   padding: 15px;
   cursor: pointer;
   outline: none;
+  font-size: 20px;
+  line-height: 20px;
+}
 
+.submit-button:hover{
+  color: #8b8e59;
+}
+
+.chat-area input[type=submit]:hover{
+  color: #8b8e59;
 }
 
 .login-button:after{
   position: absolute;
   content: "";
   display: block;
-  background: linear-gradient(0, rgba(0, 0, 0, 0), rgba(63, 59, 60, 0.5));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(99, 89, 96, 0.1));
   width: 100%;
   height: 200px;
-  transform: scaleX(1.03) skewY(7deg) rotate(-15deg);
-  left: 26px;
-  top: 23px;
+  transform: scaleX(1.034) skewY(7deg) rotate(-14deg);
+  left: 25px;
+  top: 22px;
   z-index:  -1;
 }
 
@@ -147,6 +161,21 @@ p strong{
   padding: 5px;
   cursor: pointer;
   outline: none;
+}
+
+p span{
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+}
+
+span.happy-smile{
+  background-image: url(../images/smiles/happy.png);
+}
+
+span.sad-smile{
+  background-image: url(../images/smiles/sad.png);
 }
 
 /*# sourceMappingURL=styles.css.map */
