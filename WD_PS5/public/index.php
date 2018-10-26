@@ -26,7 +26,9 @@ if (isset($_SESSION["messageCount"])){
                 <input type="text" placeholder="John Doe" name="name">
                 <p>Enter your password</p>
                 <input type="password" placeholder="*****" name="password">
-                <button class="chat-button">Submit</button>
+                <div class="login-button">
+                    <button class="submit-button">Submit</button>
+                </div>
             </form>
             <p>
                 <?php

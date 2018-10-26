@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: dslife
@@ -18,4 +19,5 @@ class pageRedirection
     {
         header("location:   ../chat.php");
     }
+
 }
