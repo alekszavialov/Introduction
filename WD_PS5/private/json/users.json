@@ -30,5 +30,13 @@
     {
         "name": "Alex123",
         "password": "123456"
+    },
+    {
+        "name": "admin",
+        "password": "123456"
+    },
+    {
+        "name": "user",
+        "password": "123456"
     }
 ]
