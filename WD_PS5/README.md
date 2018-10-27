@@ -6,15 +6,18 @@ Simple chat
 
 ### Requirements
 
-* Server or local server
-* PHP 5 and up
+* Web Server (MAMP, DENWER)
+* PHP 7 and up
+* GIT
 
 `$ git clone https://github.com/alekszavialov/Introduction.git`
 
 ## Usage
 
 ```
-Go to WD_PS5\public folder. Run index.php.
+Extract files to webserver directory.
+Run your webserver.
+Go to (http://{yourhost}/{yourpath}/WD_PS5/public/index.php)
 
 Login
 Enter your name and password in login form. Push submit button. If you new user - application will register you.
