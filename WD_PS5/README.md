@@ -9,7 +9,7 @@ Simple chat
 * Server or local server
 * PHP 5 and up
 
-`$ git clone https://github.com/alekszavialov/Introduction.git
+`$ git clone https://github.com/alekszavialov/Introduction.git'
 
 ## Usage
 
