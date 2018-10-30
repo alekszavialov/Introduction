@@ -10,6 +10,9 @@ define('HOST', 'localhost');
 
 define('USER', 'admin');
 
-define('PASSWORD', '123456');
+define('PASSWORD', 'admin');
 
 define('DATABASE', 'chat');
+
+define('USERS_DB', 'users');
+

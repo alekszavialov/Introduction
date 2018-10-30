@@ -13,10 +13,14 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_S
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR
     . 'config' . DIRECTORY_SEPARATOR . 'dbConfig.php';
 
-$link = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
-if (mysqli_connect_error()) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$checkValuesAndSetFunction = new checkValuesAndSetManipulateClass();
+$manipulateClass = $checkValuesAndSetFunction->getClass();
+$manipulateClass->mainFunction();
+
+//$link = mysqli_connect(HOST, USER, PASSWORD, DATABASE);
+//if (mysqli_connect_error()) {
+//    die("Connection failed: " . mysqli_connect_error());
+//}
 
 //$query = "SELECT * FROM users";
 //$result = mysqli_query($link, $query);
@@ -33,9 +37,9 @@ if (mysqli_connect_error()) {
 //    echo "Error: " . $sql . "<br>" . mysqli_error($link);
 //}
 
-$sql_search = "SELECT USER_NAME, USER_PASSWORD FROM users WHERE USER_PASSWORD = '" . $_POST['userPassword'] . "'";
-$test = mysqli_query($link, $sql_search);
-$row = mysqli_fetch_all($test, MYSQLI_ASSOC);
+//$sql_search = "SELECT USER_NAME, USER_PASSWORD FROM users WHERE USER_PASSWORD = '" . $_POST['userPassword'] . "'";
+//$test = mysqli_query($link, $sql_search);
+//$row = mysqli_fetch_all($test, MYSQLI_ASSOC);
 //if ($row && $row['USER_PASSWORD'] === '123456') {
 //    while ($row = mysqli_fetch_row($test)) {
 //        printf ("%s (%s)\n", $row[0], $row[1]);
@@ -50,20 +54,18 @@ $row = mysqli_fetch_all($test, MYSQLI_ASSOC);
 //}
 
 
-foreach ($row as $column => $value) {
-    //echo $column . " = " . $value;
-    printf("%s (%s)\n", $value['USER_NAME'], $value['USER_PASSWORD']);
-    echo "<br />";
-}
+//foreach ($row as $column => $value) {
+//    //echo $column . " = " . $value;
+//    printf("%s (%s)\n", $value['USER_NAME'], $value['USER_PASSWORD']);
+//    echo "<br />";
+//}
+//
+//mysqli_free_result($test);
+//
+//
+//mysqli_close($link);
 
-mysqli_free_result($test);
 
-
-mysqli_close($link);
-
-//$checkValuesAndSetFunction = new checkValuesAndSetManipulateClass();
-//$manipulateClass = $checkValuesAndSetFunction->getClass();
-//$manipulateClass->mainFunction();
 
 function __autoload($className)
 {

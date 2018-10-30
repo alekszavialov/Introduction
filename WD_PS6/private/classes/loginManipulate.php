@@ -2,21 +2,22 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-class loginManipulate extends jsonDBManipulate
+class loginManipulate extends dbManipulate
 {
 
     public function __construct()
     {
-        parent::__construct(USERSDB);
+        parent::__construct(USERS_DB);
     }
 
     public function mainFunction()
     {
         try {
             $this->checkPostData();
-            $this->loginUser();
-            $_SESSION['user_name'] = $_POST['userName'];
-            pageRedirection::chatPageRedirection();
+            $this->addNewUser();
+//            $this->loginUser();
+//            $_SESSION['user_name'] = $_POST['userName'];
+//            pageRedirection::chatPageRedirection();
         } catch (Exception $e) {
             pageRedirection::errorRedirection($e->getMessage());
         }
@@ -35,18 +36,18 @@ class loginManipulate extends jsonDBManipulate
         }
     }
 
-    private function loginUser()
-    {
-        if (!in_array($_POST['userName'], array_column(parent::getDB(), 'name'))) {
-            $this->addNewUser();
-            return;
-        }
-        foreach (parent::getDB() as &$value) {
-            if ($value['name'] === $_POST['userName'] && $value['password'] !== $_POST['userPassword']) {
-                throw new Exception('Incorrect password!');
-            }
-        }
-    }
+//    private function loginUser()
+//    {
+//        if (!in_array($_POST['userName'], array_column(parent::getDB(), 'name'))) {
+//            $this->addNewUser();
+//            return;
+//        }
+//        foreach (parent::getDB() as &$value) {
+//            if ($value['name'] === $_POST['userName'] && $value['password'] !== $_POST['userPassword']) {
+//                throw new Exception('Incorrect password!');
+//            }
+//        }
+//    }
 
     private function addNewUser()
     {
@@ -54,6 +55,6 @@ class loginManipulate extends jsonDBManipulate
             'name' => $_POST['userName'],
             'password' => $_POST['userPassword']
         );
-        parent::saveJson($userData);
+        parent::addDataToTable($userData);
     }
 }
