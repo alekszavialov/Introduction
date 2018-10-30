@@ -2,27 +2,25 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-class loadMessagesManipulate extends dbManipulate
+class loadMessagesManipulate extends jsonDBManipulate
 {
 
     private $lastMessages;
 
     public function __construct()
     {
-        parent::__construct(dataDB);
+        parent::__construct(DATADB);
     }
 
     public function mainFunction()
     {
         try {
             $this->checkUserTime();
-            parent::loadJson();
-            if (!$this->checkMessagesCount()){
+            if (!$this->checkMessagesCount()) {
                 return;
             }
-            echo json_encode(array($this->getMessages(), parent::getDBSize()));
+            echo json_encode(['messages' => $this->getMessages(), 'messagesCount' => parent::getDBSize()]);
         } catch (Exception $e) {
-            pageRedirection::errorRedirection($e->getMessage());
         }
     }
 
@@ -32,7 +30,7 @@ class loadMessagesManipulate extends dbManipulate
         $lastMessageTime = date_timestamp_get(date_create()) - $hourInSeconds;
         $this->lastMessages = array();
         foreach (array_reverse(parent::getDB()) as $key => &$value) {
-            if ($value["time"] >= $lastMessageTime) {
+            if ($value['time'] >= $lastMessageTime) {
                 $this->lastMessages[] = $this->convertTextToHTML($value);
             }
         }
@@ -47,19 +45,21 @@ class loadMessagesManipulate extends dbManipulate
 
     private function convertTextToHTML($value)
     {
-        $value["time"] += intval($_POST["timeZone"]) * 60;
-        $hour = $value["time"] / 3600 % 24;
-        $minute = $value["time"] / 60 % 60;
-        $second = $value["time"] % 60;
-        $minute = strlen($minute) > 1 ? $minute : "0" . $minute;
-        return $_SESSION["user_name"] === $value["name"] ?
+        $value['time'] += intval($_POST['timeZone']) * 60;
+        $hour = $value['time'] / 3600 % 24;
+        $minute = $value['time'] / 60 % 60;
+        $second = $value['time'] % 60;
+        $hour = strlen($hour) > 1 ? $hour : '0' . $hour;
+        $minute = strlen($minute) > 1 ? $minute : '0' . $minute;
+        $second = strlen($second) > 1 ? $second : '0' . $second;
+        return $_SESSION['user_name'] === $value['name'] ?
             "<p style='text-align: right'>{$value["message"]} : <strong>You ({$value["name"]})</strong> [{$hour}:{$minute}:{$second}]</p>"
             : "<p>[{$hour}:{$minute}:{$second}] <strong>{$value["name"]}</strong>: {$value["message"]}</p>";
     }
 
     private function checkMessagesCount()
     {
-        if (!isset($_POST["messageCount"]) || parent::getDBSize() === intval($_POST["messageCount"])) {
+        if (!isset($_POST['messageCount']) || parent::getDBSize() === intval($_POST['messageCount'])) {
             return false;
         }
         return true;
@@ -67,8 +67,8 @@ class loadMessagesManipulate extends dbManipulate
 
     private function checkUserTime()
     {
-        if (!isset($_POST["timeZone"]) || !is_numeric($_POST["timeZone"])){
-            throw new Exception("cant get user timezone");
+        if (!isset($_POST['timeZone']) || !is_numeric($_POST['timeZone'])) {
+            throw new Exception('cant get user timezone');
         }
     }
 

@@ -13,7 +13,12 @@ class checkValuesAndSetManipulateClass
 
     private $class;
 
-    public function findFunctionByIncomeData()
+    public function __construct()
+    {
+        $this->findFunctionByIncomeData();
+    }
+
+    private function findFunctionByIncomeData()
     {
         try {
             $this->checkMethod();
@@ -25,38 +30,22 @@ class checkValuesAndSetManipulateClass
 
     private function setClass()
     {
-        if (isset($_POST["name"])) {
-            $this->class = "loginManipulate";
-            return;
+        if (!isset($_POST['className'])) {
+            throw new Exception('Cannot found class!');
         }
-        if (isset($_POST["userMessage"])) {
-            $this->class = "addMessageManipulate";
-            return;
-        }
-        if (isset($_POST["getMsg"])) {
-            $this->class = "loadMessagesManipulate";
-            return;
-        }
-        throw new Exception("Val!");
+        $this->class = $_POST['className'];
 
     }
 
-    public function getFunction()
+    public function getClass()
     {
-        try {
-            if (isset($this->class)) {
-                return $this->class;
-            }
-            throw new Exception("function!");
-        } catch (Exception $e) {
-            pageRedirection::errorRedirection($e->getMessage());
-        }
+        return $this->class = new $this->class();
     }
 
     private function checkMethod()
     {
-        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-            throw new Exception("POST!");
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            throw new Exception('POST!');
         }
     }
 

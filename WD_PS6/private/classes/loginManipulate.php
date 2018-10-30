@@ -2,59 +2,58 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-class loginManipulate extends dbManipulate
+class loginManipulate extends jsonDBManipulate
 {
 
     public function __construct()
     {
-        parent::__construct(DATADB);
+        parent::__construct(USERSDB);
     }
 
-    public function mainFunction(){
-        try{
+    public function mainFunction()
+    {
+        try {
             $this->checkPostData();
-            parent::loadDB();
             $this->loginUser();
-            $_SESSION["user_name"] = $_POST["name"];
+            $_SESSION['user_name'] = $_POST['userName'];
             pageRedirection::chatPageRedirection();
-        } catch (Exception $e){
+        } catch (Exception $e) {
             pageRedirection::errorRedirection($e->getMessage());
         }
     }
 
     private function checkPostData()
     {
-        if (strlen($_POST["name"]) < MIN_NAME_LENGTH || preg_match(LOGIN_REG, $_POST["name"])) {
-            throw new Exception("Name should exist 4 character at least or incorrect symbols!");
+        if (strlen($_POST['userName']) < MIN_NAME_LENGTH || strlen($_POST['userName']) > MAX_NAME_LENGTH
+            || preg_match(LOGIN_REG, $_POST['userName'])) {
+            throw new Exception('Name should exist 4 character at least or incorrect symbols!');
         }
-        if (!isset($_POST["password"]) || strlen($_POST["password"]) < MIN_PASS_LENGTH ||
-            preg_match(PASSWORD_REG, $_POST["password"])) {
-            throw new Exception("Password should exist 6 character at least or incorrect symbols!");
+        if (!isset($_POST['userPassword']) || strlen($_POST['userPassword']) < MIN_PASS_LENGTH ||
+            strlen($_POST['userPassword']) > MAX_PASS_LENGTH ||
+            preg_match(PASSWORD_REG, $_POST['userPassword'])) {
+            throw new Exception('Password should exist 6 character at least or incorrect symbols!');
         }
     }
 
     private function loginUser()
     {
-//        if (!in_array($_POST["name"], array_column(parent::getDB(), "name"))) {
-//            $this->addNewUser();
-//            return;
-//        }
-//        foreach (parent::getDB() as &$value) {
-//            if ($value["name"] === $_POST["name"]) {
-//                if ($value["password"] !== $_POST["password"]){
-//                    throw new Exception('Incorrect password!');
-//                }
-//            }
-//        }
-        $this->addNewUser();
+        if (!in_array($_POST['userName'], array_column(parent::getDB(), 'name'))) {
+            $this->addNewUser();
+            return;
+        }
+        foreach (parent::getDB() as &$value) {
+            if ($value['name'] === $_POST['userName'] && $value['password'] !== $_POST['userPassword']) {
+                throw new Exception('Incorrect password!');
+            }
+        }
     }
 
     private function addNewUser()
     {
         $userData = array(
-            "name" => $_POST["name"],
-            "password" => $_POST["password"]
+            'name' => $_POST['userName'],
+            'password' => $_POST['userPassword']
         );
-        parent::saveDataToDB($userData);
+        parent::saveJson($userData);
     }
 }

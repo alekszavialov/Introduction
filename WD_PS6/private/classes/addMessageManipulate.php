@@ -2,47 +2,42 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-class addMessageManipulate extends dbManipulate
+class addMessageManipulate extends jsonDBManipulate
 {
 
     public function __construct()
     {
         $this->checkMessage();
-        parent::__construct(dataDB);
+        parent::__construct(DATADB);
     }
 
     public function mainFunction()
     {
         try {
-            parent::loadDB();
-            $this->addMessage();
+            $messageText = htmlspecialchars($_POST['data']);
+            $icons = array(
+                ':)' => "<span class='happy-smile'></span>",
+                ':(' => "<span class='sad-smile'></span>"
+            );
+            $messageText = strtr($messageText, $icons);
+            $message = array(
+                'name' => $_SESSION['user_name'],
+                'message' => $messageText,
+                'time' => date_timestamp_get(date_create())
+            );
+            parent::saveJson($message);
         } catch (Exception $e) {
-            pageRedirection::errorRedirection($e->getMessage());
+            echo $e->getMessage();
         }
-    }
-
-    private function addMessage()
-    {
-        $messageText = htmlspecialchars($_POST["userMessage"]);
-        $icons = array(
-            ':)' => '<span class="happy-smile"></span>',
-            ':(' => '<span class="sad-smile"></span>'
-        );
-        $messageText = strtr($messageText, $icons);
-       // $messageText = str_replace($messageText, ":)", "<span class='happy-smile'> </span>");
-        //  $messageText = str_replace($messageText, ":(", "<span class='sad-smile'> </span>");
-        $message = array(
-            "name" => $_SESSION["user_name"],
-            "message" => $messageText,
-            "time" => date_timestamp_get(date_create())
-        );
-        parent::saveJson($message);
     }
 
     private function checkMessage()
     {
-        if (strlen($_POST["userMessage"]) === 0) {
-            throw new Exception("Empty message!");
+        if (strlen($_POST['data']) === 0) {
+            echo "Empty message!";
+            die();
         }
     }
+
+
 }

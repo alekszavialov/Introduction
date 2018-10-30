@@ -10,45 +10,47 @@ $(function () {
 
     function loadMessage() {
         const $chatBody = $("#message-chat");
-        const data = 'getMsg=true&timeZone=' + timezone_offset_minutes + '&messageCount=' + messageCount;
+        const data = 'className=loadMessagesManipulate&timeZone=' + timezone_offset_minutes + '&messageCount=' + messageCount;
         $.ajax({
             type: method,
             url: action,
             data: data,
             dataType: 'json',
-            cache: false,
-            success: function (result) {
-                if (result && result[1] !== messageCount) {
-                    $chatBody.html(result[0]);
-                    messageCount = result[1];
-                }
+            cache: false
+        }).done(function (data) {
+            if (data["messages"] && data["messagesCount"] !== messageCount) {
+                $chatBody.html(data["messages"]);
+                messageCount = data["messagesCount"];
+                $chatBody.scrollTop($chatBody.prop("scrollHeight"));
             }
         });
-        $chatBody.scrollTop($chatBody.prop("scrollHeight"));
+
     }
 
-    $form.submit(function (e) {
+    $form.on("submit", (function (e) {
         e.preventDefault();
         const $messageValue = $("#message-value");
         let $messageValueData = $messageValue.val();
         if (!$messageValueData) {
             return;
         }
-        const data = 'userMessage=' + $messageValueData;
+        const data = 'className=addMessageManipulate&' + $form.serialize();
         $.ajax({
             type: method,
             url: action,
-            data: data,
-            success: function (data) {
-                if (data) {
-                    $error.text(data);
-                    return;
-                }
+            data: data
+        }).done(function (data) {
+            if (!data) {
                 $messageValue.val("");
                 loadMessage();
+                $error.text("");
+            } else {
+                $error.text(data);
             }
+        }).fail(function () {
+            $error.text("Cant write file!");
         });
-    });
+    }));
 
     loadMessage();
     setInterval(loadMessage, 1000);

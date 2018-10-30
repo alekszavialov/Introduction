@@ -23,9 +23,10 @@ if (isset($_SESSION["messageCount"])){
             <h1>Easy chat</h1>
             <form action="handler/handler.php" method="POST">
                 <p>Enter your name</p>
-                <input type="text" placeholder="John Doe" name="name">
+                <input type="text" placeholder="John Doe" name="userName">
+                <input type="hidden" name="className" value="loginManipulate">
                 <p>Enter your password</p>
-                <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" name="password">
+                <input type="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;" name="userPassword">
                 <div class="login-button">
                     <button class="submit-button">Submit</button>
                 </div>
