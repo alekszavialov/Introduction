@@ -14,10 +14,11 @@ class loginManipulate extends dbManipulate
     {
         try {
             $this->checkPostData();
-            $this->addNewUser();
-//            $this->loginUser();
-//            $_SESSION['user_name'] = $_POST['userName'];
-//            pageRedirection::chatPageRedirection();
+            if (!parent::findUser()){
+                $this->addNewUser();
+            }
+            $_SESSION['user_name'] = $_POST['userName'];
+            pageRedirection::chatPageRedirection();
         } catch (Exception $e) {
             pageRedirection::errorRedirection($e->getMessage());
         }
@@ -36,25 +37,13 @@ class loginManipulate extends dbManipulate
         }
     }
 
-//    private function loginUser()
-//    {
-//        if (!in_array($_POST['userName'], array_column(parent::getDB(), 'name'))) {
-//            $this->addNewUser();
-//            return;
-//        }
-//        foreach (parent::getDB() as &$value) {
-//            if ($value['name'] === $_POST['userName'] && $value['password'] !== $_POST['userPassword']) {
-//                throw new Exception('Incorrect password!');
-//            }
-//        }
-//    }
 
     private function addNewUser()
     {
-        $userData = array(
+        $userData = [
             'name' => $_POST['userName'],
             'password' => $_POST['userPassword']
-        );
+        ];
         parent::addDataToTable($userData);
     }
 }

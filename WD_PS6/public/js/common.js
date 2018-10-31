@@ -24,7 +24,6 @@ $(function () {
                 $chatBody.scrollTop($chatBody.prop("scrollHeight"));
             }
         });
-
     }
 
     $form.on("submit", (function (e) {

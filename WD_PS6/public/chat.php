@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION["user_name"])) {
-    $_SESSION["error"] = "Oops!";
+if (!isset($_SESSION['user_name'])) {
+    $_SESSION['error'] = "Oops!";
     header("location: index.php");
 }
 ?>

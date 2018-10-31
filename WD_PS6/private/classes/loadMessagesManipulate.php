@@ -2,14 +2,14 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-class loadMessagesManipulate extends jsonDBManipulate
+class loadMessagesManipulate extends dbManipulate
 {
 
     private $lastMessages;
 
     public function __construct()
     {
-        parent::__construct(DATADB);
+        parent::__construct(MESSAGES_DB);
     }
 
     public function mainFunction()
@@ -28,13 +28,10 @@ class loadMessagesManipulate extends jsonDBManipulate
     {
         $hourInSeconds = 3600;
         $lastMessageTime = date_timestamp_get(date_create()) - $hourInSeconds;
-        $this->lastMessages = array();
-        foreach (array_reverse(parent::getDB()) as $key => &$value) {
-            if ($value['time'] >= $lastMessageTime) {
-                $this->lastMessages[] = $this->convertTextToHTML($value);
-            }
+        $this->lastMessages = [];
+        foreach (parent::getLastMessages($lastMessageTime) as &$value) {
+            $this->lastMessages[] = $this->convertTextToHTML($value);
         }
-        $this->lastMessages = array_reverse($this->lastMessages);
     }
 
     private function getMessages()
@@ -52,9 +49,9 @@ class loadMessagesManipulate extends jsonDBManipulate
         $hour = strlen($hour) > 1 ? $hour : '0' . $hour;
         $minute = strlen($minute) > 1 ? $minute : '0' . $minute;
         $second = strlen($second) > 1 ? $second : '0' . $second;
-        return $_SESSION['user_name'] === $value['name'] ?
-            "<p style='text-align: right'>{$value["message"]} : <strong>You ({$value["name"]})</strong> [{$hour}:{$minute}:{$second}]</p>"
-            : "<p>[{$hour}:{$minute}:{$second}] <strong>{$value["name"]}</strong>: {$value["message"]}</p>";
+        return $_SESSION['user_name'] === $value['user_name'] ?
+            "<p style='text-align: right'>{$value["message"]} : <strong>You ({$value["user_name"]})</strong> [{$hour}:{$minute}:{$second}]</p>"
+            : "<p>[{$hour}:{$minute}:{$second}] <strong>{$value["user_name"]}</strong>: {$value["message"]}</p>";
     }
 
     private function checkMessagesCount()

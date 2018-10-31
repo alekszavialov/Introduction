@@ -2,30 +2,30 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-class addMessageManipulate extends jsonDBManipulate
+class addMessageManipulate extends dbManipulate
 {
 
     public function __construct()
     {
         $this->checkMessage();
-        parent::__construct(DATADB);
+        parent::__construct(MESSAGES_DB);
     }
 
     public function mainFunction()
     {
         try {
             $messageText = htmlspecialchars($_POST['data']);
-            $icons = array(
+            $icons = [
                 ':)' => "<span class='happy-smile'></span>",
                 ':(' => "<span class='sad-smile'></span>"
-            );
+            ];
             $messageText = strtr($messageText, $icons);
-            $message = array(
+            $message = [
                 'name' => $_SESSION['user_name'],
                 'message' => $messageText,
                 'time' => date_timestamp_get(date_create())
-            );
-            parent::saveJson($message);
+            ];
+            parent::addDataToTable($message);
         } catch (Exception $e) {
             echo $e->getMessage();
         }

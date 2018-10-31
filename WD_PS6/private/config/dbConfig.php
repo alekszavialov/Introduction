@@ -16,3 +16,5 @@ define('DATABASE', 'chat');
 
 define('USERS_DB', 'users');
 
+define('MESSAGES_DB', 'messages');
+
