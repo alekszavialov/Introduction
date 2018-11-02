@@ -25,9 +25,9 @@ const ATM = {
         incorrectMoneyValue: "You only can get or add integer value bigger than 0!"
     },
     cashLogsMessages: {
-        getCash : "Try to get cash!",
-        loadCash : "Try to load cash!",
-        load_cash : "Try to add cash!"
+        getCash: "Try to get cash!",
+        loadCash: "Try to load cash!",
+        load_cash: "Try to add cash!"
     },
     isString: function (data) {
         return data.constructor === String;
@@ -37,7 +37,7 @@ const ATM = {
     },
     // authorization
     auth: function (number, pin) {
-        if (this.is_auth){
+        if (this.is_auth) {
             return this.atmMessages.isAuth;
         }
         if (!this.isString(number) || !this.isString(pin)) {
@@ -56,16 +56,16 @@ const ATM = {
         }
         return this.atmMessages["notLogged"];
     },
-    checkAutorizationAndTypeErrors: function(type){
-        if (!this.user){
+    checkAutorizationAndTypeErrors: function (type) {
+        if (!this.user) {
             return this.atmMessages["notLogged"];
         }
-        if (this.user.type !== type){
+        if (this.user.type !== type) {
             return this.atmMessages.accesError;
         }
         return false;
     },
-    addToLogs: function(functionName, error){
+    addToLogs: function (functionName, error) {
         this.cashLogs.push(`${new Date().toLocaleString()} : ${this.cashLogsMessages[functionName]} ${error}`);
     },
     // get cash - available for user only
@@ -141,7 +141,7 @@ const ATM = {
     },
     // log out
     logout: function () {
-        if (!this.is_auth){
+        if (!this.is_auth) {
             return this.atmMessages.notLogged;
         }
         this.user = false;
