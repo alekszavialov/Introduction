@@ -1,10 +1,3 @@
-<?php
-if (isset($_SESSION["messageCount"])){
-    session_reset();
-} else {
-    session_start();
-}
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,8 +28,8 @@ if (isset($_SESSION["messageCount"])){
                 <?php
                 if (isset($_SESSION["error"])) {
                     echo $_SESSION["error"];
-                    session_unset();
-                    session_destroy();
+                   // echo $_SESSION["error"]["currentUser"];
+                    unset($_SESSION["error"]);
                 } ?>
             </p>
         </div>

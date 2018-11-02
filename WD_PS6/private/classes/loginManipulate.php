@@ -14,7 +14,7 @@ class loginManipulate extends dbManipulate
     {
         try {
             $this->checkPostData();
-            if (!parent::findUser()){
+            if (!parent::findUser()) {
                 $this->addNewUser();
             }
             $_SESSION['user_name'] = $_POST['userName'];
@@ -40,10 +40,8 @@ class loginManipulate extends dbManipulate
 
     private function addNewUser()
     {
-        $userData = [
-            'name' => $_POST['userName'],
-            'password' => $_POST['userPassword']
-        ];
-        parent::addDataToTable($userData);
+        $rows = ['USER_NAME', 'USER_PASSWORD'];
+        $userData = [$_POST['userName'], $_POST['userPassword']];
+        parent::insertIntoTable($rows, $userData);
     }
 }
