@@ -30,7 +30,9 @@ if (!isset($_SESSION["user_name"])) {
                 </div>
                 <p class="errorArea"></p>
             </form>
+            <button id="logout" class="submit-button">Logout</button>
         </div>
+
     </div>
 </section>
 <script src="libs/jquery/jquery-3.3.1.js"></script>

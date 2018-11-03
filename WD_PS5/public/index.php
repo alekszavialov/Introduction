@@ -1,9 +1,5 @@
 <?php
-if (isset($_SESSION["messageCount"])){
-    session_reset();
-} else {
-    session_start();
-}
+session_start();
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,10 +29,12 @@ if (isset($_SESSION["messageCount"])){
             </form>
             <p>
                 <?php
+                if (isset($_SESSION["user_name"])) {
+                    header("location: chat.php");
+                }
                 if (isset($_SESSION["error"])) {
                     echo $_SESSION["error"];
-                    session_unset();
-                    session_destroy();
+                    unset($_SESSION["error"]);
                 } ?>
             </p>
         </div>

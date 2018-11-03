@@ -1,12 +1,27 @@
 [
     {
-        "name": "admin",
-        "message": "<span class='happy-smile'><\/span>",
-        "time": 1540685040
+        "name": "User",
+        "message": "Hey!",
+        "time": 1541249347
     },
     {
-        "name": "user",
-        "message": "<span class='sad-smile'><\/span>",
-        "time": 1540685045
+        "name": "Admin",
+        "message": "Hi",
+        "time": 1541249351
+    },
+    {
+        "name": "User",
+        "message": "How are u?",
+        "time": 1541249369
+    },
+    {
+        "name": "Admin",
+        "message": "Im sad <span class='sad-smile'><\/span>",
+        "time": 1541249384
+    },
+    {
+        "name": "User",
+        "message": "Dont worry, be happy <span class='happy-smile'><\/span>",
+        "time": 1541249413
     }
 ]

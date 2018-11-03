@@ -117,7 +117,7 @@ h1 {
 
 .chat-area {
     width: 600px;
-    padding: 100px 0 0 0;
+    padding: 75px 0 0 0;
 }
 
 .chat-area button, .chat-area input, #message-chat {
@@ -131,7 +131,7 @@ h1 {
     outline: none;
     height: 300px;
     overflow: scroll;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     resize: none;
     overflow-x: hidden;
     box-sizing: border-box;
@@ -183,6 +183,10 @@ span.happy-smile {
 
 span.sad-smile {
     background-image: url(../images/smiles/sad.png);
+}
+
+#logout{
+    margin-top: 15px;
 }
 
 /*# sourceMappingURL=styles.css.map */

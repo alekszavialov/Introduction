@@ -31,7 +31,8 @@ $(function () {
         e.preventDefault();
         const $messageValue = $("#message-value");
         let $messageValueData = $messageValue.val();
-        if (!$messageValueData) {
+        if (!$messageValueData.replace(/\s+/g, '')) {
+            $messageValue.val("");
             return;
         }
         const data = 'className=addMessageManipulate&' + $form.serialize();
@@ -49,6 +50,21 @@ $(function () {
             }
         }).fail(function () {
             $error.text("Cant write file!");
+        });
+    }));
+
+    $("#logout").on("click", (function (e) {
+        const data = 'className=loginManipulate&logout=true';
+        $.ajax({
+            type: "post",
+            url: "handler/handler.php",
+            data: data
+        }).done(function (data) {
+            if (data) {
+                window.location.href = "index.php";
+            }
+        }).fail(function () {
+            $error.text("Oops, something goes wrong(");
         });
     }));
 

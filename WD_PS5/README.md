@@ -6,6 +6,7 @@ Simple chat
 
 ### Requirements
 
+* OS : Windows
 * Web Server (MAMP, DENWER)
 * PHP 7 and up
 * GIT
