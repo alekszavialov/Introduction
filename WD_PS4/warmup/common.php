@@ -5,9 +5,9 @@ const ERROR = "Incorrect input data";
 if (isset($_POST['function'])) {
     switch ($_POST['function']) {
         case 'addNumbers':
-            return $_SESSION["addNumbers"] = addNumbers();
+            return $_SESSION["addNumbers"] = addNumbers(false);
         case 'addRndNumbers':
-            return $_SESSION["addRndNumbers"] = addRndNumbers();
+            return $_SESSION["addRndNumbers"] = addNumbers(true);
         case 'chrismassTree':
             if (!is_numeric($_POST['stars_count'])) {
                 return $_SESSION["addRndNumbers"] = ERROR;
@@ -29,7 +29,7 @@ if (isset($_POST['function'])) {
 }
 
 
-function addNumbers()
+function addNumbers($rndNumbers)
 {
     $firstValue = -1000;
     $secondValue = 1000;
@@ -37,26 +37,19 @@ function addNumbers()
     if ($firstValue > $secondValue) {
         [$firstValue, $secondValue] = [$secondValue, $firstValue];
     }
-    for ($i = $firstValue; $i <= $secondValue; $i++) {
-        $result += $i;
-    }
-    return $result;
-}
-
-function addRndNumbers()
-{
-    $firstValue = -1000;
-    $secondValue = 1000;
-    $result = 0;
-    $endValues = [2, 3, 7];
-    if ($firstValue > $secondValue) {
-        [$firstValue, $secondValue] = [$secondValue, $firstValue];
-    }
-    for ($i = $firstValue; $i <= $secondValue; $i++) {
-        if (in_array(abs($i % 10), $endValues)) {
+    if ($rndNumbers){
+        $endValues = [2, 3, 7];
+        for ($i = $firstValue; $i <= $secondValue; $i++) {
+            if (in_array(abs($i % 10), $endValues)) {
+                $result += $i;
+            }
+        }
+    } else {
+        for ($i = $firstValue; $i <= $secondValue; $i++) {
             $result += $i;
         }
     }
+
     return $result;
 }
 

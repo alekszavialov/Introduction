@@ -25,8 +25,7 @@ include_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "private" . DIRECTORY_SEPAR
         <?php
         if (isset($_SESSION["error"])) {
             echo $_SESSION["error"];
-            session_unset();
-            session_destroy();
+            unset($_SESSION["error"]);
         } ?>
     </p>
 </form>

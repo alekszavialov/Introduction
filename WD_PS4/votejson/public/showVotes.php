@@ -33,3 +33,4 @@ include_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "private" . DIRECTORY_SEPAR
 session_unset();
 session_destroy();
 ?>
+

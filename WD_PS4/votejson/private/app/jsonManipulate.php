@@ -10,14 +10,14 @@ class jsonManipulate
     {
         $this->filePath = $filePath;
         $this->userName = $userName;
+        $this->makeVote();
     }
 
-    public function makeVote()
+    private function makeVote()
     {
         $this->openAndReadJson();
         $this->changeVote();
         $this->writeJson();
-        $this->convertDbToCharts();
     }
 
     private function openAndReadJson()
@@ -33,16 +33,15 @@ class jsonManipulate
 
     private function changeVote()
     {
-        if (!in_array($this->userName, array_column($this->database["Users"], "name"))) {
+        if (!in_array($this->userName, array_column($this->database, "name"))) {
             throw new Exception('Incorrect name or db!');
         }
-        foreach ($this->database['Users'] as &$value) {
+        foreach ($this->database as &$value) {
             if ($value["name"] === $this->userName) {
                 $value["votes"]++;
                 break;
             }
         }
-
     }
 
     private function writeJson()
@@ -56,7 +55,7 @@ class jsonManipulate
     public function convertDbToCharts()
     {
         $result[] = ["Name", "Vote count"];
-        foreach ($this->database['Users'] as &$value) {
+        foreach ($this->database as &$value) {
             $result[] = ["{$value['name']}", $value['votes']];
         }
         return json_encode($result);

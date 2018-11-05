@@ -1,6 +1,7 @@
 <?php
-define("PRIVATE_DIR", dirname(__DIR__) . DIRECTORY_SEPARATOR);
 
-const VOTE_DB = PRIVATE_DIR . "json" . DIRECTORY_SEPARATOR . "vote.json";
-const JSON_MANIPULATE = PRIVATE_DIR . "jsonManipulate" . DIRECTORY_SEPARATOR .
-    "jsonManipulate.php";
+define("ERROR", "Oops, smth go wrong(");
+define("PRIVATE_DIR", dirname(__DIR__) . DIRECTORY_SEPARATOR);
+define("APP_DIR", PRIVATE_DIR . "app" . DIRECTORY_SEPARATOR);
+define("VOTE_DB", PRIVATE_DIR . "json" . DIRECTORY_SEPARATOR . "vote.json");
+define("JSON_MANIPULATE", APP_DIR . "app.php");
