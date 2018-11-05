@@ -34,12 +34,13 @@
   src: url("../fonts/ProximaNova/ProximaNova-SemiboldIt.woff") format("woff"), url("../fonts/ProximaNova/ProximaNova-SemiboldIt.ttf") format("truetype");
 }
 h1 {
-  font-size: 68px;
+  font-size: 70px;
   font-family: "BlackJack-Regular", sans-serif;
   color: #ffffff;
   text-align: right;
   margin-bottom: 2px;
   margin-top: 66px;
+  font-weight: normal;
 }
 
 h2 {
@@ -60,7 +61,7 @@ p {
 body .link-button {
   display: block;
   text-transform: uppercase;
-  padding: 20px 26px;
+  padding: 21px 27px 17px 26px;
   font-family: "ProximaNova-Regular", sans-serif;
   font-size: 15px;
   line-height: 15px;
@@ -74,6 +75,7 @@ body .link-button {
 }
 body .link-button i {
   margin-right: 2px;
+  font-size: 13px;
 }
 body .link-button span {
   margin-right: 9px;
@@ -149,10 +151,15 @@ header {
   position: relative;
   z-index: 0;
 }
+header h1 {
+  margin-top: 64px;
+  margin-right: -5px;
+}
 header h2 {
   font-size: 35px;
   text-align: right;
-  margin-bottom: 45px;
+  margin-bottom: 46px;
+  word-spacing: 0.4px;
 }
 header h2 strong {
   font-family: "ProximaNova-BoldIt", sans-serif;
@@ -160,7 +167,7 @@ header h2 strong {
 header .link-button {
   border-color: #ffffff;
   margin-left: auto;
-  margin-bottom: 230px;
+  margin-bottom: 231px;
 }
 header .link-button:hover {
   border-color: #ea4c89;
@@ -212,7 +219,7 @@ header .link-button:hover {
   width: 230px;
   background: url("../images/iphone.png") no-repeat;
   bottom: 0;
-  left: 80px;
+  left: 81px;
 }
 
 .menu {
@@ -289,9 +296,11 @@ header .link-button:hover {
   background: #f4f4f4;
 }
 .about-me h2 {
-  margin-top: 139px;
+  margin-top: 140px;
   color: #545454;
   margin-bottom: 30px;
+  word-spacing: -2.5px;
+  letter-spacing: -0.5px;
 }
 .about-me p {
   margin-bottom: 26px;
@@ -301,20 +310,24 @@ header .link-button:hover {
   border-left: 7px solid #4eacdd;
   padding: 0 0 0 15px;
   color: #7e7e7e;
-  margin: 0 0 70px 0;
+  margin: 0 0 66px 0;
   font-family: "ProximaNova-RegularIt", sans-serif;
-  line-height: 24px;
-  letter-spacing: 0.18px;
+  line-height: 25px;
+  letter-spacing: 0.4px;
 }
 .about-me .link-button {
   color: #14af8f;
   border-color: #14af8f;
-  margin-bottom: 140px;
+  margin-bottom: 141px;
   margin-right: auto;
-  padding: 19px 31px;
+  padding: 19px 30px 17px 29px;
+  margin-left: 1px;
 }
 .about-me .link-button span {
-  margin-right: 11px;
+  margin-right: 12px;
+}
+.about-me .link-button i {
+  font-size: 16px;
 }
 
 .about-me-container {
@@ -325,29 +338,39 @@ header .link-button:hover {
 
 .ipad-image {
   position: absolute;
-  height: 498px;
+  height: 499px;
   width: 409px;
   background: url("../images/ipad.png") no-repeat;
   bottom: 0;
-  left: 773px;
+  left: 770px;
 }
 
 .portfolio h2 {
   color: #545454;
-  margin: 99px 0 16px 0;
-  letter-spacing: -0.92px;
+  margin: 97px 0 16px -0.8px;
+  letter-spacing: -1.1px;
+  word-spacing: 0.2px;
+}
+.portfolio p {
+  margin-top: 10.5px;
+  line-height: 24px;
 }
 .portfolio p i {
   font-family: "ProximaNova-SemiboldIt", sans-serif;
   color: #474e5d;
+  display: block;
+  margin-top: 5.9px;
 }
 .portfolio .link-button {
   color: #ea4c89;
   border-color: #ea4c89;
-  margin-bottom: 239px;
-  margin-right: auto;
-  margin-top: 39px;
-  padding: 19px 28px;
+  margin: 41px auto 238px 1px;
+  padding: 20px 30px 18px 29px;
+}
+.portfolio .link-button span {
+  margin-right: 10px;
+  letter-spacing: -0.1px;
+  word-spacing: 0.5px;
 }
 
 .portfolio-container {
@@ -364,7 +387,7 @@ section {
 
 .devices-image {
   position: absolute;
-  height: 380px;
+  height: 378px;
   width: 100%;
   background: url("../images/devices.png") no-repeat;
   bottom: 0;
@@ -381,16 +404,16 @@ section {
   font-family: "ProximaNova-BoldIt", sans-serif;
 }
 .donate h2 {
-  margin-top: 90px;
+  margin-top: 92px;
   margin-bottom: 32px;
-  letter-spacing: 0.68px;
+  letter-spacing: 0.7px;
 }
 .donate .link-button {
-  margin-bottom: 100px;
-  padding: 18px 36px;
+  margin-bottom: 101px;
+  padding: 18px 33px 20px 36px;
 }
 .donate .link-button span {
-  margin-right: 14px;
+  margin-right: 18px;
 }
 .donate .link-button i {
   transform: rotate(180deg);
@@ -408,7 +431,7 @@ section {
 }
 
 .socials {
-  margin: 242px 0 67px 0;
+  margin: 240px 0 70px 0;
   display: flex;
 }
 .socials a {
@@ -419,7 +442,7 @@ section {
   border: 3px solid #545454;
   border-radius: 50%;
   position: relative;
-  margin-right: 35px;
+  margin-right: 34px;
   transition: all 0.2s linear;
 }
 .socials a i {
@@ -486,7 +509,7 @@ footer {
 }
 footer p {
   text-align: center;
-  margin: 47px 0 40px 0;
+  margin: 43px 0 40px 0;
   font-size: 12px;
   color: #545454;
 }
@@ -502,7 +525,7 @@ footer p i {
   width: 40px;
   height: 40px;
   position: absolute;
-  top: 34px;
+  top: 32px;
   right: -91px;
   background: #f4f4f4;
   color: #717171;
