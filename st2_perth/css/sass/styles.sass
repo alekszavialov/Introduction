@@ -1,0 +1,416 @@
+@import "_fonts.sass"
+
+$bg-color-first: #fff
+$bg-color-second: #1abc9c
+$text-color: #7e7e7e
+$active-item-color-dark: #ea4c89
+$active-item-color: #4eacdd
+$default-transition: all .2s linear
+$center-element: translateX(-50%) translateY(-50%)
+h1
+  font-size: 68px
+  font-family: 'BlackJack-Regular', sans-serif
+  color: #ffffff
+  text-align: right
+  margin-bottom: 2px
+  margin-top: 66px
+
+h2
+  font-family: 'ProximaNova-Light', sans-serif
+  font-size: 40px
+  color: #ffffff
+  font-weight: normal
+
+p
+  font-family: 'ProximaNova-Regular', sans-serif
+  font-size: 16px
+  color: $text-color
+  line-height: 23px
+  letter-spacing: 0.4px
+
+body
+  .link-button
+    display: block
+    text-transform: uppercase
+    padding: 20px 26px
+    font-family: 'ProximaNova-Regular', sans-serif
+    font-size: 15px
+    line-height: 15px
+    box-sizing: border-box
+    vertical-align: middle
+    border: 2px solid
+    color: #ffffff
+    text-decoration: none
+    border-radius: 3px
+    transition: $default-transition
+    i
+      margin-right: 2px
+    span
+      margin-right: 9px
+    &:hover
+      border-color: $active-item-color
+      color: $active-item-color
+
+nav
+  background: rgba(243, 120, 122, 0.8)
+  position: absolute
+  width: 100%
+  height: 100%
+  z-index: 1
+  display: none
+  a
+    text-decoration: none
+
+.items-container
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: $center-element
+
+.nav-item
+  display: flex
+  align-items: center
+  margin-bottom: 14px
+  transition: $default-transition
+  &:hover
+    .nav-item-image-container
+      background: $active-item-color
+    .nav-item-text
+      color: $active-item-color
+    i
+      color: #ffffff
+
+.nav-item-image-container
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  position: relative
+  background: #ffffff
+  margin-right: 18px
+  transition: $default-transition
+  i
+    color: $active-item-color
+    transition: $default-transition
+    font-size: 18px
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: $center-element
+
+.nav-item-text
+  transition: $default-transition
+  font-family: 'ProximaNova-BoldIt', sans-serif
+  font-size: 18px
+  color: #fff
+
+header
+  background: url("../images/blue-pattern.jpg") repeat
+  position: relative
+  z-index: 0
+  h2
+    font-size: 35px
+    text-align: right
+    margin-bottom: 45px
+    strong
+      font-family: 'ProximaNova-BoldIt', sans-serif
+  .link-button
+    border-color: #ffffff
+    margin-left: auto
+    margin-bottom: 230px
+    &:hover
+      border-color: $active-item-color-dark
+      color: $active-item-color-dark
+
+.container
+  width: 940px
+  padding: 0 10px
+  margin: 0 auto
+  position: relative
+  display: flex
+  flex-direction: column
+
+.logo
+  font-family: 'KaushanScript-Regular', sans-serif
+  font-size: 50px
+  width: 100px
+  height: 102px
+  color: #0da9e5
+  border-bottom: 2px solid #0da9e5
+  position: relative
+  background: #ffffff
+  display: block
+  box-sizing: border-box
+  text-align: center
+  line-height: 50px
+  span
+    padding-top: 11px
+    display: block
+  &:after
+    content: ""
+    display: block
+    position: absolute
+    width: 100%
+    height: 100%
+    background: #27b0e6
+    top: 14px
+    left: 14px
+    z-index: -1
+
+.phone-image
+  position: absolute
+  height: 268px
+  width: 230px
+  background: url("../images/iphone.png") no-repeat
+  bottom: 0
+  left: 80px
+
+.menu
+  position: relative
+  z-index: 2
+  height: 22px
+  width: 30px
+  overflow: hidden
+  transition: $default-transition
+  cursor: pointer
+  &:hover
+    &:before, &:after, span
+      background: $active-item-color-dark
+  &:before, &:after
+    transition: all 0.2s linear
+    content: ""
+    display: block
+    position: absolute
+    border-radius: 5px
+    width: 100%
+    height: 4px
+    background: #ffffff
+  &:before
+    bottom: 0
+  &:after
+    top: 0
+  span
+    transition: $default-transition
+    width: 100%
+    height: 4px
+    border-radius: 5px
+    display: block
+    background: #ffffff
+    margin-bottom: 2px
+    &:first-child
+      margin: 6px 0 2px 0
+
+.menu-active
+  &:hover
+    span
+      background: $active-item-color
+  span
+    position: absolute
+    top: 50%
+    left: 50%
+    margin: 0
+    &:first-child
+      transform: translateX(-50%) translateY(-50%) rotate(-45deg)
+      margin: 0
+    &:last-child
+      transform: translateX(-50%) translateY(-50%) rotate(45deg)
+  &:before
+    bottom: 100%
+  &:after
+    top: 100%
+
+.head-top
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.about-me
+  background: #f4f4f4
+  h2
+    margin-top: 139px
+    color: #545454
+    margin-bottom: 30px
+  p
+    margin-bottom: 26px
+    margin-top: 0
+  blockquote
+    border-left: 7px solid #4eacdd
+    padding: 0 0 0 15px
+    color: $text-color
+    margin: 0 0 70px 0
+    font-family: 'ProximaNova-RegularIt', sans-serif
+    line-height: 24px
+    letter-spacing: 0.18px
+  .link-button
+    color: #14af8f
+    border-color: #14af8f
+    margin-bottom: 140px
+    margin-right: auto
+    padding: 19px 31px
+    span
+      margin-right: 11px
+
+.about-me-container
+  display: flex
+  flex-direction: column
+  width: 553px
+
+.ipad-image
+  position: absolute
+  height: 498px
+  width: 409px
+  background: url("../images/ipad.png") no-repeat
+  bottom: 0
+  left: 773px
+
+.portfolio
+  h2
+    color: #545454
+    margin: 99px 0 16px 0
+    letter-spacing: -0.92px
+  p
+    i
+      font-family: 'ProximaNova-SemiboldIt', sans-serif
+      color: #474e5d
+  .link-button
+    color: $active-item-color-dark
+    border-color: $active-item-color-dark
+    margin-bottom: 239px
+    margin-right: auto
+    margin-top: 39px
+    padding: 19px 28px
+
+.portfolio-container
+  width: 396px
+  margin-left: auto
+  display: flex
+  flex-direction: column
+  z-index: 1
+
+section
+  overflow: hidden
+
+.devices-image
+  position: absolute
+  height: 380px
+  width: 100%
+  background: url("../images/devices.png") no-repeat
+  bottom: 0
+  right: 229px
+
+.donate
+  background: url("../images/green-pattern.jpg") repeat
+  .container
+    align-items: center
+  strong
+    font-family: 'ProximaNova-BoldIt', sans-serif
+  h2
+    margin-top: 90px
+    margin-bottom: 32px
+    letter-spacing: 0.68px
+  .link-button
+    margin-bottom: 100px
+    padding: 18px 36px
+    span
+      margin-right: 14px
+    i
+      transform: rotate(180deg)
+    &:hover
+      color: $active-item-color-dark
+      border-color: $active-item-color-dark
+
+.contact
+  background: #f4f4f4
+  .container
+    align-items: center
+
+.socials
+  margin: 242px 0 67px 0
+  display: flex
+  a
+    width: 56px
+    height: 56px
+    box-sizing: border-box
+    color: #545454
+    border: 3px solid #545454
+    border-radius: 50%
+    position: relative
+    margin-right: 35px
+    transition: $default-transition
+    i
+      position: absolute
+      left: 50%
+      top: 50%
+      font-size: 21px
+      transform: $center-element
+    &:last-child
+      margin-right: 0
+    &:hover
+      border-color: $active-item-color
+      color: $active-item-color
+
+.newsletter
+  display: flex
+  margin-bottom: 240px
+  align-items: center
+  p
+    font-family: 'ProximaNova-SemiboldIt', sans-serif
+    color: #545454
+    margin: 0 21px 0 0
+  form
+    display: flex
+    border: none
+    border-radius: 8px
+    background: #ffffff
+    padding: 12px 18px
+    align-items: center
+  input
+    border: none
+    font-size: 14px
+    font-family: 'ProximaNova-SemiboldIt', sans-serif
+    outline: none
+    color: #545454
+    &::placeholder
+      font-family: 'ProximaNova-SemiboldIt', sans-serif
+      color: #d3d3d3
+  button
+    border: none
+    background: none
+    padding: 0
+    cursor: pointer
+    transition: $default-transition
+    margin-left: 12px
+    i
+      color: $active-item-color
+    &:hover
+      i
+        color: $active-item-color-dark
+
+footer
+  position: relative
+  p
+    text-align: center
+    margin: 47px 0 40px 0
+    font-size: 12px
+    color: #545454
+    a
+      text-decoration: none
+      color: $active-item-color
+    i
+      font-family: 'ProximaNova-RegularIt', sans-serif
+.up-page
+  width: 40px
+  height: 40px
+  position: absolute
+  top: 34px
+  right: -91px
+  background: #f4f4f4
+  color: #717171
+  transition: $default-transition
+  i
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: $center-element
+  &:hover
+    color: $active-item-color
+@import "_media.sass"

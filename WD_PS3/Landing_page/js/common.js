@@ -35,6 +35,7 @@ $(function() {
 		if (elHeight < windowHeight && elOffset > windowHeight / 2) {
 			offset = elOffset - ((windowHeight / 2) - (elHeight / 2));
 		}
+
 		$('html').animate({
 			scrollTop: offset
 		}, animationSpeed);
