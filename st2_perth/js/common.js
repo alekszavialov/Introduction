@@ -4,15 +4,15 @@ $(function () {
     const animationSpeed = 500;
 
     $menu.on('click', function () {
-        $('.menu').toggleClass('menu-active');
-        $navigation.fadeToggle('fast');
+        $(this).toggleClass('menu-active');
+        $navigation.fadeToggle(animationSpeed);
     });
 
 
     $('.up-page').on('click', function () {
         $('html').animate({
             scrollTop: 0
-        }, 500);
+        }, animationSpeed);
     });
 
     $('.navigation a[href^="#"]').on('click', function () {
