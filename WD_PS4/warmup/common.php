@@ -3,7 +3,7 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 const ERROR = "Incorrect input data";
-if (isset($_POST['function'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['function'])) {
     switch ($_POST['function']) {
         case 'addNumbers':
             $_SESSION["addNumbers"] = addNumbers(false);
