@@ -1,0 +1,14 @@
+.desc {
+    margin-top: 10px;
+    display: block;
+}
+.black-box, .white-box{
+    display: inline-block;
+    vertical-align: middle;
+}
+.black-box {
+    background: #FFFF00;
+}
+.white-box{
+    background: #FF0000;
+}

@@ -1,35 +1,20 @@
 <?php
 session_start();
-include_once "common.php";?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>PHP</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<style>
-    .desc {
-        margin-top: 10px;
-        display: block;
-    }
-    .black-box, .white-box{
-        display: inline-block;
-        vertical-align: middle;
-    }
-    .black-box {
-        background: #FFFF00;
-    }
-    .white-box{
-        background: #FF0000;
-    }
-</style>
 <body>
 <div class="container">
     <div class="task">
         <h2>
             Сумма от -1000 до 1000;
         </h2>
-        <form action="" method="POST" class="form_task1">
+        <form action="common.php" method="POST" class="form_task1">
             <input type="hidden" name="function" value="addNumbers"/>
             <input type="submit" value="GetSumm"/>
             <p><?php echo isset($_SESSION["addNumbers"]) ? $_SESSION["addNumbers"] : "Run function" ?></p>
@@ -39,7 +24,7 @@ include_once "common.php";?>
         <h2>
             Сумма от -1000 до 1000 которые заканчиваются на 2,3, и 7;
         </h2>
-        <form action="#" method="POST" class="form_task1">
+        <form action="common.php" method="POST" class="form_task1">
             <input type="hidden" name="function" value="addRndNumbers"/>
             <input type="submit" value="GetSumm"/>
             <p><?php echo isset($_SESSION["addRndNumbers"]) ? $_SESSION["addRndNumbers"] : "Run function" ?></p>
@@ -49,7 +34,7 @@ include_once "common.php";?>
         <h2>
             Елочка
         </h2>
-        <form action="" method="POST" class="form_task1">
+        <form action="common.php" method="POST" class="form_task1">
             <input type="number" name="stars_count" min="1" max="50" step="1">
             <input type="hidden" name="function" value="chrismassTree"/>
             <input type="submit" value="Build Tree"/>
@@ -60,7 +45,7 @@ include_once "common.php";?>
         <h2>
             Доска
         </h2>
-        <form action="" method="POST" class="form_task1">
+        <form action="common.php" method="POST" class="form_task1">
             <input type="number" name="firstNumber" min="1" max="12">
             <input type="number" name="secondNumber" min="1" max="12">
             <input type="hidden" name="function" value="chessDesk"/>
@@ -72,7 +57,7 @@ include_once "common.php";?>
         <h2>
             Сумма чисел
         </h2>
-        <form action="" method="POST" class="form_task1">
+        <form action="common.php" method="POST" class="form_task1">
             <input type="number" name="value" min="1">
             <input type="hidden" name="function" value="getSumm"/>
             <input type="submit" value="Get Summ of Numbers"/>
@@ -83,7 +68,7 @@ include_once "common.php";?>
         <h2>
             Массив
         </h2>
-        <form action="" method="POST" class="form_task1">
+        <form action="common.php" method="POST" class="form_task1">
             <input type="hidden" name="function" value="createArray"/>
             <input type="submit" value="Create Array"/>
             <p><?php echo isset($_SESSION["createArray"]) ? $_SESSION["createArray"] : "Run function" ?></p>
@@ -96,3 +81,4 @@ include_once "common.php";?>
 session_unset();
 session_destroy();
 ?>
+

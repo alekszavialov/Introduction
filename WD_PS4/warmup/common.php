@@ -1,32 +1,42 @@
 <?php
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 const ERROR = "Incorrect input data";
 if (isset($_POST['function'])) {
     switch ($_POST['function']) {
         case 'addNumbers':
-            return $_SESSION["addNumbers"] = addNumbers(false);
+            $_SESSION["addNumbers"] = addNumbers(false);
+            break;
         case 'addRndNumbers':
-            return $_SESSION["addRndNumbers"] = addNumbers(true);
+            $_SESSION["addRndNumbers"] = addNumbers(true);
+            break;
         case 'chrismassTree':
             if (!is_numeric($_POST['stars_count'])) {
-                return $_SESSION["addRndNumbers"] = ERROR;
+                $_SESSION["addRndNumbers"] = ERROR;
+                break;
             }
-            return $_SESSION["chrismassTree"] = chrismassTree($_POST['stars_count']);
+            $_SESSION["chrismassTree"] = chrismassTree($_POST['stars_count']);
+            break;
         case 'chessDesk':
             if (!is_numeric($_POST['secondNumber']) || !is_numeric($_POST['secondNumber'])) {
-                return $_SESSION["chessDesk"] = ERROR;
+                $_SESSION["chessDesk"] = ERROR;
+                break;
             }
-            return $_SESSION["chessDesk"] = chessBoard($_POST['firstNumber'], $_POST['secondNumber']);
+            $_SESSION["chessDesk"] = chessBoard($_POST['firstNumber'], $_POST['secondNumber']);
+            break;
         case 'getSumm':
             if (!is_numeric($_POST['value']) || $_POST['value'] < 0) {
-                return $_SESSION["getSumm"] = ERROR;
+                $_SESSION["getSumm"] = ERROR;
+                break;
             }
-            return $_SESSION["getSumm"] = getSumm($_POST['value']);
+            $_SESSION["getSumm"] = getSumm($_POST['value']);
+            break;
         case 'createArray':
-            return $_SESSION["createArray"] = implode(",", createArray());
+            $_SESSION["createArray"] = implode(",", createArray());
     }
 }
+header("Location: index.php");
 
 
 function addNumbers($rndNumbers)
@@ -37,7 +47,7 @@ function addNumbers($rndNumbers)
     if ($firstValue > $secondValue) {
         [$firstValue, $secondValue] = [$secondValue, $firstValue];
     }
-    if ($rndNumbers){
+    if ($rndNumbers) {
         $endValues = [2, 3, 7];
         for ($i = $firstValue; $i <= $secondValue; $i++) {
             if (in_array(abs($i % 10), $endValues)) {
@@ -49,7 +59,6 @@ function addNumbers($rndNumbers)
             $result += $i;
         }
     }
-
     return $result;
 }
 
