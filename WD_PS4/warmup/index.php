@@ -73,7 +73,7 @@ include_once "common.php";?>
             Сумма чисел
         </h2>
         <form action="" method="POST" class="form_task1">
-            <input type="number" name="value" min="1" max="100000">
+            <input type="number" name="value" min="1">
             <input type="hidden" name="function" value="getSumm"/>
             <input type="submit" value="Get Summ of Numbers"/>
             <p><?php echo isset($_SESSION["getSumm"]) ? $_SESSION["getSumm"] : "Run function" ?></p>
