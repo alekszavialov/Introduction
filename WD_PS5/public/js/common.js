@@ -12,7 +12,7 @@ $(function () {
         const $chatBody = $("#message-chat");
         const data = 'className=loadMessagesManipulate&timeZone=' + timezone_offset_minutes + '&messageCount=' + messageCount;
         $.ajax({
-            type: method,
+            type: 'GET',
             url: action,
             data: data,
             dataType: 'json',
@@ -23,52 +23,54 @@ $(function () {
                 messageCount = data["messagesCount"];
                 $chatBody.scrollTop($chatBody.prop("scrollHeight"));
             }
+        }).fail(function () {
+            window.location.href = "index.php";
         });
-
     }
 
     $form.on("submit", (function (e) {
-        e.preventDefault();
-        const $messageValue = $("#message-value");
-        let $messageValueData = $messageValue.val();
-        if (!$messageValueData.replace(/\s+/g, '')) {
-            $messageValue.val("");
-            return;
-        }
-        const data = 'className=addMessageManipulate&' + $form.serialize();
+            e.preventDefault();
+            const $messageValue = $("#message-value");
+            let $messageValueData = $messageValue.val();
+            if (!$messageValueData.replace(/\s+/g, '')) {
+                $messageValue.val("");
+                return;
+            }
+            const data = 'className=addMessageManipulate&' + $form.serialize();
+            $.ajax({
+                type: method,
+                url: action,
+                data: data,
+                cache: false
+            }).done(function (data) {
+                if (!data) {
+                    $messageValue.val("");
+                    loadMessage();
+                    $error.text("");
+                } else {
+                    $error.text(data);
+                }
+            }).fail(function () {
+                window.location.href = "index.php";
+            })
+        })
+    );
+
+    $("#logout").click(function () {
+        const data = 'className=loginManipulate&logout=true';
         $.ajax({
             type: method,
             url: action,
             data: data
-        }).done(function (data) {
-            if (!data) {
-                $messageValue.val("");
-                loadMessage();
-                $error.text("");
-            } else {
-                $error.text(data);
-            }
-        }).fail(function () {
-            $error.text("Cant write file!");
+        }).done(function () {
+            window.location.href = "index.php";
         });
-    }));
+    });
 
-    $("#logout").on("click", (function (e) {
-        const data = 'className=loginManipulate&logout=true';
-        $.ajax({
-            type: "post",
-            url: "handler/handler.php",
-            data: data
-        }).done(function (data) {
-            if (data) {
-                window.location.href = "index.php";
-            }
-        }).fail(function () {
-            $error.text("Oops, something goes wrong(");
-        });
-    }));
-
-    loadMessage();
     setInterval(loadMessage, 1000);
+
+    $(window).bind('hashchange', function () {
+        location.reload();
+    });
 
 });

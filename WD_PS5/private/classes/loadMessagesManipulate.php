@@ -15,12 +15,15 @@ class loadMessagesManipulate extends jsonDBManipulate
     public function mainFunction()
     {
         try {
+            $this->checkUser();
             $this->checkUserTime();
             if (!$this->checkMessagesCount()) {
+                echo json_encode('');
                 return;
             }
             echo json_encode(['messages' => $this->getMessages(), 'messagesCount' => parent::getDBSize()]);
         } catch (Exception $e) {
+            die();
         }
     }
 
@@ -45,7 +48,7 @@ class loadMessagesManipulate extends jsonDBManipulate
 
     private function convertTextToHTML($value)
     {
-        $value['time'] += intval($_POST['timeZone']) * 60;
+        $value['time'] += intval($_GET['timeZone']) * 60;
         $hour = $value['time'] / 3600 % 24;
         $minute = $value['time'] / 60 % 60;
         $second = $value['time'] % 60;
@@ -59,7 +62,7 @@ class loadMessagesManipulate extends jsonDBManipulate
 
     private function checkMessagesCount()
     {
-        if (!isset($_POST['messageCount']) || parent::getDBSize() === intval($_POST['messageCount'])) {
+        if (!isset($_GET['messageCount']) || parent::getDBSize() === intval($_GET['messageCount'])) {
             return false;
         }
         return true;
@@ -67,8 +70,15 @@ class loadMessagesManipulate extends jsonDBManipulate
 
     private function checkUserTime()
     {
-        if (!isset($_POST['timeZone']) || !is_numeric($_POST['timeZone'])) {
-            throw new Exception('cant get user timezone');
+        if (!isset($_GET['timeZone']) || !is_numeric($_GET['timeZone'])) {
+            throw new Exception('Incorret time!');
+        }
+    }
+
+    private function checkUser()
+    {
+        if (!isset($_SESSION['user_name'])) {
+            throw new Exception('Empty user!');
         }
     }
 

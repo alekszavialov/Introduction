@@ -21,7 +21,6 @@ class checkValuesAndSetManipulateClass
     private function findFunctionByIncomeData()
     {
         try {
-            $this->checkMethod();
             $this->setClass();
         } catch (Exception $e) {
             pageRedirection::errorRedirection($e->getMessage());
@@ -30,23 +29,18 @@ class checkValuesAndSetManipulateClass
 
     private function setClass()
     {
-        if (!isset($_POST['className'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['className'])) {
+            $this->class = $_POST['className'];
+        } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['className'])){
+            $this->class = $_GET['className'];
+        } else {
             throw new Exception('Cannot found class!');
         }
-        $this->class = $_POST['className'];
-
     }
 
     public function getClass()
     {
         return $this->class = new $this->class();
-    }
-
-    private function checkMethod()
-    {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            throw new Exception('POST!');
-        }
     }
 
 }

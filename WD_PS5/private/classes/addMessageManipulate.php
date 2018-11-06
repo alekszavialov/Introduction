@@ -7,6 +7,7 @@ class addMessageManipulate extends jsonDBManipulate
 
     public function __construct()
     {
+        $this->checkUser();
         $this->checkMessage();
         parent::__construct(DATADB);
     }
@@ -35,6 +36,13 @@ class addMessageManipulate extends jsonDBManipulate
     {
         if (strlen($_POST['data']) === 0) {
             echo "Empty message!";
+            die();
+        }
+    }
+
+    private function checkUser()
+    {
+        if (!isset($_SESSION['user_name'])) {
             die();
         }
     }
