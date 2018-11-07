@@ -11,7 +11,7 @@ include_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "private" . DIRECTORY_SEPAR
 
             const data = google.visualization.arrayToDataTable(
                 JSON.parse('<?php
-                    echo $_SESSION["votes"];
+                    echo $_SESSION['votes'];
                     ?>')
             );
 

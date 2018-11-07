@@ -17,7 +17,7 @@ session_start();
         <form action="common.php" method="POST" class="form_task1">
             <input type="hidden" name="function" value="addNumbers"/>
             <input type="submit" value="GetSumm"/>
-            <p><?php echo isset($_SESSION["addNumbers"]) ? $_SESSION["addNumbers"] : "Run function" ?></p>
+            <p><?php echo isset($_SESSION['addNumbers']) ? $_SESSION['addNumbers'] : 'Run function' ?></p>
         </form>
     </div>
     <div class="task">
@@ -27,7 +27,7 @@ session_start();
         <form action="common.php" method="POST" class="form_task1">
             <input type="hidden" name="function" value="addRndNumbers"/>
             <input type="submit" value="GetSumm"/>
-            <p><?php echo isset($_SESSION["addRndNumbers"]) ? $_SESSION["addRndNumbers"] : "Run function" ?></p>
+            <p><?php echo isset($_SESSION['addRndNumbers']) ? $_SESSION['addRndNumbers'] : 'Run function' ?></p>
         </form>
     </div>
     <div class="task">
@@ -38,7 +38,7 @@ session_start();
             <input type="number" name="stars_count" min="1" max="50" step="1">
             <input type="hidden" name="function" value="chrismassTree"/>
             <input type="submit" value="Build Tree"/>
-            <p><?php echo isset($_SESSION["chrismassTree"]) ? $_SESSION["chrismassTree"] : "Run function" ?></p>
+            <p><?php echo isset($_SESSION['chrismassTree']) ? $_SESSION['chrismassTree'] : 'Run function' ?></p>
         </form>
     </div>
     <div class="task board">
@@ -50,7 +50,7 @@ session_start();
             <input type="number" name="secondNumber" min="1" max="12">
             <input type="hidden" name="function" value="chessDesk"/>
             <input type="submit" value="CreateDesk"/>
-            <div class="desc"><?php echo isset($_SESSION["chessDesk"]) ? $_SESSION["chessDesk"] : "Run function" ?></div>
+            <div class="desc"><?php echo isset($_SESSION['chessDesk']) ? $_SESSION['chessDesk'] : 'Run function' ?></div>
         </form>
     </div>
     <div class="task">
@@ -61,7 +61,7 @@ session_start();
             <input type="number" name="value" min="1">
             <input type="hidden" name="function" value="getSumm"/>
             <input type="submit" value="Get Summ of Numbers"/>
-            <p><?php echo isset($_SESSION["getSumm"]) ? $_SESSION["getSumm"] : "Run function" ?></p>
+            <p><?php echo isset($_SESSION['getSumm']) ? $_SESSION['getSumm'] : 'Run function' ?></p>
         </form>
     </div>
     <div class="task">
@@ -71,7 +71,7 @@ session_start();
         <form action="common.php" method="POST" class="form_task1">
             <input type="hidden" name="function" value="createArray"/>
             <input type="submit" value="Create Array"/>
-            <p><?php echo isset($_SESSION["createArray"]) ? $_SESSION["createArray"] : "Run function" ?></p>
+            <p><?php echo isset($_SESSION['createArray']) ? $_SESSION['createArray'] : 'Run function' ?></p>
         </form>
     </div>
 </div>

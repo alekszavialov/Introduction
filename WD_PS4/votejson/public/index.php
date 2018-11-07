@@ -23,9 +23,9 @@ include_once(dirname(__DIR__). DIRECTORY_SEPARATOR . "private" . DIRECTORY_SEPAR
     <input type="submit" value="Make vote">
     <p>
         <?php
-        if (isset($_SESSION["error"])) {
-            echo $_SESSION["error"];
-            unset($_SESSION["error"]);
+        if (isset($_SESSION['error'])) {
+            echo $_SESSION['error'];
+            unset($_SESSION['error']);
         } ?>
     </p>
 </form>

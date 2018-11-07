@@ -2,41 +2,41 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-const ERROR = "Incorrect input data";
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['function'])) {
+const ERROR = 'Incorrect input data';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['function'])) {
     switch ($_POST['function']) {
         case 'addNumbers':
-            $_SESSION["addNumbers"] = addNumbers(false);
+            $_SESSION['addNumbers'] = addNumbers(false);
             break;
         case 'addRndNumbers':
-            $_SESSION["addRndNumbers"] = addNumbers(true);
+            $_SESSION['addRndNumbers'] = addNumbers(true);
             break;
         case 'chrismassTree':
             if (!is_numeric($_POST['stars_count'])) {
-                $_SESSION["addRndNumbers"] = ERROR;
+                $_SESSION['addRndNumbers'] = ERROR;
                 break;
             }
-            $_SESSION["chrismassTree"] = chrismassTree($_POST['stars_count']);
+            $_SESSION['chrismassTree'] = chrismassTree($_POST['stars_count']);
             break;
         case 'chessDesk':
             if (!is_numeric($_POST['secondNumber']) || !is_numeric($_POST['secondNumber'])) {
-                $_SESSION["chessDesk"] = ERROR;
+                $_SESSION['chessDesk'] = ERROR;
                 break;
             }
-            $_SESSION["chessDesk"] = chessBoard($_POST['firstNumber'], $_POST['secondNumber']);
+            $_SESSION['chessDesk'] = chessBoard($_POST['firstNumber'], $_POST['secondNumber']);
             break;
         case 'getSumm':
             if (!is_numeric($_POST['value']) || $_POST['value'] < 0) {
-                $_SESSION["getSumm"] = ERROR;
+                $_SESSION['getSumm'] = ERROR;
                 break;
             }
-            $_SESSION["getSumm"] = getSumm($_POST['value']);
+            $_SESSION['getSumm'] = getSumm($_POST['value']);
             break;
         case 'createArray':
-            $_SESSION["createArray"] = implode(",", createArray());
+            $_SESSION['createArray'] = implode(',', createArray());
     }
 }
-header("Location: index.php");
+header('Location: index.php');
 
 
 function addNumbers($rndNumbers)
@@ -64,18 +64,18 @@ function addNumbers($rndNumbers)
 
 function chrismassTree($value)
 {
-    $star = "*";
-    $result = "";
+    $star = '*';
+    $result = '';
     for ($i = 1; $i <= $value; $i++) {
-        $result .= str_repeat($star, $i) . "</br>";
+        $result .= str_repeat($star, $i) . '</br>';
     }
     return $result;
 }
 
 function chessBoard($firstValue, $secondValue)
 {
-    $result = "";
-    $newLine = "</br>";
+    $result = '';
+    $newLine = '</br>';
     $boxWidth = 500;
     $boxHeight = 500;
     $boxSize = ($boxWidth / $firstValue > $boxHeight / $secondValue) ? $boxHeight / $secondValue :

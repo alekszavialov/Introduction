@@ -33,12 +33,12 @@ class jsonManipulate
 
     private function changeVote()
     {
-        if (!in_array($this->userName, array_column($this->database, "name"))) {
+        if (!in_array($this->userName, array_column($this->database, 'name'))) {
             throw new Exception('Incorrect name or db!');
         }
         foreach ($this->database as &$value) {
-            if ($value["name"] === $this->userName) {
-                $value["votes"]++;
+            if ($value['name'] === $this->userName) {
+                $value['votes']++;
                 break;
             }
         }
@@ -54,9 +54,9 @@ class jsonManipulate
 
     public function convertDbToCharts()
     {
-        $result[] = ["Name", "Vote count"];
+        $result[] = ['Name', 'Vote count'];
         foreach ($this->database as &$value) {
-            $result[] = ["{$value['name']}", $value['votes']];
+            $result[] = ["$value[name]", $value['votes']];
         }
         return json_encode($result);
     }

@@ -1,18 +1,18 @@
 [
     {
         "name": "Ivan",
-        "votes": 6
+        "votes": 8
     },
     {
         "name": "Alex",
-        "votes": 15
+        "votes": 18
     },
     {
         "name": "Nikolai",
-        "votes": 21
+        "votes": 23
     },
     {
         "name": "Dora",
-        "votes": 5
+        "votes": 6
     }
 ]
