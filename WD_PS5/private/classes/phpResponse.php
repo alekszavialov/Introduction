@@ -11,7 +11,7 @@ class phpResponse
 {
     public static function pageRedirection($errorMsg, $location)
     {
-        if (!empty($errorMsg)){
+        if (!empty($errorMsg)) {
             $_SESSION["error"] = $errorMsg;
         }
         header("location:   ../$location");
@@ -19,11 +19,11 @@ class phpResponse
 
     public static function ajaxResponse($responseCode, $data = null)
     {
-        $response = ['data' => $data, 'responseCode' => $responseCode];
-        if ($responseCode === 200){
+        if ($responseCode === 200) {
             echo $result = json_encode(['data' => $data, 'responseCode' => $responseCode]);
-        } else{
-            print_r([$data,$responseCode]);
+        } else {
+            http_response_code($responseCode);
+            echo $data;
         }
         die();
     }

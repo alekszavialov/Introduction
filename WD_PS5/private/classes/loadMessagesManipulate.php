@@ -18,9 +18,8 @@ class loadMessagesManipulate extends jsonDBManipulate
             $this->checkUser();
             $this->checkUserTime();
             if (!$this->checkMessagesCount()) {
-                phpResponse::ajaxResponse(404);
+                phpResponse::ajaxResponse(202);
             }
-         //   echo json_encode(['messages' => $this->getMessages(), 'messagesCount' => parent::getDBSize()]);
             phpResponse::ajaxResponse(200, ['messages' => $this->getMessages(), 'messagesCount' => parent::getDBSize()]);
         } catch (Exception $e) {
             die();

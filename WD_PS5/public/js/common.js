@@ -21,13 +21,10 @@ $(function () {
             $chatBody.html(data.data.messages);
             messageCount = data.data.messagesCount;
             $chatBody.scrollTop($chatBody.prop("scrollHeight"));
-            alert(1);
         }).fail(function (xhr) {
-            let text = Array.from(xhr.responseText);
-            console.log(text[0]);
-            // if (xhr.responseText["responseCode"] !== 202){
-            //     window.location.href = "index.php";
-            // }
+            if (xhr.status !== 202){
+                window.location.href = "index.php";
+            }
         });
     }
 
@@ -35,27 +32,25 @@ $(function () {
             e.preventDefault();
             const $messageValue = $("#message-value");
             let $messageValueData = $messageValue.val();
-            // if (!$messageValueData.replace(/\s+/g, '')) {
-            //     $messageValue.val("");
-            //     return;
-            // }
+            if (!$messageValueData.replace(/\s+/g, '')) {
+                $messageValue.val("");
+                return;
+            }
             const data = 'className=addMessageManipulate&' + $form.serialize();
             $.ajax({
                 type: method,
                 url: action,
                 data: data,
+                dataType: 'json',
                 cache: false
             }).done(function () {
                     $messageValue.val("");
-                    loadMessage();
                     $error.text("");
-            }).fail(function (data) {
-
-                if (data["responseCode"] === 401){
+            }).fail(function (xhr) {
+                if (xhr.status === 400){
+                    $error.text(xhr.responseText);
+                } else {
                     window.location.href = "index.php";
-                }
-                if (data["responseCode"] === 409){
-                    $error.text(data["data"]);
                 }
             })
         })
@@ -71,7 +66,7 @@ $(function () {
             cache: false
         }).done(function (data) {
             window.location.href = data.data;
-        }).fail(function (data) {
+        }).fail(function () {
             window.location.href = "index.php";
         });
     });

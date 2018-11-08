@@ -7,14 +7,14 @@ class addMessageManipulate extends jsonDBManipulate
 
     public function __construct()
     {
-        $this->checkUser();
-        $this->checkMessage();
         parent::__construct(DATADB);
     }
 
     public function mainFunction()
     {
         try {
+            $this->checkUser();
+            $this->checkMessage();
             $messageText = htmlspecialchars($_POST['data']);
             $icons = array(
                 ':)' => "<span class='happy-smile'></span>",
@@ -35,14 +35,15 @@ class addMessageManipulate extends jsonDBManipulate
 
     private function checkMessage()
     {
-        if (strlen($_POST['data']) === 0) {
-            throw new Exception("Empty input value!", 409);
+        if (!isset($_POST['data']) || empty($_POST['data'])) {
+            throw new Exception("Empty input value!", 400);
         }
     }
 
     private function checkUser()
     {
         if (!isset($_SESSION['user_name'])) {
+            $_SESSION['error'] = "Not logged!";
             throw new Exception("You need to login!", 401);
         }
     }

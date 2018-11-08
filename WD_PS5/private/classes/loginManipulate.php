@@ -26,6 +26,7 @@ class loginManipulate extends jsonDBManipulate
     {
         if (isset($_POST['logout']) && $_POST['logout'] === "true"){
             unset($_SESSION['user_name']);
+            $_SESSION['error'] = "Log out!";
             phpResponse::ajaxResponse(200, 'index.php');
         }
         if (strlen($_POST['userName']) < MIN_NAME_LENGTH || strlen($_POST['userName']) > MAX_NAME_LENGTH
