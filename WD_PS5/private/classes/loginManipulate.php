@@ -16,9 +16,9 @@ class loginManipulate extends jsonDBManipulate
             $this->checkPostData();
             $this->loginUser();
             $_SESSION['user_name'] = $_POST['userName'];
-            pageRedirection::chatPageRedirection();
+            phpResponse::pageRedirection('', 'chat.php');
         } catch (Exception $e) {
-            pageRedirection::errorRedirection($e->getMessage());
+            phpResponse::pageRedirection($e->getMessage(), 'index.php');
         }
     }
 
@@ -26,7 +26,7 @@ class loginManipulate extends jsonDBManipulate
     {
         if (isset($_POST['logout']) && $_POST['logout'] === "true"){
             unset($_SESSION['user_name']);
-            throw new Exception('Logout!');
+            phpResponse::ajaxResponse(200, 'index.php');
         }
         if (strlen($_POST['userName']) < MIN_NAME_LENGTH || strlen($_POST['userName']) > MAX_NAME_LENGTH
             || preg_match(LOGIN_REG, $_POST['userName'])) {

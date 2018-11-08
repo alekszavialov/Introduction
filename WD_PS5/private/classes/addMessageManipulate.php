@@ -27,23 +27,23 @@ class addMessageManipulate extends jsonDBManipulate
                 'time' => date_timestamp_get(date_create())
             );
             parent::saveJson($message);
+            phpResponse::ajaxResponse(200);
         } catch (Exception $e) {
-            echo $e->getMessage();
+            phpResponse::ajaxResponse($e->getCode(), $e->getMessage());
         }
     }
 
     private function checkMessage()
     {
         if (strlen($_POST['data']) === 0) {
-            echo "Empty message!";
-            die();
+            throw new Exception("Empty input value!", 409);
         }
     }
 
     private function checkUser()
     {
         if (!isset($_SESSION['user_name'])) {
-            die();
+            throw new Exception("You need to login!", 401);
         }
     }
 

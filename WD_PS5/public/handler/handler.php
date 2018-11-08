@@ -21,7 +21,7 @@ function __autoload($className)
     if (file_exists(CLASSES_DIR . "$className.php")){
         require_once(CLASSES_DIR . "$className.php");
     } else {
-        pageRedirection::errorRedirection(ERROR);
+        phpResponse::errorRedirection(ERROR);
     }
 }
 

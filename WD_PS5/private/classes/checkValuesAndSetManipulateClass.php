@@ -23,7 +23,7 @@ class checkValuesAndSetManipulateClass
         try {
             $this->setClass();
         } catch (Exception $e) {
-            pageRedirection::errorRedirection($e->getMessage());
+            phpResponse::pageRedirection($e->getMessage(), "index.php");
         }
     }
 
