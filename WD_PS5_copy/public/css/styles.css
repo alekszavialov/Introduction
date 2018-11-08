@@ -1,0 +1,192 @@
+@font-face {
+    font-family: "Montserrat-Regular";
+    src: url("../fonts/Montserrat/Montserrat-Regular.eot");
+    src: url("../fonts/Montserrat/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat/Montserrat-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Pacifico";
+    src: url("../fonts/Pacifico/Pacifico.eot");
+    src: url("../fonts/Pacifico/Pacifico.eot?#iefix") format("embedded-opentype"), url("../fonts/Pacifico/Pacifico.woff") format("woff"), url("../fonts/Pacifico/Pacifico.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.chat-body {
+    position: relative;
+    background: #b9c783;
+    min-height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.chat-body:before {
+    content: "";
+    display: block;
+    width: 100%;
+    border-bottom: 10px solid;
+    border-image: linear-gradient(to right, #635960 10%, #8b8e59 10%, #8b8e59 20%, #eada7d 20%, #eada7d 30%, #fffedc 30%, #fffedc 40%, #7bc3ab 40%, #7bc3ab 50%, #635960 50%, #635960 60%, #8b8e59 60%, #8b8e59 70%, #eada7d 70%, #eada7d 80%, #fffedc 80%, #fffedc 90%, #7bc3ab 90%, #7bc3ab 100%) 5;
+}
+
+h1 {
+    color: #fffecd;
+    font-size: 80px;
+    font-family: Pacifico, serif;
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.chat {
+    padding: 70px 0 0 0;
+    margin: 0 auto;
+    width: 330px;
+}
+
+.chat p {
+    font-size: 14px;
+    font-family: Montserrat-Regular, serif;
+    color: #635960;
+    margin-bottom: 5px;
+}
+
+.chat input {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: none;
+    background: #fffecd;
+    color: #635960;
+    outline: none;
+    font-weight: bold;
+}
+
+.chat input::placeholder {
+    color: #a9adb3;
+}
+
+.chat input:hover {
+    outline: auto;
+}
+
+.login-button {
+    position: relative;
+}
+
+.submit-button {
+    display: block;
+    margin-top: 15px;
+    width: 100%;
+    background: #635960;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    outline: none;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.submit-button:hover {
+    color: #8b8e59;
+}
+
+.chat-area input[type=submit]:hover {
+    color: #8b8e59;
+}
+
+.login-button:after {
+    position: absolute;
+    content: "";
+    display: block;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(99, 89, 96, 0.1));
+    width: 100%;
+    height: 200px;
+    transform: scaleX(1.034) skewY(7deg) rotate(-14deg);
+    left: 25px;
+    top: 22px;
+    z-index: -1;
+}
+
+.chat-send-msg {
+    display: flex;
+}
+
+.chat-area {
+    width: 600px;
+    padding: 75px 0 0 0;
+}
+
+.chat-area button, .chat-area input, #message-chat {
+    padding: 15px;
+    margin: 0;
+}
+
+#message-chat {
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 300px;
+    overflow: scroll;
+    margin-bottom: 15px;
+    resize: none;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 25px;
+}
+
+#message-chat p {
+    font-size: 16px;
+    color: #000;
+}
+
+p strong {
+    font-weight: bold;
+}
+
+.chat-area input {
+    width: 450px;
+}
+
+.chat-area h1 {
+    font-size: 55px;
+    margin-bottom: 48px;
+}
+
+.chat-area input[type=submit] {
+    width: 120px;
+    margin-left: auto;
+    display: block;
+    background: #635960;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+p span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+}
+
+span.happy-smile {
+    background-image: url(../images/smiles/happy.png);
+}
+
+span.sad-smile {
+    background-image: url(../images/smiles/sad.png);
+}
+
+#logout{
+    margin-top: 15px;
+}
+
+/*# sourceMappingURL=css.css.map */
