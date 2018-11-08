@@ -2,6 +2,10 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
+//namespace manipulate;
+//
+//use Exception;
+
 class addMessageManipulate extends jsonDBManipulate
 {
 
@@ -28,7 +32,7 @@ class addMessageManipulate extends jsonDBManipulate
             );
             parent::saveJson($message);
             phpResponse::ajaxResponse(200);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             phpResponse::ajaxResponse($e->getCode(), $e->getMessage());
         }
     }

@@ -2,6 +2,12 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
+namespace manipulate;
+
+use Manipulate;
+
+use Exception;
+
 /**
  * Created by PhpStorm.
  * User: dslife
@@ -40,7 +46,8 @@ class checkValuesAndSetManipulateClass
 
     public function getClass()
     {
-        return $this->class = new $this->class();
+        $className = "manipulate\\" . $this->class;
+        return $this->class = new $className;
     }
 
 }

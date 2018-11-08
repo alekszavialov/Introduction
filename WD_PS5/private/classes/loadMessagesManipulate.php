@@ -2,6 +2,10 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
+namespace manipulate;
+
+use Exception;
+
 class loadMessagesManipulate extends jsonDBManipulate
 {
 

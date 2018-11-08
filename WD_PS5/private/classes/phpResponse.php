@@ -1,5 +1,7 @@
 <?php
 
+namespace manipulate;
+
 /**
  * Created by PhpStorm.
  * User: dslife

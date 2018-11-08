@@ -2,6 +2,10 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
+namespace manipulate;
+
+use Exception;
+
 class loginManipulate extends jsonDBManipulate
 {
 
@@ -26,8 +30,7 @@ class loginManipulate extends jsonDBManipulate
     {
         if (isset($_POST['logout']) && $_POST['logout'] === "true"){
             unset($_SESSION['user_name']);
-            $_SESSION['error'] = "Log out!";
-            phpResponse::ajaxResponse(200, 'index.php');
+            throw new Exception('Logout');
         }
         if (strlen($_POST['userName']) < MIN_NAME_LENGTH || strlen($_POST['userName']) > MAX_NAME_LENGTH
             || preg_match(LOGIN_REG, $_POST['userName'])) {
@@ -37,6 +40,9 @@ class loginManipulate extends jsonDBManipulate
             strlen($_POST['userPassword']) > MAX_PASS_LENGTH ||
             preg_match(PASSWORD_REG, $_POST['userPassword'])) {
             throw new Exception('Password should exist 6 character at least or incorrect symbols!');
+        }
+        if (isset($_SESSION['user_name'])){
+            throw new Exception('Already logged');
         }
     }
 
