@@ -25,7 +25,7 @@ if (!isset($_SESSION["user_name"])) {
                 <div id="message-chat">
                 </div>
                 <div class="chat-send-msg">
-                    <input id="message-value" type="text" name="data">
+                    <input id="message-value" type="text" name="data" minlength="1" maxlength="500">
                     <input type="submit" value="Send">
                 </div>
                 <p class="errorArea"></p>

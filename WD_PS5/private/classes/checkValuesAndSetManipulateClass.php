@@ -2,18 +2,17 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-namespace manipulate;
-
-use Manipulate;
-
-use Exception;
-
 /**
  * Created by PhpStorm.
  * User: dslife
  * Date: 10/25/2018
  * Time: 10:15 PM
  */
+
+namespace manipulate;
+
+use Exception;
+
 class checkValuesAndSetManipulateClass
 {
 

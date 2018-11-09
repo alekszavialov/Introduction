@@ -2,9 +2,9 @@
 
 /** @noinspection PhpUnhandledExceptionInspection */
 
-//namespace manipulate;
-//
-//use Exception;
+namespace manipulate;
+
+use Exception;
 
 class addMessageManipulate extends jsonDBManipulate
 {
@@ -20,27 +20,24 @@ class addMessageManipulate extends jsonDBManipulate
             $this->checkUser();
             $this->checkMessage();
             $messageText = htmlspecialchars($_POST['data']);
-            $icons = array(
-                ':)' => "<span class='happy-smile'></span>",
-                ':(' => "<span class='sad-smile'></span>"
-            );
-            $messageText = strtr($messageText, $icons);
-            $message = array(
+            $message = [
+                'id' => parent::getLastMessageID()+1,
                 'name' => $_SESSION['user_name'],
                 'message' => $messageText,
                 'time' => date_timestamp_get(date_create())
-            );
+            ];
             parent::saveJson($message);
             phpResponse::ajaxResponse(200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             phpResponse::ajaxResponse($e->getCode(), $e->getMessage());
         }
     }
 
     private function checkMessage()
     {
-        if (!isset($_POST['data']) || empty($_POST['data'])) {
-            throw new Exception("Empty input value!", 400);
+        $maxMessageLenght = 500;
+        if (!isset($_POST['data']) || empty($_POST['data']) || strlen($_POST['data']) > $maxMessageLenght) {
+            throw new Exception("Invorrect message!", 400);
         }
     }
 

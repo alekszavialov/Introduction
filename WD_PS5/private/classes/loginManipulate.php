@@ -29,8 +29,10 @@ class loginManipulate extends jsonDBManipulate
     private function checkPostData()
     {
         if (isset($_POST['logout']) && $_POST['logout'] === "true"){
-            unset($_SESSION['user_name']);
-            throw new Exception('Logout');
+            if (isset($_SESSION['user_name'])){
+                unset($_SESSION['user_name']);
+            }
+            throw new Exception('You loged out');
         }
         if (strlen($_POST['userName']) < MIN_NAME_LENGTH || strlen($_POST['userName']) > MAX_NAME_LENGTH
             || preg_match(LOGIN_REG, $_POST['userName'])) {

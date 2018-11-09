@@ -16,7 +16,6 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_S
     . 'config' . DIRECTORY_SEPARATOR . 'dbConfig.php';
 
 $checkValuesAndSetFunction = new checkValuesAndSetManipulateClass();
-echo "ok";
 $manipulateClass = $checkValuesAndSetFunction->getClass();
 $manipulateClass->mainFunction();
 

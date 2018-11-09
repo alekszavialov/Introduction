@@ -24,9 +24,10 @@ class loadMessagesManipulate extends jsonDBManipulate
             if (!$this->checkMessagesCount()) {
                 phpResponse::ajaxResponse(202);
             }
-            phpResponse::ajaxResponse(200, ['messages' => $this->getMessages(), 'messagesCount' => parent::getDBSize()]);
+            phpResponse::ajaxResponse(200, ['messages' => $this->getMessages(),
+                'currentUser' => $_SESSION['user_name']]);
         } catch (Exception $e) {
-            die();
+            phpResponse::ajaxResponse($e->getCode(), $e->getMessage());
         }
     }
 
@@ -34,10 +35,11 @@ class loadMessagesManipulate extends jsonDBManipulate
     {
         $hourInSeconds = 3600;
         $lastMessageTime = date_timestamp_get(date_create()) - $hourInSeconds;
-        $this->lastMessages = array();
+        $this->lastMessages = [];
         foreach (array_reverse(parent::getDB()) as $key => &$value) {
             if ($value['time'] >= $lastMessageTime) {
-                $this->lastMessages[] = $this->convertTextToHTML($value);
+                $value['time'] = $this->convertTime($value);
+                $this->lastMessages[] = $value;
             }
         }
         $this->lastMessages = array_reverse($this->lastMessages);
@@ -46,26 +48,22 @@ class loadMessagesManipulate extends jsonDBManipulate
     private function getMessages()
     {
         $this->readMessages();
-        return implode("\n", $this->lastMessages);
+        return $this->lastMessages;
     }
 
-    private function convertTextToHTML($value)
+    private function convertTime($value)
     {
         $value['time'] += intval($_GET['timeZone']) * 60;
         $hour = $value['time'] / 3600 % 24;
         $minute = $value['time'] / 60 % 60;
         $second = $value['time'] % 60;
         $hour = strlen($hour) > 1 ? $hour : '0' . $hour;
-        $minute = strlen($minute) > 1 ? $minute : '0' . $minute;
-        $second = strlen($second) > 1 ? $second : '0' . $second;
-        return $_SESSION['user_name'] === $value['name'] ?
-            "<p style='text-align: right'>{$value["message"]} : <strong>You ({$value["name"]})</strong> [{$hour}:{$minute}:{$second}]</p>"
-            : "<p>[{$hour}:{$minute}:{$second}] <strong>{$value["name"]}</strong>: {$value["message"]}</p>";
+        return "[{$hour}:{$minute}:{$second}]";
     }
 
     private function checkMessagesCount()
     {
-        if (!isset($_GET['messageCount']) || parent::getDBSize() === intval($_GET['messageCount'])) {
+        if (!isset($_GET['messageCount']) || parent::getLastMessageID() === intval($_GET['messageCount'])) {
             return false;
         }
         return true;
@@ -74,14 +72,15 @@ class loadMessagesManipulate extends jsonDBManipulate
     private function checkUserTime()
     {
         if (!isset($_GET['timeZone']) || !is_numeric($_GET['timeZone'])) {
-            throw new Exception('Incorret time!');
+            throw new Exception('Incorret time!', 409);
         }
     }
 
     private function checkUser()
     {
         if (!isset($_SESSION['user_name'])) {
-            throw new Exception('Empty user!');
+            $_SESSION['error'] = "Not logged!";
+            throw new Exception("You need to login!", 401);
         }
     }
 

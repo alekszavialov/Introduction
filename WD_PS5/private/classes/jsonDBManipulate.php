@@ -43,9 +43,9 @@ class jsonDBManipulate
         return $this->database;
     }
 
-    final public function getDBSize()
+    final public function getLastMessageID()
     {
-        return count($this->database);
+        return count($this->database) > 0 ? end($this->database)['id'] : 0;
     }
 
 }

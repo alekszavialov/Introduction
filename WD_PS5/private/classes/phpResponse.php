@@ -1,13 +1,13 @@
 <?php
 
-namespace manipulate;
-
 /**
  * Created by PhpStorm.
  * User: dslife
  * Date: 10/26/2018
  * Time: 12:34 AM
  */
+
+namespace manipulate;
 
 class phpResponse
 {
@@ -22,7 +22,7 @@ class phpResponse
     public static function ajaxResponse($responseCode, $data = null)
     {
         if ($responseCode === 200) {
-            echo $result = json_encode(['data' => $data, 'responseCode' => $responseCode]);
+            echo $result = json_encode($data);
         } else {
             http_response_code($responseCode);
             echo $data;
