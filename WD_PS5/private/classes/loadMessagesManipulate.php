@@ -6,7 +6,7 @@ namespace manipulate;
 
 use Exception;
 
-class loadMessagesManipulate extends jsonDBManipulate
+class loadMessagesManipulate extends JsonDBManipulate
 {
 
     private $lastMessages;

@@ -13,7 +13,7 @@ namespace manipulate;
 
 use Exception;
 
-class checkValuesAndSetManipulateClass
+class CheckValuesAndSetManipulateClass
 {
 
     private $class;
@@ -36,7 +36,7 @@ class checkValuesAndSetManipulateClass
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['className'])) {
             $this->class = $_POST['className'];
-        } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['className'])){
+        } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['className'])) {
             $this->class = $_GET['className'];
         } else {
             throw new Exception('Cannot found class!');
@@ -45,7 +45,7 @@ class checkValuesAndSetManipulateClass
 
     public function getClass()
     {
-        $className = "manipulate\\" . $this->class;
+        $className = __NAMESPACE__ . '\\' . $this->class;
         return $this->class = new $className;
     }
 

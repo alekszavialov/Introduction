@@ -6,7 +6,7 @@ namespace manipulate;
 
 use Exception;
 
-class jsonDBManipulate
+class JsonDBManipulate
 {
 
     private $database;

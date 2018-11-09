@@ -6,7 +6,7 @@ namespace manipulate;
 
 use Exception;
 
-class addMessageManipulate extends jsonDBManipulate
+class AddMessageManipulate extends JsonDBManipulate
 {
 
     public function __construct()
@@ -21,7 +21,7 @@ class addMessageManipulate extends jsonDBManipulate
             $this->checkMessage();
             $messageText = htmlspecialchars($_POST['data']);
             $message = [
-                'id' => parent::getLastMessageID()+1,
+                'id' => parent::getLastMessageID() + 1,
                 'name' => $_SESSION['user_name'],
                 'message' => $messageText,
                 'time' => date_timestamp_get(date_create())
@@ -48,6 +48,5 @@ class addMessageManipulate extends jsonDBManipulate
             throw new Exception("You need to login!", 401);
         }
     }
-
 
 }

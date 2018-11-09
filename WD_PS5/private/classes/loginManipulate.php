@@ -6,7 +6,7 @@ namespace manipulate;
 
 use Exception;
 
-class loginManipulate extends jsonDBManipulate
+class loginManipulate extends JsonDBManipulate
 {
 
     public function __construct()
@@ -28,8 +28,8 @@ class loginManipulate extends jsonDBManipulate
 
     private function checkPostData()
     {
-        if (isset($_POST['logout']) && $_POST['logout'] === "true"){
-            if (isset($_SESSION['user_name'])){
+        if (isset($_POST['logout']) && $_POST['logout'] === "true") {
+            if (isset($_SESSION['user_name'])) {
                 unset($_SESSION['user_name']);
             }
             throw new Exception('You loged out');
@@ -43,7 +43,7 @@ class loginManipulate extends jsonDBManipulate
             preg_match(PASSWORD_REG, $_POST['userPassword'])) {
             throw new Exception('Password should exist 6 character at least or incorrect symbols!');
         }
-        if (isset($_SESSION['user_name'])){
+        if (isset($_SESSION['user_name'])) {
             throw new Exception('Already logged');
         }
     }
