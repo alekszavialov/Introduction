@@ -25,7 +25,8 @@ session_start();
             Сумма от -1000 до 1000 которые заканчиваются на 2,3, и 7;
         </h2>
         <form action="common.php" method="POST" class="form_task1">
-            <input type="hidden" name="function" value="addRndNumbers"/>
+            <input type="hidden" name="function" value="addNumbers"/>
+            <input type="hidden" name="addRndNumbers" value="addRndNumbers"/>
             <input type="submit" value="GetSumm"/>
             <p><?php echo isset($_SESSION['addRndNumbers']) ? $_SESSION['addRndNumbers'] : 'Run function' ?></p>
         </form>
@@ -48,7 +49,7 @@ session_start();
         <form action="common.php" method="POST" class="form_task1">
             <input type="number" name="firstNumber" min="1" max="12">
             <input type="number" name="secondNumber" min="1" max="12">
-            <input type="hidden" name="function" value="chessDesk"/>
+            <input type="hidden" name="function" value="chessBoard"/>
             <input type="submit" value="CreateDesk"/>
             <div class="desc"><?php echo isset($_SESSION['chessDesk']) ? $_SESSION['chessDesk'] : 'Run function' ?></div>
         </form>
