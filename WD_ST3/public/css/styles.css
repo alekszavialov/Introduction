@@ -1,0 +1,60 @@
+body {
+    background: silver;
+    font: 14px 'trebuchet ms', arial, sans-serif;
+}
+
+main{
+    height: 100vh;
+    background: url('../images/background.jpg') no-repeat;
+    background-size: cover;
+}
+
+#footer {
+    background: #12407f;
+    color: #fff;
+    padding: 20px;
+    border-top: 4px solid #436fac;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.draggable-block{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50px;
+    left: 50px;
+    background: #00aabb;
+    border-radius: .4em;
+    cursor: move;
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+
+    /* Not implemented yet */
+    -o-user-select: none;
+    user-select: none;
+}
+
+.draggable-block:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 23%;
+    width: 0;
+    height: 0;
+    border: 32px solid transparent;
+    border-top-color: #00aabb;
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -19.5px;
+    margin-bottom: -31px;
+}
+
+.draggable-block input{
+    width: 100%;
+    box-sizing: border-box;
+    display: none;
+}
+
+
