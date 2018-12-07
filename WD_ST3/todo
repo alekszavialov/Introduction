@@ -1,0 +1,27 @@
+Form a basic page (find some funny image with any characters) +
+Place that picture on the page and put some div on the top of it (body > main[style=backgroundImage: url()] > div) +
+Make div draggable (time for googling) +
+Google how to handle double-click +
+Google how to add a new div above the picture-container element with js +
+Google how to place added div directly at mouse position +
+Make dynamic divs draggable +
+Learn how to replace div contents with input on double-click and set its value to what was in double-clicked div +
+Make sure that double-click handle of the container is not executed during double-click on our dynamic div +
+Review how to handle Enter and Escape keys on input +
+Auto-focus on input when it appears +
+Set proper cursor (cursor: move) on our div +
+If enter was pressed - apply changes and remove (or hide) input +
+If escape was pressed - do not apply changes, but also remove (or hide) input +
+Add message "corner" at the bottom of each dynamic div, so it looks like "message bubble" +
+Ensure long messages are supported correctly (and short too) +
+Ensure no text is highlighted when double-clicking on the container (image) or dynamic div +
+Ensure that doubleclick handler of dynamic div is not executed when double-clicking on input +
+Ensure that we're working with relative coordinates while placing our divs +
+Ensure that dynamic draggable is not able to go out of its parent's boundaries +
+Develop data storage model on server side (file containing json)
+Develop ability to get dynamic divs positions and text from server when page is loaded.
+Develop ability to save new text contents to server on dynamic div's input enter key press
+Same for deleting dynamic div by entering empty text
+Save new position of element when dragging is over
+Ensure all that works fine under chrome and firefox
+Ensure that update message transfers only necessary info about some dynamic div, not the full array

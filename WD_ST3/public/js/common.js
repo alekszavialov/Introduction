@@ -1,11 +1,9 @@
 const enterButton = 13;
 const escButton = 27;
 
-$(function (asd) {
+$(function () {
 
-
-
-    $('.draggable-block').draggable();
+    getBlocks();
 
     $('#main').on('dblclick', function (e) {
         e.stopPropagation();
@@ -24,11 +22,10 @@ $(function (asd) {
     }).on('keyup', '.draggable-block input', function (e) {
         e.stopPropagation();
         console.log('input keyup');
-        if (e.keyCode === enterButton){
+        if (e.keyCode === enterButton) {
             $(this).parent().find('p').text($(this).val());
             $(this).fadeOut();
-        } else
-        if (e.keyCode === escButton){
+        } else if (e.keyCode === escButton) {
             $(this).parent().removeClass('active');
             $(this).fadeOut();
         }
@@ -37,17 +34,50 @@ $(function (asd) {
         e.preventDefault();
         console.log('main click');
         $activeBlock = $('.active');
-        if ($activeBlock){
+        if ($activeBlock) {
             $activeBlock.find('input').fadeOut();
             $activeBlock.removeClass('active');
         }
     });
 
     function customBlock(positionX, positionY) {
-        const container = $('#main');
-        const div = $('<div />').addClass('draggable-block').css({top: `${positionY}px`, left: `${positionX}px`,
-            position: 'absolute'}).draggable().append($('<p />')).append($('<input />'));;
-        container.append(div);
+        // const container = $('#main');
+        // const div = $('<div />').addClass('draggable-block').css({
+        //     top: `${positionY}px`, left: `${positionX}px`,
+        //     position: 'absolute'
+        // }).draggable({containment: "#main", scroll: false}).append($('<p />')).append($('<input />'));
+        // container.append(div);
+        $.ajax({
+            type: 'POST',
+            data: `addNewDiv&positionX=${positionX}&positionY=${positionY}`,
+            url: '../app/handler.php',
+            cache: false,
+            dataType: 'json',
+        }).done(function (objects) {
+                $block = $('<div />').addClass('draggable-block').attr('id', `${objects['id']}`).css({
+                    top: `${objects['positionY']}px`, left: `${objects['positionX']}px`, position : "absolute"
+                }).append($('<p />').text(`${objects['message']}`)).append($('<input />'))
+                    .draggable({containment: "#main", scroll: false});
+                $('#main').append($block);
+        })
+    }
+
+    function getBlocks() {
+        $.ajax({
+            type: 'GET',
+            url: '../app/handler.php',
+            cache: false,
+            dataType: 'json',
+        }).done(function (objects) {
+            for (let i = 0; i < objects.length; i++) {
+                $block = $('<div />').addClass('draggable-block').attr('id', `${objects[i]['id']}`).css({
+                    top: `${objects[i]['positionY']}px`, left: `${objects[i]['positionX']}px`
+                }).append($('<p />').text(`${objects[i]['message']}`)).append($('<input />'))
+                    .draggable({containment: "#main", scroll: false});
+                $('#main').append($block);
+                alert(i);
+            }
+        })
     }
 
 });

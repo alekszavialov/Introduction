@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "positionX": "493",
+        "positionY": "127",
+        "message": ""
+    },
+    {
+        "id": 2,
+        "positionX": "836",
+        "positionY": "105",
+        "message": ""
+    },
+    {
+        "id": 3,
+        "positionX": "214",
+        "positionY": "159",
+        "message": ""
+    },
+    {
+        "id": 4,
+        "positionX": "1092",
+        "positionY": "187",
+        "message": ""
+    },
+    {
+        "id": 5,
+        "positionX": "656",
+        "positionY": "296",
+        "message": ""
+    },
+    {
+        "id": 6,
+        "positionX": "356",
+        "positionY": "308",
+        "message": ""
+    }
+]
