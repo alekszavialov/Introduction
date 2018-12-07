@@ -20,7 +20,6 @@ main{
 }
 
 .draggable-block{
-    position: relative;
     width: 100px;
     height: 100px;
     top: 50px;

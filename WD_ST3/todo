@@ -18,10 +18,10 @@ Ensure no text is highlighted when double-clicking on the container (image) or d
 Ensure that doubleclick handler of dynamic div is not executed when double-clicking on input +
 Ensure that we're working with relative coordinates while placing our divs +
 Ensure that dynamic draggable is not able to go out of its parent's boundaries +
-Develop data storage model on server side (file containing json)
-Develop ability to get dynamic divs positions and text from server when page is loaded.
-Develop ability to save new text contents to server on dynamic div's input enter key press
+Develop data storage model on server side (file containing json) +
+Develop ability to get dynamic divs positions and text from server when page is loaded. +
+Develop ability to save new text contents to server on dynamic div's input enter key press +
 Same for deleting dynamic div by entering empty text
-Save new position of element when dragging is over
+Save new position of element when dragging is over +
 Ensure all that works fine under chrome and firefox
 Ensure that update message transfers only necessary info about some dynamic div, not the full array

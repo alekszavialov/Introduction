@@ -1,19 +1,22 @@
-const enterButton = 13;
-const escButton = 27;
+const ENTER_BUTTON = 13;
+const ESC_BUTTON = 27;
 
 $(function () {
 
+    const $mainBody = $('#main');
+
     getBlocks();
 
-    $('#main').on('dblclick', function (e) {
+    /**
+     *
+     */
+    $mainBody.on('dblclick', function (e) {
         e.stopPropagation();
-        e.preventDefault();
         console.log('main db');
         customBlock(e.pageX, e.pageY);
     }).on('dblclick', '.draggable-block', function (e) {
         e.stopPropagation();
         console.log('draggable click');
-        $(this).css('background-color', getRandomColor());
         $(this).addClass('active');
         $(this).find('input').fadeIn().focus();
     }).on('dblclick', '.draggable-block input', function (e) {
@@ -22,43 +25,51 @@ $(function () {
     }).on('keyup', '.draggable-block input', function (e) {
         e.stopPropagation();
         console.log('input keyup');
-        if (e.keyCode === enterButton) {
-            $(this).parent().find('p').text($(this).val());
-            $(this).fadeOut();
-        } else if (e.keyCode === escButton) {
+        if (e.keyCode === ENTER_BUTTON) {
+            changeBlock($(this).parent().attr('id'), '', '', $(this).val());
+        } else if (e.keyCode === ESC_BUTTON) {
             $(this).parent().removeClass('active');
             $(this).fadeOut();
         }
     }).on('click', function (e) {
+        if (!$(event.target).is($(this))) {
+            return;
+        }
         e.stopPropagation();
-        e.preventDefault();
         console.log('main click');
-        $activeBlock = $('.active');
+        const $activeBlock = $('.active');
         if ($activeBlock) {
             $activeBlock.find('input').fadeOut();
             $activeBlock.removeClass('active');
         }
+    }).on('mouseup', '.ui-draggable-dragging', function (e) {
+        e.stopPropagation();
+        console.log('changeBlock');
+        changeBlock($(this).attr('id'), `${$(this).position().left}`, $(this).position().top, $(this).val());
     });
 
+    function createBlock(objects) {
+        const $block = $('<div />')
+            .addClass('draggable-block')
+            .attr('id', `${objects['id']}`)
+            .css({top: `${objects['positionY']}px`, left: `${objects['positionX']}px`, position: 'absolute'})
+            .append($('<p />').text(`${objects['message']}`))
+            .append($('<input />').val(`${objects['message']}`))
+            .draggable({containment: "#main", scroll: false});
+        $mainBody.append($block);
+    }
+
     function customBlock(positionX, positionY) {
-        // const container = $('#main');
-        // const div = $('<div />').addClass('draggable-block').css({
-        //     top: `${positionY}px`, left: `${positionX}px`,
-        //     position: 'absolute'
-        // }).draggable({containment: "#main", scroll: false}).append($('<p />')).append($('<input />'));
-        // container.append(div);
+        console.log(positionX + " " + positionY);
+        const data = `addNewDiv&positionX=${positionX}&positionY=${positionY}`
         $.ajax({
             type: 'POST',
-            data: `addNewDiv&positionX=${positionX}&positionY=${positionY}`,
+            data: data,
             url: '../app/handler.php',
             cache: false,
             dataType: 'json',
         }).done(function (objects) {
-                $block = $('<div />').addClass('draggable-block').attr('id', `${objects['id']}`).css({
-                    top: `${objects['positionY']}px`, left: `${objects['positionX']}px`, position : "absolute"
-                }).append($('<p />').text(`${objects['message']}`)).append($('<input />'))
-                    .draggable({containment: "#main", scroll: false});
-                $('#main').append($block);
+            createBlock(objects);
         })
     }
 
@@ -70,23 +81,34 @@ $(function () {
             dataType: 'json',
         }).done(function (objects) {
             for (let i = 0; i < objects.length; i++) {
-                $block = $('<div />').addClass('draggable-block').attr('id', `${objects[i]['id']}`).css({
-                    top: `${objects[i]['positionY']}px`, left: `${objects[i]['positionX']}px`
-                }).append($('<p />').text(`${objects[i]['message']}`)).append($('<input />'))
-                    .draggable({containment: "#main", scroll: false});
-                $('#main').append($block);
-                alert(i);
+                createBlock(objects[i]);
+            }
+        })
+    }
+
+    function changeBlock(id, positionX, positionY, message) {
+        console.log(id + " " + positionX + " " + positionY + " " + message);
+        const data = 'changeBlock&id=' + id + '&positionX=' + positionX + '&positionY='
+            + positionY + '&message=' + message;
+        $.ajax({
+            type: 'POST',
+            url: '../app/handler.php',
+            data: data,
+            cache: false,
+            dataType: 'json',
+        }).done(function (objects) {
+            console.log(objects);
+            let $currentBlock = $(`#${id}`);
+            return;
+            if (!objects['message']){
+                $currentBlock.fadeOut();
+            } else {
+                $currentBlock
+                    .css({top: `${objects['positionY']}px`, left: `${objects['positionX']}px`})
+                    .find('p').text(objects['message']);
+                $currentBlock.find('input').fadeOut();
             }
         })
     }
 
 });
-
-function getRandomColor() {
-    let letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}

@@ -47,20 +47,23 @@ class Database
         echo json_encode($data);
     }
 
-    public function edit($id = null, $position = null, $message = null)
+    public function edit($id = null, $positionX = '', $positionY = '', $message = false)
     {
         if (!is_writable(DB_PATH)) {
             die();
         }
         $blockId = array_search($id, array_column($this->database, 'id'));
-        if ($position) {
-            $this->database[$blockId]['positionX'] = $position['x'];
-            $this->database[$blockId]['positionY'] = $position['y'];
-        }
+        if (!empty($positionX) && !empty($positionY)) {
+            $this->database[$blockId]['positionX'] = $positionX;
+            $this->database[$blockId]['positionY'] = $positionY;
+        } else
         if ($message) {
             $this->database[$blockId]['message'] = $message;
+            echo $this->database[$blockId]['message'] ? json_encode("true") :
+                json_encode("false");
         }
-        file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
+       // file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
+       // echo json_encode($this->database[$blockId]);
     }
 
 
