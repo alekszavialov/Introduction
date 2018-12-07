@@ -8,5 +8,6 @@
     <title>WD_ST3</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="libs/jquery-ui/jquery-ui.css">
 </head>
 <body>

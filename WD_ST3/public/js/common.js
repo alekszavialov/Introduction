@@ -3,51 +3,78 @@ const ESC_BUTTON = 27;
 
 $(function () {
 
+    /**
+     * @type {*|jQuery|HTMLElement}
+     */
     const $mainBody = $('#main');
 
+    /**
+     * Load blocks from database;
+     */
     getBlocks();
 
     /**
-     *
+     * Create block on main div;
      */
     $mainBody.on('dblclick', function (e) {
-        e.stopPropagation();
-        console.log('main db');
         customBlock(e.pageX, e.pageY);
-    }).on('dblclick', '.draggable-block', function (e) {
+    }).
+    /**
+     * Find ative div and remove active from it. Set current div active and show input;
+     */
+    on('dblclick', '.draggable-block', function (e) {
         e.stopPropagation();
-        console.log('draggable click');
+        let $currentDivInput = $(this).find('input');
+        if ($currentDivInput.is(':visible')) {
+            return;
+        }
+        checkActiveBlock();
         $(this).addClass('active');
-        $(this).find('input').fadeIn().focus();
-    }).on('dblclick', '.draggable-block input', function (e) {
-        e.stopPropagation();
-        $(this).parent().find('p').text($(this).val());
-    }).on('keyup', '.draggable-block input', function (e) {
-        e.stopPropagation();
-        console.log('input keyup');
+        $currentDivInput.val($(this).find('p').text()).fadeIn().focus();
+    }).
+    /**
+     * When pressed enter button - add data from input to paragraph and hide input;
+     * When pressed esc button - hide input;
+     */
+    on('keyup', '.active input', function (e) {
         if (e.keyCode === ENTER_BUTTON) {
             changeBlock($(this).parent().attr('id'), '', '', $(this).val());
         } else if (e.keyCode === ESC_BUTTON) {
-            $(this).parent().removeClass('active');
             $(this).fadeOut();
         }
-    }).on('click', function (e) {
-        if (!$(event.target).is($(this))) {
+    }).
+    /**
+     * Hide active input;
+     */
+    on('click', function (e) {
+        if (!$(e.target).is($(this))) {
             return;
         }
-        e.stopPropagation();
-        console.log('main click');
-        const $activeBlock = $('.active');
-        if ($activeBlock) {
-            $activeBlock.find('input').fadeOut();
-            $activeBlock.removeClass('active');
-        }
-    }).on('mouseup', '.ui-draggable-dragging', function (e) {
-        e.stopPropagation();
-        console.log('changeBlock');
+        checkActiveBlock();
+    }).
+    /**
+     * Change current div coords;
+     */
+    on('mouseup', '.ui-draggable-dragging', function () {
         changeBlock($(this).attr('id'), `${$(this).position().left}`, $(this).position().top, $(this).val());
     });
 
+    /**
+     * Check active block. If find active block - remove class active from it and clean input value;
+     */
+    function checkActiveBlock() {
+        const $activeBlock = $('.active');
+        if ($activeBlock) {
+            $activeBlock.find('input').val('').fadeOut();
+            $activeBlock.removeClass('active');
+        }
+    }
+
+    /**
+     * Create div
+     *
+     * @param objects   div parameters
+     */
     function createBlock(objects) {
         const $block = $('<div />')
             .addClass('draggable-block')
@@ -59,8 +86,13 @@ $(function () {
         $mainBody.append($block);
     }
 
+    /**
+     * Add new block in cursor coords;
+     *
+     * @param positionX mouse position from left
+     * @param positionY mouse position from right
+     */
     function customBlock(positionX, positionY) {
-        console.log(positionX + " " + positionY);
         const data = `addNewDiv&positionX=${positionX}&positionY=${positionY}`
         $.ajax({
             type: 'POST',
@@ -69,38 +101,50 @@ $(function () {
             cache: false,
             dataType: 'json',
         }).done(function (objects) {
-            createBlock(objects);
+             createBlock(objects);
         })
     }
 
+
+    /**
+     * Load blocks from database;
+     */
     function getBlocks() {
         $.ajax({
-            type: 'GET',
+            type: 'get',
+            data: 'getBlocks',
             url: '../app/handler.php',
             cache: false,
             dataType: 'json',
         }).done(function (objects) {
             for (let i = 0; i < objects.length; i++) {
-                createBlock(objects[i]);
+                if (objects[i]['active'] === true) {
+                    createBlock(objects[i]);
+                }
             }
         })
     }
 
+    /**
+     * Change div position or text;
+     *
+     * @param id            div id
+     * @param positionX     div position from left
+     * @param positionY     div position from top
+     * @param message       div input message
+     */
     function changeBlock(id, positionX, positionY, message) {
-        console.log(id + " " + positionX + " " + positionY + " " + message);
         const data = 'changeBlock&id=' + id + '&positionX=' + positionX + '&positionY='
             + positionY + '&message=' + message;
         $.ajax({
             type: 'POST',
-            url: '../app/handler.php',
             data: data,
+            url: '../app/handler.php',
             cache: false,
             dataType: 'json',
         }).done(function (objects) {
-            console.log(objects);
             let $currentBlock = $(`#${id}`);
-            return;
-            if (!objects['message']){
+            if (objects['active'] === false) {
                 $currentBlock.fadeOut();
             } else {
                 $currentBlock

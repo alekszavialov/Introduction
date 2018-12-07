@@ -40,31 +40,31 @@ class Database
             'id' => ((int)end($this->database)['id']) + 1,
             'positionX' => $positionX,
             'positionY' => $positionY,
-            'message' => ''
+            'message' => '',
+            'active' => true
         ];
         $this->database[] = $data;
         file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
         echo json_encode($data);
     }
 
-    public function edit($id = null, $positionX = '', $positionY = '', $message = false)
+    public function edit($id = null, $positionX = '', $positionY = '', $message = '')
     {
-        if (!is_writable(DB_PATH)) {
+        $blockId = array_search($id, array_column($this->database, 'id'));
+        if (!is_writable(DB_PATH) || $blockId === false) {
             die();
         }
-        $blockId = array_search($id, array_column($this->database, 'id'));
         if (!empty($positionX) && !empty($positionY)) {
             $this->database[$blockId]['positionX'] = $positionX;
             $this->database[$blockId]['positionY'] = $positionY;
-        } else
-        if ($message) {
+        } else {
             $this->database[$blockId]['message'] = $message;
-            echo $this->database[$blockId]['message'] ? json_encode("true") :
-                json_encode("false");
+            if (empty($this->database[$blockId]['message'])) {
+                $this->database[$blockId]['active'] = false;
+            }
         }
-       // file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
-       // echo json_encode($this->database[$blockId]);
+        file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
+        echo json_encode($this->database[$blockId]);
     }
-
 
 }
