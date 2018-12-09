@@ -40,7 +40,7 @@ class Database
             'id' => ((int)end($this->database)['id']) + 1,
             'positionX' => $positionX,
             'positionY' => $positionY,
-            'message' => '',
+            'message' => 'New Block',
             'active' => true
         ];
         $this->database[] = $data;
@@ -54,14 +54,12 @@ class Database
         if (!is_writable(DB_PATH) || $blockId === false) {
             die();
         }
-        if (!empty($positionX) && !empty($positionY)) {
-            $this->database[$blockId]['positionX'] = $positionX;
-            $this->database[$blockId]['positionY'] = $positionY;
-        } else {
-            $this->database[$blockId]['message'] = $message;
-            if (empty($this->database[$blockId]['message'])) {
-                $this->database[$blockId]['active'] = false;
-            }
+
+        $this->database[$blockId]['positionX'] = $positionX;
+        $this->database[$blockId]['positionY'] = $positionY;
+        $this->database[$blockId]['message'] = $message;
+        if (empty($this->database[$blockId]['message'])) {
+            $this->database[$blockId]['active'] = false;
         }
         file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
         echo json_encode($this->database[$blockId]);

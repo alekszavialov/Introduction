@@ -38,7 +38,8 @@ $(function () {
      */
     on('keyup', '.active input', function (e) {
         if (e.keyCode === ENTER_BUTTON) {
-            changeBlock($(this).parent().attr('id'), '', '', $(this).val());
+            const $block = $(this).parent();
+            changeBlock($block.attr('id'), $block.position().left, $block.position().top, $(this).val());
         } else if (e.keyCode === ESC_BUTTON) {
             $(this).fadeOut();
         }
@@ -55,8 +56,8 @@ $(function () {
     /**
      * Change current div coords;
      */
-    on('mouseup', '.ui-draggable-dragging', function () {
-        changeBlock($(this).attr('id'), `${$(this).position().left}`, $(this).position().top, $(this).val());
+    on('dragstop', '.draggable-block', function () {
+        changeBlock($(this).attr('id'), `${$(this).position().left}`, $(this).position().top, $(this).find('p').text());
     });
 
     /**
@@ -78,10 +79,10 @@ $(function () {
     function createBlock(objects) {
         const $block = $('<div />')
             .addClass('draggable-block')
-            .attr('id', `${objects['id']}`)
-            .css({top: `${objects['positionY']}px`, left: `${objects['positionX']}px`, position: 'absolute'})
-            .append($('<p />').text(`${objects['message']}`))
-            .append($('<input />').val(`${objects['message']}`))
+            .attr('id', `${objects.id}`)
+            .css({top: `${objects.positionY}px`, left: `${objects.positionX}px`, position: 'absolute'})
+            .append($('<p />').text(`${objects.message}`))
+            .append($('<input />').val(`${objects.message}`))
             .draggable({containment: "#main", scroll: false});
         $mainBody.append($block);
     }
@@ -93,15 +94,18 @@ $(function () {
      * @param positionY mouse position from right
      */
     function customBlock(positionX, positionY) {
-        const data = `addNewDiv&positionX=${positionX}&positionY=${positionY}`
         $.ajax({
             type: 'POST',
-            data: data,
+            data: {
+                addNewDiv: '',
+                positionX: `${positionX}`,
+                positionY: `${positionY}`
+            },
             url: '../app/handler.php',
             cache: false,
             dataType: 'json',
         }).done(function (objects) {
-             createBlock(objects);
+            createBlock(objects);
         })
     }
 
@@ -118,7 +122,7 @@ $(function () {
             dataType: 'json',
         }).done(function (objects) {
             for (let i = 0; i < objects.length; i++) {
-                if (objects[i]['active'] === true) {
+                if (objects[i].active === true) {
                     createBlock(objects[i]);
                 }
             }
@@ -134,22 +138,26 @@ $(function () {
      * @param message       div input message
      */
     function changeBlock(id, positionX, positionY, message) {
-        const data = 'changeBlock&id=' + id + '&positionX=' + positionX + '&positionY='
-            + positionY + '&message=' + message;
         $.ajax({
             type: 'POST',
-            data: data,
+            data: {
+                changeBlock: '',
+                id: `${id}`,
+                positionX: `${positionX}`,
+                positionY: `${positionY}`,
+                message: `${message}`
+            },
             url: '../app/handler.php',
             cache: false,
             dataType: 'json',
         }).done(function (objects) {
             let $currentBlock = $(`#${id}`);
-            if (objects['active'] === false) {
+            if (objects.active === false) {
                 $currentBlock.fadeOut();
             } else {
                 $currentBlock
-                    .css({top: `${objects['positionY']}px`, left: `${objects['positionX']}px`})
-                    .find('p').text(objects['message']);
+                    .css({top: `${objects.positionY}px`, left: `${objects.positionX}px`})
+                    .find('p').text(objects.message);
                 $currentBlock.find('input').fadeOut();
             }
         })
