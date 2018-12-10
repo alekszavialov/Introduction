@@ -1,20 +1,23 @@
 <?php
 
+
 use app\Database;
 
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Database.php';
 
-$Database = new Database();
-if (isset($_GET['function']) && function_exists($_GET['function'])) {
-    $Database->load();
-    die();
+$database = new Database();
+
+if (isset($_GET['function']) && method_exists($database, $_GET['function'])) {
+    $database->loadItems();
 }
-if (isset($_POST['function']) && function_exists($_POST['function'])) {
-    if ($_POST['function'] === 'insertItem'){
-        $Database->{$_POST['function']}($_POST['positionX'], $_POST['positionY'], $_POST['message']);
-    } else if ($_POST['function'] === 'editItem'){
-        $Database->{$_POST['function']}($_POST['id'], $_POST['positionX'], $_POST['positionY'], $_POST['message']);
+
+
+
+if (isset($_POST['function']) && method_exists($database, $_POST['function'])) {
+    if ($_POST['function'] === 'insertItem') {
+        $database->insertItem($_POST['positionX'], $_POST['positionY'], $_POST['message']);
+    } else if ($_POST['function'] === 'editItem') {
+
+        $database->editItem($_POST['id'], $_POST['positionX'], $_POST['positionY'], $_POST['message']);
     }
-} else {
-    echo json_encode('Incorrect query!');
 }

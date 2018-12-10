@@ -2,7 +2,7 @@
 
 namespace app;
 
-define('DB_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'db.json');
+define('DB_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'database.json');
 
 class Database
 {
@@ -26,13 +26,41 @@ class Database
         echo json_encode($this->database);
     }
 
-    public function insertItem($coordinateX, $coordinateY, $message)
+    public function insertItem($positionX, $positionY, $message)
     {
-
+        if (!is_writable(DB_PATH)) {
+            die();
+        }
+        $data = [
+            'id' => ((int)end($this->database)['id']) + 1,
+            'positionX' => $positionX,
+            'positionY' => $positionY,
+            'message' => $message
+        ];
+        $this->database[] = $data;
+        file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
+        echo json_encode($data);
     }
 
     public function editItem($id = null, $positionX = '', $positionY = '', $message = '')
     {
+        $blockId = array_search($id, array_column($this->database, 'id'));
+        if (!is_writable(DB_PATH) || $blockId === false) {
+            die();
+        }
+        $removedBlock = null;
+        if (empty($message)) {
+            $removedBlock = $this->database[$blockId];
+            $removedBlock['active'] = false;
+            unset($this->database[$blockId]);
+            $this->database = array_values($this->database);
+        } else {
+            $this->database[$blockId]['positionX'] = $positionX;
+            $this->database[$blockId]['positionY'] = $positionY;
+            $this->database[$blockId]['message'] = $message;
+        }
+        file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
+        echo isset($this->database[$blockId]) ? json_encode($this->database[$blockId]) : json_encode($removedBlock);
     }
 
 }

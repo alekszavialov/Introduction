@@ -21,9 +21,6 @@ main{
 
 .draggable-block{
     width: 100px;
-    height: 100px;
-    top: 50px;
-    left: 50px;
     padding: 10px;
     background: #00aabb;
     border-radius: 5px;
@@ -33,6 +30,7 @@ main{
     -ms-user-select: none; /* IE10+ */
     user-select: none;
     margin-bottom: 23px;
+    box-sizing: border-box;
 }
 
 .draggable-block p{
@@ -40,6 +38,7 @@ main{
     overflow-y: auto;
     width: 100%;
     height: 100%;
+    min-height: 16px;
 }
 
 .draggable-block:after {
@@ -69,4 +68,6 @@ main{
     border-radius: 5px;
 }
 
-
+.active input{
+    display: block;
+}

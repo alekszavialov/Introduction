@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "id": 3,
+        "positionX": "985",
+        "positionY": "210",
+        "message": "123sad12"
+    },
+    {
+        "id": 6,
+        "positionX": "806",
+        "positionY": "350",
+        "message": "123"
+    },
+    {
+        "id": 7,
+        "positionX": "386",
+        "positionY": "303",
+        "message": "sad"
+    },
+    {
+        "id": 9,
+        "positionX": "836",
+        "positionY": "285",
+        "message": "321213"
+    },
+    {
+        "id": 10,
+        "positionX": "1008",
+        "positionY": "394",
+        "message": "asd"
+    }
+]
