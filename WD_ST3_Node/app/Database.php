@@ -12,11 +12,12 @@ class Database
     public function __construct()
     {
         $database = null;
-        if (file_exists(DB_PATH)) {
-            $database = json_decode(file_get_contents(DB_PATH), true);
-        }
-        if (json_last_error()) {
+        if (!file_exists(DB_PATH)) {
             die();
+        }
+        $database = json_decode(file_get_contents(DB_PATH), true);
+        if (json_last_error()) {
+            $database = [];
         }
         $this->database = $database;
     }
@@ -48,7 +49,7 @@ class Database
         if (!is_writable(DB_PATH) || $blockId === false) {
             die();
         }
-        $removedBlock = null;
+        $removedBlock = '';
         if (empty($message)) {
             $removedBlock = $this->database[$blockId];
             $removedBlock['active'] = false;
@@ -60,7 +61,7 @@ class Database
             $this->database[$blockId]['message'] = $message;
         }
         file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
-        echo isset($this->database[$blockId]) ? json_encode($this->database[$blockId]) : json_encode($removedBlock);
+        echo empty($removedBlock) ? json_encode($this->database[$blockId]) : json_encode($removedBlock);
     }
 
 }

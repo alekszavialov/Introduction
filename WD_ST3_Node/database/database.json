@@ -1,32 +1,32 @@
 [
     {
+        "id": 1,
+        "positionX": "148",
+        "positionY": "179",
+        "message": "1"
+    },
+    {
+        "id": 2,
+        "positionX": "318",
+        "positionY": "186",
+        "message": "2"
+    },
+    {
         "id": 3,
-        "positionX": "985",
-        "positionY": "210",
-        "message": "123sad12"
+        "positionX": "523",
+        "positionY": "82",
+        "message": "1"
     },
     {
-        "id": 6,
-        "positionX": "806",
-        "positionY": "350",
+        "id": 4,
+        "positionX": "1266",
+        "positionY": "435",
+        "message": "12"
+    },
+    {
+        "id": 5,
+        "positionX": "810",
+        "positionY": "200",
         "message": "123"
-    },
-    {
-        "id": 7,
-        "positionX": "386",
-        "positionY": "303",
-        "message": "sad"
-    },
-    {
-        "id": 9,
-        "positionX": "836",
-        "positionY": "285",
-        "message": "321213"
-    },
-    {
-        "id": 10,
-        "positionX": "1008",
-        "positionY": "394",
-        "message": "asd"
     }
 ]

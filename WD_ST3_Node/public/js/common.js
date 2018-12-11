@@ -30,7 +30,7 @@ $(function () {
         if (!$(e.target).is($(this))) {
             return;
         }
-        console.log('doubleClick!');
+        console.log('doubleClick! ' + e.target);
         const emptyBlock = {
             'positionX': e.pageX,
             'positionY': e.pageY,
@@ -40,52 +40,48 @@ $(function () {
         const $createdBlock = $(this).find('.' + NODE_CONTAINER + ':last');
         $createdBlock.addClass('active');
         $createdBlock.find('input').focus();
-    }).on('click', function (e) {
-        if (!$(e.target).is($(this))) {
-            return;
-        }
-        console.log('Click!');
-        activeBlockManipulation();
     }).on('dblclick', `.${NODE_CONTAINER}`, function (e) {
         if ($(this).hasClass('active')) {
             return;
         }
         console.log('doubleClick block!');
-        activeBlockManipulation();
         $(this).addClass('active');
         $(this).find('input').val($(this).find('p').text().trim()).focus();
+   //     $(`.${NODE_CONTAINER}`).draggable( "destroy" )
+    }).on('blur', `.${NODE_CONTAINER} input`, function (e) {
+        console.log('blur!');
+        const $parentContainer = $(this).parent();
+        const inputText = $(this).val().trim();
+        if (!$parentContainer.is('[id]') && !inputText) {
+            removeBlock($parentContainer);
+        } else
+        if (!$parentContainer.is('[id]') && inputText) {
+            addNewBlock($parentContainer,
+                $parentContainer.position().left,
+                $parentContainer.position().top,
+                inputText);
+        } else
+        if (inputText !== $parentContainer.find('p').text()) {
+            changeBlock($parentContainer.attr('id'),
+                $parentContainer.position().left,
+                $parentContainer.position().top,
+                inputText);
+        }
+        $parentContainer.removeClass('active');
+    }).on('keyup', '.active input', function (e) {
+        if (e.keyCode === ENTER_BUTTON) {
+            console.log('enter!');
+            $(this).blur();
+        } else if (e.keyCode === ESC_BUTTON) {
+            console.log('esc!');
+            const $parentBlock = $(this).parent();
+            $(this).val($parentBlock.find('p').text());
+            $parentBlock.removeClass('active');
+        }
+    }).on('dragstop', '.draggable-block', function () {
+        console.log('change pos!');
+        changeBlock($(this).attr('id'), `${$(this).position().left}`, $(this).position().top, $(this).find('p').text());
     });
-
-    function activeBlockManipulation() {
-        const $activeBlock = $('.active');
-        if (!$activeBlock.hasClass(`${NODE_CONTAINER}`)) {
-            return true;
-        }
-        const inputValue = $activeBlock.find('input').val().trim();
-        if (!$activeBlock.is('[id]') && !inputValue) {
-            console.log('remove new block!');
-            removeBlock($activeBlock);
-            return;
-        }
-        if ($activeBlock.is('[id]') && $activeBlock.find('p').text() !== inputValue) {
-            console.log('change block!');
-            changeBlock($activeBlock.attr('id'),
-                $activeBlock.position().left,
-                $activeBlock.position().top,
-                inputValue);
-            $activeBlock.removeClass('active');
-        } else if (!$activeBlock.is('[id]') && inputValue) {
-            // $activeBlock.find('p').text(inputValue);
-            $activeBlock.removeClass('active');
-            addNewBlock($activeBlock,
-                $activeBlock.position().left,
-                $activeBlock.position().top,
-                inputValue);
-        } else {
-            $activeBlock.removeClass('active');
-        }
-
-    }
 
     function removeBlock(block) {
         $.when(block.fadeOut('fast')).done(function () {
@@ -124,9 +120,7 @@ $(function () {
         }
         if (objectPosition.left !== objectPositionX || objectPositionY !== objectPosition.top) {
             console.log('refactor!');
-            object.remove();
             object.css({top: `${objectPositionY}px`, left: `${objectPositionX}px`});
-            $mainBody.append(object);
         }
         object.draggable({containment: "#main", scroll: false});
     }
@@ -146,8 +140,7 @@ $(function () {
         }).done(function (object) {
             console.log('add new block to db succsess!');
             $activeBlock.attr('id', object.id);
-            let currentBlock = $(`#${object.id}`);
-            currentBlock.find('p').text(object.message);
+            $activeBlock.find('p').text(object.message);
         });
     }
 
@@ -168,18 +161,24 @@ $(function () {
             let $currentBlock = $(`#${objects.id}`);
             if (objects.active === false) {
                 console.log(`removed! ${objects.id}`);
-                $mainBody.remove(`#${objects.id}`);
-                // $.when($currentBlock.fadeOut('fast')).done(function () {
-                //     $currentBlock.remove();
-                // });
-                return;
+                removeBlock($currentBlock);
+            } else {
+                $currentBlock
+                    .css({top: `${objects.positionY}px`, left: `${objects.positionX}px`})
+                    .find('p').text(objects.message)
+                    .find('input').val(objects.message);
+                console.log(`change faded! ${objects.id}`);
             }
-            $currentBlock
-                .css({top: `${objects.positionY}px`, left: `${objects.positionX}px`})
-                .find('p').text(objects.message)
-                .find('input').val(objects.message);
-            console.log(`change faded! ${objects.id}`);
         });
     }
 
+    $(window).on('resize', function(){
+        console.log('resize');
+        $(`.${NODE_CONTAINER}`).each(function() {
+            correctingPosition($(this));
+        });
+    });
+
 });
+
+
