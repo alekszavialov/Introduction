@@ -18,5 +18,5 @@ Draggable Speech Balloons
 ```
 Extract files to webserver directory.
 Run your webserver.
-Go to (http://{yourhost}/{yourpath}/WD_ST3/public/index.php)
+Go to (http://{yourhost}/{yourpath}/WD_ST3/public/index.html)
 ```
