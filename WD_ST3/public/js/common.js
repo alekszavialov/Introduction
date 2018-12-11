@@ -1,166 +1,189 @@
 const ENTER_BUTTON = 13;
 const ESC_BUTTON = 27;
+const AJAX_URL = '../app/handler.php';
+const NODE_CONTAINER = 'draggable-block';
+const ERROR_MESSAGE = 'Oops, something goes wrong :( Reload page';
+const INPUT_TEXT_MAX_LENGHT = 255;
+const ACTIVE_CLASS = 'active';
+const MAIN_BODY = 'main';
 
 $(function () {
 
     /**
      * @type {*|jQuery|HTMLElement}
      */
-    const $mainBody = $('#main');
+    const $mainBody = $('#' + MAIN_BODY);
 
-    /**
-     * Load blocks from database;
-     */
-    getBlocks();
+    $.ajax({
+        type: 'get',
+        data: {
+            function: 'loadItems'
+        },
+        url: AJAX_URL,
+        cache: false,
+        dataType: 'json',
+    }).done(function (objects) {
+        for (let i = 0; i < objects.length; i++) {
+            createBlock(objects[i]);
+        }
+    }).fail(function () {
+        programDestroy();
+    });
 
     /**
      * Create block on main div;
      */
     $mainBody.on('dblclick', function (e) {
-        customBlock(e.pageX, e.pageY);
-    }).
-    /**
-     * Find ative div and remove active from it. Set current div active and show input;
-     */
-    on('dblclick', '.draggable-block', function (e) {
-        e.stopPropagation();
-        let $currentDivInput = $(this).find('input');
-        if ($currentDivInput.is(':visible')) {
-            return;
-        }
-        checkActiveBlock();
-        $(this).addClass('active');
-        $currentDivInput.val($(this).find('p').text()).fadeIn().focus();
-    }).
-    /**
-     * When pressed enter button - add data from input to paragraph and hide input;
-     * When pressed esc button - hide input;
-     */
-    on('keyup', '.active input', function (e) {
-        if (e.keyCode === ENTER_BUTTON) {
-            const $block = $(this).parent();
-            changeBlock($block.attr('id'), $block.position().left, $block.position().top, $(this).val());
-        } else if (e.keyCode === ESC_BUTTON) {
-            $(this).fadeOut();
-        }
-    }).
-    /**
-     * Hide active input;
-     */
-    on('click', function (e) {
         if (!$(e.target).is($(this))) {
             return;
         }
-        checkActiveBlock();
-    }).
-    /**
-     * Change current div coords;
-     */
-    on('dragstop', '.draggable-block', function () {
-        changeBlock($(this).attr('id'), `${$(this).position().left}`, $(this).position().top, $(this).find('p').text());
+        const emptyBlock = {
+            'positionX': e.pageX,
+            'positionY': e.pageY,
+            'message': ''
+        };
+        createBlock(emptyBlock);
+        const $createdBlock = $(this).find('.' + NODE_CONTAINER + ':last');
+        $createdBlock.addClass(ACTIVE_CLASS);
+        $createdBlock.find('input').focus();
+    }).on('dblclick', `.${NODE_CONTAINER}`, function () {
+        if ($(this).hasClass(ACTIVE_CLASS)) {
+            return;
+        }
+        $(this).addClass(ACTIVE_CLASS);
+        $(this).find('input').val($(this).find('p').text().trim()).focus();
+    }).on('blur', `.${NODE_CONTAINER} input`, function () {
+        const $parentContainer = $(this).parent();
+        const inputText = $(this).val().trim();
+        if (!$parentContainer.is('[id]') && !inputText) {
+            removeBlock($parentContainer);
+        } else if (!$parentContainer.is('[id]') && inputText) {
+            addNewBlock($parentContainer,
+                $parentContainer.position().left,
+                $parentContainer.position().top,
+                inputText);
+        } else if (inputText !== $parentContainer.find('p').text()) {
+            changeBlock($parentContainer.attr('id'),
+                $parentContainer.position().left,
+                $parentContainer.position().top,
+                inputText);
+        }
+        $parentContainer.removeClass(ACTIVE_CLASS);
+    }).on('keyup', '.' + ACTIVE_CLASS + ' input', function (e) {
+        if (e.keyCode === ENTER_BUTTON) {
+            $(this).blur();
+        } else if (e.keyCode === ESC_BUTTON) {
+            const $parentBlock = $(this).parent();
+            $(this).val($parentBlock.find('p').text());
+            $parentBlock.removeClass(ACTIVE_CLASS);
+        }
+    }).on('dragstop', '.draggable-block', function () {
+        changeBlock($(this).attr('id'), $(this).position().left, $(this).position().top, $(this).find('p').text());
     });
 
-    /**
-     * Check active block. If find active block - remove class active from it and clean input value;
-     */
-    function checkActiveBlock() {
-        const $activeBlock = $('.active');
-        if ($activeBlock) {
-            $activeBlock.find('input').val('').fadeOut();
-            $activeBlock.removeClass('active');
-        }
+    function removeBlock(block) {
+        $.when(block.fadeOut('fast')).done(function () {
+            block.remove();
+        });
     }
 
-    /**
-     * Create div
-     *
-     * @param objects   div parameters
-     */
     function createBlock(objects) {
-        const $block = $('<div />')
-            .addClass('draggable-block')
-            .attr('id', `${objects.id}`)
-            .css({top: `${objects.positionY}px`, left: `${objects.positionX}px`, position: 'absolute'})
+        let $block = $('<div />')
+            .addClass(`${NODE_CONTAINER}`)
+            .css({top: objects.positionY + 'px', left: objects.positionX + 'px', position: 'absolute'})
             .append($('<p />').text(`${objects.message}`))
-            .append($('<input />').val(`${objects.message}`))
-            .draggable({containment: "#main", scroll: false});
+            .append($('<input />').attr({maxlength: INPUT_TEXT_MAX_LENGHT}).val(objects.message));
+        if (objects.id) {
+            $block.attr('id', objects.id);
+        }
         $mainBody.append($block);
+        correctingPosition($block);
     }
 
-    /**
-     * Add new block in cursor coords;
-     *
-     * @param positionX mouse position from left
-     * @param positionY mouse position from right
-     */
-    function customBlock(positionX, positionY) {
+    function correctingPosition(object) {
+        const objectPosition = object.position();
+        let objectPositionX = objectPosition.left;
+        let objectPositionY = objectPosition.top;
+        if (objectPositionX < 0) {
+            objectPositionX = 0;
+        }
+        if (objectPositionY < 0) {
+            objectPositionY = 0;
+        }
+        if (objectPositionY + object.outerHeight(true) > $mainBody.outerHeight()) {
+            objectPositionY = $mainBody.outerHeight() - object.outerHeight(true);
+        }
+        if (objectPosition.left + object.outerWidth() > $mainBody.outerWidth()) {
+            objectPositionX = $mainBody.outerWidth() - object.outerWidth();
+        }
+        if (objectPosition.left !== objectPositionX || objectPositionY !== objectPosition.top) {
+            object.css({top: objectPositionY + 'px', left: objectPositionX + 'px'});
+        }
+        object.draggable({containment: "#main", scroll: false});
+    }
+
+    function addNewBlock($activeBlock, positionX, positionY, message) {
         $.ajax({
             type: 'POST',
             data: {
-                addNewDiv: '',
-                positionX: `${positionX}`,
-                positionY: `${positionY}`
+                function: 'insertItem',
+                positionX: positionX,
+                positionY: positionY,
+                message: message
             },
-            url: '../app/handler.php',
-            cache: false,
+            url: AJAX_URL,
             dataType: 'json',
-        }).done(function (objects) {
-            createBlock(objects);
-        })
+        }).done(function (object) {
+            $activeBlock.attr('id', object.id);
+            $activeBlock.find('p').text(object.message);
+        }).fail(function () {
+            programDestroy();
+        });
     }
 
-
-    /**
-     * Load blocks from database;
-     */
-    function getBlocks() {
-        $.ajax({
-            type: 'get',
-            data: 'getBlocks',
-            url: '../app/handler.php',
-            cache: false,
-            dataType: 'json',
-        }).done(function (objects) {
-            for (let i = 0; i < objects.length; i++) {
-                if (objects[i].active === true) {
-                    createBlock(objects[i]);
-                }
-            }
-        })
-    }
-
-    /**
-     * Change div position or text;
-     *
-     * @param id            div id
-     * @param positionX     div position from left
-     * @param positionY     div position from top
-     * @param message       div input message
-     */
     function changeBlock(id, positionX, positionY, message) {
         $.ajax({
             type: 'POST',
             data: {
-                changeBlock: '',
-                id: `${id}`,
-                positionX: `${positionX}`,
-                positionY: `${positionY}`,
-                message: `${message}`
+                function: 'editItem',
+                id: id,
+                positionX: positionX,
+                positionY: positionY,
+                message: message
             },
-            url: '../app/handler.php',
+            url: AJAX_URL,
             cache: false,
             dataType: 'json',
         }).done(function (objects) {
-            let $currentBlock = $(`#${id}`);
+            let $currentBlock = $('#' + objects.id);
             if (objects.active === false) {
-                $currentBlock.fadeOut();
-            } else {
+                removeBlock($currentBlock);
+            } else if (objects.id) {
                 $currentBlock
-                    .css({top: `${objects.positionY}px`, left: `${objects.positionX}px`})
-                    .find('p').text(objects.message);
-                $currentBlock.find('input').fadeOut();
+                    .css({top: objects.positionY + 'px', left: objects.positionX + 'px'})
+                    .find('p').text(objects.message)
+                    .find('input').val(objects.message);
+                correctingPosition($currentBlock);
             }
-        })
+        }).fail(function () {
+            programDestroy();
+        });
     }
+
+    function programDestroy() {
+        $(`.${NODE_CONTAINER}`).each(function () {
+            removeBlock($(this));
+        });
+        const $errorBlock = $('<span />')
+            .addClass(`errorMessage`)
+            .text(ERROR_MESSAGE);
+        $mainBody.append($errorBlock);
+    }
+
+    $(window).on('resize', function () {
+        $(`.${NODE_CONTAINER}`).each(function () {
+            correctingPosition($(this));
+        });
+    });
 
 });

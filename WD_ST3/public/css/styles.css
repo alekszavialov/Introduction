@@ -3,7 +3,7 @@ body {
     font: 14px 'trebuchet ms', arial, sans-serif;
 }
 
-main{
+main {
     height: 100vh;
     background: url('../images/background.jpg') no-repeat;
     background-size: cover;
@@ -19,11 +19,8 @@ main{
     border-bottom-right-radius: 10px;
 }
 
-.draggable-block{
-    width: 100px;
-    height: 100px;
-    top: 50px;
-    left: 50px;
+.draggable-block {
+    width: 200px;
     padding: 10px;
     background: #00aabb;
     border-radius: 5px;
@@ -33,13 +30,16 @@ main{
     -ms-user-select: none; /* IE10+ */
     user-select: none;
     margin-bottom: 23px;
+    box-sizing: border-box;
 }
 
-.draggable-block p{
+.draggable-block p {
     word-break: break-word;
     overflow-y: auto;
     width: 100%;
     height: 100%;
+    min-height: 16px;
+    text-align: center;
 }
 
 .draggable-block:after {
@@ -57,16 +57,56 @@ main{
     margin-bottom: -23px;
 }
 
-.draggable-block input{
+.draggable-block input {
     width: calc(100% - 20px);
     height: calc(100% - 20px);
     border: none;
     box-sizing: border-box;
-    display: none;
     position: absolute;
     top: 10px;
     left: 10px;
     border-radius: 5px;
+    animation: fadeOut .5s forwards;
 }
 
+.ui-draggable-dragging {
+    z-index: 2;
+}
 
+.active input {
+    animation: fadeIn .5s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.errorMessage{
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 32px;
+    word-wrap: break-word;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ff1616;
+}

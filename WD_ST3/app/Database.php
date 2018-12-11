@@ -1,37 +1,34 @@
 <?php
-/**
- * Created by PhpStorm.
- *  * User: Aleksandr Zavyalov
- * Date: 12/7/2018
- * Time: 12:09 AM
- */
 
 namespace app;
 
+define('DB_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'database.json');
 
 class Database
 {
 
-    private $database;
+    private $database = null;
 
     public function __construct()
     {
         $database = null;
-        if (file_exists(DB_PATH)) {
-            $database = json_decode(file_get_contents(DB_PATH), true);
-        }
-        if (json_last_error()) {
+        if (!file_exists(DB_PATH)) {
+            echo 'database not found';
             die();
+        }
+        $database = json_decode(file_get_contents(DB_PATH), true);
+        if (json_last_error()) {
+            $database = [];
         }
         $this->database = $database;
     }
 
-    public function load()
+    public function loadItems()
     {
         echo json_encode($this->database);
     }
 
-    public function insert($positionX, $positionY)
+    public function insertItem($positionX, $positionY, $message)
     {
         if (!is_writable(DB_PATH)) {
             die();
@@ -40,29 +37,34 @@ class Database
             'id' => ((int)end($this->database)['id']) + 1,
             'positionX' => $positionX,
             'positionY' => $positionY,
-            'message' => 'New Block',
-            'active' => true
+            'message' => $message
         ];
         $this->database[] = $data;
         file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
         echo json_encode($data);
     }
 
-    public function edit($id = null, $positionX = '', $positionY = '', $message = '')
+    public function editItem($id = null, $positionX = '', $positionY = '', $message = '')
     {
         $blockId = array_search($id, array_column($this->database, 'id'));
         if (!is_writable(DB_PATH) || $blockId === false) {
             die();
         }
-
-        $this->database[$blockId]['positionX'] = $positionX;
-        $this->database[$blockId]['positionY'] = $positionY;
-        $this->database[$blockId]['message'] = $message;
-        if (empty($this->database[$blockId]['message'])) {
-            $this->database[$blockId]['active'] = false;
+        $removedBlock = '';
+        if (empty($message)) {
+            $removedBlock = [
+                'id' => $this->database[$blockId]['id'],
+                'active' => false
+            ];
+            unset($this->database[$blockId]);
+            $this->database = array_values($this->database);
+        } else {
+            $this->database[$blockId]['positionX'] = $positionX;
+            $this->database[$blockId]['positionY'] = $positionY;
+            $this->database[$blockId]['message'] = htmlspecialchars($message);
         }
         file_put_contents(DB_PATH, json_encode($this->database, JSON_PRETTY_PRINT), LOCK_EX);
-        echo json_encode($this->database[$blockId]);
+        echo empty($removedBlock) ? json_encode($this->database[$blockId]) : json_encode($removedBlock);
     }
 
 }
