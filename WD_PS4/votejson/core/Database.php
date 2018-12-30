@@ -5,8 +5,8 @@ namespace core;
 class Database
 {
 
-    protected $database;
-    protected $databasePath;
+    private $database;
+    private $databasePath;
     protected static $instance;
 
     private function __construct()
