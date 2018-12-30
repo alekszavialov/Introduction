@@ -5,6 +5,10 @@ form, p {
     text-align: center;
 }
 
+h1{
+    text-align: center;
+}
+
 input, label{
     cursor: pointer;
 }
@@ -19,4 +23,8 @@ p{
 
 div{
     margin: 5px 0;
+}
+
+#piechart{
+    margin: 0 auto;
 }
