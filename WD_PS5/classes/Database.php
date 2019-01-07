@@ -19,7 +19,6 @@ class Database
     private function loadJson()
     {
         if (!file_exists($this->filePath)) {
-           // file_put_contents($this->filePath, json_encode(array(), JSON_PRETTY_PRINT));
             throw new Exception('Cant find db');
         }
         if (!file_get_contents($this->filePath)){
