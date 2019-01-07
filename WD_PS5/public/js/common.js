@@ -3,7 +3,7 @@ $(function () {
     const $form = $("#chat-Form");
     const $error = $(".errorArea");
     const $chatBody = $("#message-chat");
-    const action = "handler/handler.php";
+    const action = "../handler/handler.php";
     const timeout = 2000;
     const maxMessageLenght = 500;
     let timezone_offset_minutes = new Date().getTimezoneOffset();
@@ -12,13 +12,15 @@ $(function () {
     let addMessageStatus = false;
     let loadMessages;
 
-
     function loadMessage() {
-        const data = 'className=loadMessagesManipulate&timeZone=' + timezone_offset_minutes + '&messageCount=' + messageCount;
         $.ajax({
             type: 'GET',
             url: action,
-            data: data,
+            data: {
+                className: 'loadMessages',
+                timeZone: timezone_offset_minutes,
+                messageCount: messageCount
+            },
             dataType: 'json',
             cache: false
         }).done(function (data) {
@@ -50,22 +52,25 @@ $(function () {
             $error.text("Long message! Max 500 characters");
             return;
         }
-        const data = 'className=addMessageManipulate&' + $form.serialize();
+        const data = $form.serialize() + '&' + $.param({"className": "addMessage"});
         $messageValue.attr('readonly', true);
         clearTimeout(loadMessages);
         sendMessage(data, $messageValue);
     }));
 
     $("#logout").click(function () {
+        clearTimeout(loadMessages);
         logOut();
     });
 
     function logOut() {
-        const data = 'className=loginManipulate&logout=true';
         $.ajax({
             type: 'POST',
             url: action,
-            data: data,
+            data: {
+                className: "loginManipulate",
+                logout: "true"
+            },
             dataType: 'json',
             cache: false
         }).done(function (data) {

@@ -1,12 +1,10 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
-
-namespace manipulate;
+namespace classes;
 
 use Exception;
 
-class JsonDBManipulate
+class Database
 {
 
     private $database;
@@ -21,9 +19,14 @@ class JsonDBManipulate
     private function loadJson()
     {
         if (!file_exists($this->filePath)) {
-            file_put_contents($this->filePath, json_encode(array(), JSON_PRETTY_PRINT));
+           // file_put_contents($this->filePath, json_encode(array(), JSON_PRETTY_PRINT));
+            throw new Exception('Cant find db');
         }
-        $this->database = json_decode(file_get_contents($this->filePath), true);
+        if (!file_get_contents($this->filePath)){
+            $this->database = [];
+        } else {
+            $this->database = json_decode(file_get_contents($this->filePath), true);
+        }
         if (json_last_error()) {
             throw new Exception('Incorrect db type!');
         }

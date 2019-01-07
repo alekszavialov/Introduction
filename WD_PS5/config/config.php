@@ -1,8 +1,5 @@
 <?php
 
-define('CLASSES_DIR', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'classes' .
-    DIRECTORY_SEPARATOR);
-
 define('ERROR', 'Oops, smth go wrong(');
 
 define('MIN_NAME_LENGTH', 4);

@@ -1,16 +1,8 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
+namespace classes;
 
-/**
- * Created by PhpStorm.
- * User: dslife
- * Date: 10/25/2018
- * Time: 10:15 PM
- */
-
-namespace manipulate;
-
+use core\phpResponse;
 use Exception;
 
 class CheckValuesAndSetManipulateClass
@@ -39,7 +31,7 @@ class CheckValuesAndSetManipulateClass
         } else if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['className'])) {
             $this->class = $_GET['className'];
         } else {
-            throw new Exception('Cannot found class!');
+            throw new Exception('Cannot find class!');
         }
     }
 

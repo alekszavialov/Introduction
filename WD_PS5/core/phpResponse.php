@@ -7,7 +7,7 @@
  * Time: 12:34 AM
  */
 
-namespace manipulate;
+namespace core;
 
 class phpResponse
 {
@@ -17,6 +17,7 @@ class phpResponse
             $_SESSION["error"] = $errorMsg;
         }
         header("location:   ../$location");
+        die();
     }
 
     public static function ajaxResponse($responseCode, $data = null)

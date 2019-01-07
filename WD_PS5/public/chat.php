@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION["user_name"])) {
-    $_SESSION["error"] = "Oops!";
-    header("location: index.php");
+if (!isset($_SESSION['user_name'])) {
+    $_SESSION['error'] = 'Oops!';
+    header('location: index.php');
 }
 ?>
 <!doctype html>
@@ -21,7 +21,7 @@ if (!isset($_SESSION["user_name"])) {
     <div class="container">
         <div class="chat chat-area">
             <h1>Easy chat</h1>
-            <form id="chat-Form" method="post" action="handler/handler.php">
+            <form id="chat-Form" method="post" action="../handler/handler.php">
                 <div id="message-chat">
                 </div>
                 <div class="chat-send-msg">
@@ -32,7 +32,6 @@ if (!isset($_SESSION["user_name"])) {
             </form>
             <button id="logout" class="submit-button">Logout</button>
         </div>
-
     </div>
 </section>
 <script src="libs/jquery/jquery-3.3.1.js"></script>

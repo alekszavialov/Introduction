@@ -17,7 +17,7 @@ session_start();
     <div class="container">
         <div class="chat">
             <h1>Easy chat</h1>
-            <form action="handler/handler.php" method="POST">
+            <form action="../handler/handler.php" method="POST">
                 <p>Enter your name</p>
                 <input type="text" placeholder="John Doe" name="userName">
                 <input type="hidden" name="className" value="loginManipulate">
@@ -29,12 +29,12 @@ session_start();
             </form>
             <p>
                 <?php
-                if (isset($_SESSION["user_name"])) {
-                    header("location: chat.php");
+                if (isset($_SESSION['user_name'])) {
+                    header('location: chat.php');
                 }
-                if (isset($_SESSION["error"])) {
-                    echo $_SESSION["error"];
-                    unset($_SESSION["error"]);
+                if (isset($_SESSION['error'])) {
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
                 } ?>
             </p>
         </div>

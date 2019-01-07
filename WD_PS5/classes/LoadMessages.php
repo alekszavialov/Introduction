@@ -1,12 +1,11 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
+namespace classes;
 
-namespace manipulate;
-
+use core\phpResponse;
 use Exception;
 
-class loadMessagesManipulate extends JsonDBManipulate
+class LoadMessages extends Database
 {
 
     private $lastMessages;

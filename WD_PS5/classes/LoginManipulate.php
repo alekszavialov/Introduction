@@ -1,12 +1,11 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
+namespace classes;
 
-namespace manipulate;
-
+use core\phpResponse;
 use Exception;
 
-class loginManipulate extends JsonDBManipulate
+class LoginManipulate extends Database
 {
 
     public function __construct()
@@ -20,9 +19,9 @@ class loginManipulate extends JsonDBManipulate
             $this->checkPostData();
             $this->loginUser();
             $_SESSION['user_name'] = $_POST['userName'];
-            phpResponse::pageRedirection('', 'chat.php');
+            phpResponse::pageRedirection('', 'public/chat.php');
         } catch (Exception $e) {
-            phpResponse::pageRedirection($e->getMessage(), 'index.php');
+            phpResponse::pageRedirection($e->getMessage(), 'public/index.php');
         }
     }
 
@@ -32,7 +31,7 @@ class loginManipulate extends JsonDBManipulate
             if (isset($_SESSION['user_name'])) {
                 unset($_SESSION['user_name']);
             }
-            throw new Exception('You loged out');
+            die();
         }
         if (strlen($_POST['userName']) < MIN_NAME_LENGTH || strlen($_POST['userName']) > MAX_NAME_LENGTH
             || preg_match(LOGIN_REG, $_POST['userName'])) {
@@ -54,7 +53,7 @@ class loginManipulate extends JsonDBManipulate
             $this->addNewUser();
             return;
         }
-        foreach (parent::getDB() as &$value) {
+        foreach (parent::getDB() as $value) {
             if ($value['name'] === $_POST['userName'] && $value['password'] !== $_POST['userPassword']) {
                 throw new Exception('Incorrect password!');
             }

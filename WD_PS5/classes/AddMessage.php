@@ -1,12 +1,11 @@
 <?php
 
-/** @noinspection PhpUnhandledExceptionInspection */
+namespace classes;
 
-namespace manipulate;
-
+use core\phpResponse;
 use Exception;
 
-class AddMessageManipulate extends JsonDBManipulate
+class AddMessage extends Database
 {
 
     public function __construct()
@@ -36,8 +35,8 @@ class AddMessageManipulate extends JsonDBManipulate
     private function checkMessage()
     {
         $maxMessageLenght = 500;
-        if (!isset($_POST['data']) || empty($_POST['data']) || strlen($_POST['data']) > $maxMessageLenght) {
-            throw new Exception("Invorrect message!", 400);
+        if (!isset($_POST['data']) || strlen($_POST['data']) > $maxMessageLenght) {
+            throw new Exception("Incorrect message!", 400);
         }
     }
 
