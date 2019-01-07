@@ -3,6 +3,12 @@
 /** @noinspection PhpUndefinedMethodInspection */
 /** @noinspection PhpIncludeInspection */
 
+if (($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['className']) ||
+    ($_SERVER['REQUEST_METHOD'] === 'GET' && !isset($_GET['className'])))) {
+    header('location: ../public/index.php');
+    die();
+}
+
 session_start();
 
 use classes\CheckValuesAndSetManipulateClass;
