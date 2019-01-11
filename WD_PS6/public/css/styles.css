@@ -117,7 +117,7 @@ h1 {
 
 .chat-area {
     width: 600px;
-    padding: 100px 0 0 0;
+    padding: 75px 0 0 0;
 }
 
 .chat-area button, .chat-area input, #message-chat {
@@ -131,7 +131,7 @@ h1 {
     outline: none;
     height: 300px;
     overflow: scroll;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     resize: none;
     overflow-x: hidden;
     box-sizing: border-box;
@@ -142,6 +142,7 @@ h1 {
 #message-chat p {
     font-size: 16px;
     color: #000;
+    word-wrap: break-word;
 }
 
 p strong {
@@ -185,4 +186,11 @@ span.sad-smile {
     background-image: url(../images/smiles/sad.png);
 }
 
-/*# sourceMappingURL=styles.css.map */
+#logout{
+    margin-top: 15px;
+}
+
+.error-page{
+    background: url(../images/404.jpg) no-repeat;
+    background-size: cover;
+}

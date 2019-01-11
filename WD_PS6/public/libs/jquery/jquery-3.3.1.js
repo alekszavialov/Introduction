@@ -3983,7 +3983,7 @@ function fcamelCase( all, letter ) {
 
 // Convert dashed to camelCase; used by the css and data modules
 // Support: IE <=9 - 11, Edge 12 - 15
-// Microsoft forgot to hump their vendor prefix (#9572)
+// Microsoft forgot to hump their base prefix (#9572)
 function camelCase( string ) {
 	return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
 }
@@ -6085,7 +6085,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 		reliableMarginLeftVal = roundPixelMeasures( divStyle.marginLeft ) === 12;
 
 		// Support: Android 4.0 - 4.3 only, Safari <=9.1 - 10.1, iOS <=7.0 - 9.3
-		// Some styles come back with percentage values, even though they shouldn't
+		// Some css come back with percentage values, even though they shouldn't
 		div.style.right = "60%";
 		pixelBoxStylesVal = roundPixelMeasures( divStyle.right ) === 36;
 
@@ -6239,15 +6239,15 @@ var
 	cssPrefixes = [ "Webkit", "Moz", "ms" ],
 	emptyStyle = document.createElement( "div" ).style;
 
-// Return a css property mapped to a potentially vendor prefixed property
+// Return a css property mapped to a potentially base prefixed property
 function vendorPropName( name ) {
 
-	// Shortcut for names that are not vendor prefixed
+	// Shortcut for names that are not base prefixed
 	if ( name in emptyStyle ) {
 		return name;
 	}
 
-	// Check for vendor prefixed names
+	// Check for base prefixed names
 	var capName = name[ 0 ].toUpperCase() + name.slice( 1 ),
 		i = cssPrefixes.length;
 
@@ -6260,7 +6260,7 @@ function vendorPropName( name ) {
 }
 
 // Return a property mapped along what jQuery.cssProps suggests or to
-// a vendor prefixed property.
+// a base prefixed property.
 function finalPropName( name ) {
 	var ret = jQuery.cssProps[ name ];
 	if ( !ret ) {
@@ -6384,7 +6384,7 @@ function getWidthOrHeight( elem, dimension, extra ) {
 	// Normalize "" and auto
 	val = parseFloat( val ) || 0;
 
-	// Adjust for the element's box model
+	// Adjust for the element's box models
 	return ( val +
 		boxModelAdjustment(
 			elem,
@@ -6440,7 +6440,7 @@ jQuery.extend( {
 	// Get and set the style property on a DOM Node
 	style: function( elem, name, value, extra ) {
 
-		// Don't set styles on text and comment nodes
+		// Don't set css on text and comment nodes
 		if ( !elem || elem.nodeType === 3 || elem.nodeType === 8 || !elem.style ) {
 			return;
 		}
@@ -6920,7 +6920,7 @@ function defaultPrefilter( elem, props, opts ) {
 		return;
 	}
 
-	// Restrict "overflow" and "display" styles during box animations
+	// Restrict "overflow" and "display" css during box animations
 	if ( isBox && elem.nodeType === 1 ) {
 
 		// Support: IE <=9 - 11, Edge 12 - 15

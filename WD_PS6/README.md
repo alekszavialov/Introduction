@@ -2,22 +2,29 @@
 
 Simple chat
 
-## Installation
-
 ### Requirements
 
-* Web Server (MAMP, DENWER)
+* Web Server (XAMMP, MAMP, DENWER)
+* Apache 2.4.35.0 and up
+* MySQL 10.1.36-MariaDB
 * PHP 7 and up
 * GIT
+
+## Installation
+
+```
+Extract files from Introduction\WD_PS6 to your domain root directory.
+Import database chatdb.sql from Introduction to your MySQL.
+Set user and password settings in Introduction\WD_PS6\config\configDB.php file.
+```
 
 `$ git clone https://github.com/alekszavialov/Introduction.git`
 
 ## Usage
 
 ```
-Extract files to webserver directory.
 Run your webserver.
-Go to (http://{yourhost}/{yourpath}/WD_PS5/public/index.php)
+Go to (http://{yourhost}/)
 
 Login
 Enter your name and password in login form. Push submit button. If you new user - application will register you.
