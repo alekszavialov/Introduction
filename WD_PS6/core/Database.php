@@ -34,6 +34,10 @@ class Database
     {
     }
 
+    private function __wakeup()
+    {
+    }
+
     public function getConnection()
     {
         return $this->pdo;

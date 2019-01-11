@@ -14,8 +14,9 @@ Simple chat
 
 ```
 Extract files from Introduction\WD_PS6 to your domain root directory.
+Create new database in MySQL with utf8mb4_general_ci encode.
 Import database chatdb.sql from Introduction to your MySQL.
-Set user and password settings in Introduction\WD_PS6\config\configDB.php file.
+Set database name, user and password settings in Introduction\WD_PS6\config\configDB.php file.
 ```
 
 `$ git clone https://github.com/alekszavialov/Introduction.git`
