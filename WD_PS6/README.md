@@ -25,7 +25,7 @@ Set database name, user and password settings in Introduction\WD_PS6\config\conf
 
 ```
 Run your webserver.
-Go to (http://{yourdomain}/)
+Go to (http://{yourhost}/)
 
 Login
 Enter your name and password in login form. Push submit button. If you new user - application will register you.
