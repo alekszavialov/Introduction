@@ -4,8 +4,8 @@ $(function () {
 
     const regEx = {
         ip: /^((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])$/,
-        url: /^(?:https?:\/\/)?[\w.-]+(?:\.[\w.-]+)+[\w\-._~:\/?#[\]@!$&'()*+,;=.]+$/i,
-        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
+        url: /^(?:https?:\/\/)[\w.-]+(?:\.[\w.-]+)+[\w\-._~:\/?#[\]@!$&'()*+,;=]+$/i,
+        email: /^[a-z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$/i,
         date: /^(?:0[0-9]|1[0-2])\/(?:[0-2][0-9]|3[0-1])\/[0-9]{4}$/,
         time: /^(?:[0-1][1-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/
     };
@@ -44,11 +44,14 @@ $(function () {
 
     function validationData(name, value) {
         const $answerField = $("#" + name + "Response");
+        const $currentInput = $("#" + name + "Input");
         if (regEx[name].test(value)) {
             $answerField.text('true');
+            $currentInput.removeClass('fail').addClass('done');
             return true;
         }
         $answerField.text('false');
+        $currentInput.removeClass('done').addClass('fail');
         return false;
     }
 });
