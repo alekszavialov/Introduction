@@ -1,13 +1,22 @@
-form {
+section, form {
     display: flex;
-    flex-flow: row wrap;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    width: 600px;
+    margin: 0 auto;
 }
 
-label, input, span {
-    text-align: center;
-    flex: 1 0 calc(33.333% - 20px);
-    max-width: calc(33.333% - 20px);
+textarea, button, input {
     margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea{
+    resize: none;
+}
+
+#refurbishedText{
+
 }

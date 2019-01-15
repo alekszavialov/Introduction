@@ -10,12 +10,16 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<form action="" id="mainForm">
-    <input type="text" id="input">
-    <textarea name="text" id="text" cols="30" rows="10"></textarea>
-    <button>Validate</button>
-</form>
-<div id="test"></div>
+<section>
+    <form id="mainForm">
+        <label for="regexInput">Enter regex (/Hello world!/gi)</label>
+        <input name="regexText" type="text" id="regexInput" value="/Hello world!/gi">
+        <label for="text">Enter text</label>
+        <textarea name="text" id="text" cols="30" rows="10">Hello world!</textarea>
+        <button>Validate</button>
+    </form>
+    <div id="refurbishedText"></div>
+</section>
 <script src="libs/jquery/jquery-3.3.1.js"></script>
 <script src="js/common.js"></script>
 </body>

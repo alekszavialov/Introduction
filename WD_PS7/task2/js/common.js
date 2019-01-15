@@ -1,28 +1,37 @@
 $(function () {
 
-    const $form = $("#mainForm");
-    const $input = $("#input");
-    const $text = $("#text");
+    const $mainForm = $("#mainForm");
+    const $regexInput = $("#regexInput");
+    const $textarea = $("#text");
+    const $refurbishedText = $("#refurbishedText");
 
-
-
-
-    $form.on("submit", (function (e) {
+    $mainForm.on("submit", (function (e) {
         e.preventDefault();
-        const text = $('<div/>').text($text.val()).html();
-        const inputRegex = /^\/(?<regex>.*)\/(?<flags>\w*)?$/;
-        const inputText = inputRegex.exec($input.val());
-
-        console.log(text);
-        console.log(inputText.groups.flags);
-        const regex = new RegExp(inputText.groups.regex, inputText.groups.flags);
-
-        let newString = text.replace(regex, function(p) {
-            return `<mark>${p}</mark>`;
+        const textareaText = $('<div/>').text($textarea.val()).html();
+        const inputRegex = /^\/(?<regex>.*)\/(?!.*(.).*\2)(?<flags>[gmixXsuUAJD]{0,11})$/;
+        const regexGroups = inputRegex.exec($regexInput.val());
+        if (!regexGroups || !textareaText){
+            $refurbishedText.empty().text('Incorrect regex or empty text!');
+            return;
+        }
+        const regex = new RegExp(regexGroups.groups.regex, regexGroups.groups.flags);
+        let refurbishedString = textareaText.replace(regex, function (text) {
+            return `<mark style="background: ${stringToColour(text)}">${text}</mark>`;
         });
-        $('#test').empty().append(newString);
-
+        $refurbishedText.empty().html(refurbishedString);
     }));
 
+    function stringToColour (str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        let colour = '#';
+        for (let i = 0; i < 3; i++) {
+            let value = (hash >> (i * 8)) & 0xFF;
+            colour += ('00' + value.toString(16)).substr(-2);
+        }
+        return colour;
+    }
 
 });
