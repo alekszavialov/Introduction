@@ -8,25 +8,33 @@ $(function () {
     const passwordReg = /([^\w\d])/;
     const $loginForm = $("#loginForm");
     const $errorArea = $(".errorArea");
+    const loger = new Loger();
 
     $loginForm.on("submit", (function (e) {
         e.preventDefault();
+        let functionName = "formSubmit";
         const userName = $("input[name=user]").val();
         const userPassword = $("input[name=password]").val();
         if (isEmpty(userName) || isEmpty(userPassword)) {
-            $errorArea.text("Empty user name or password!");
+            let error = "Empty user name or password!";
+            $errorArea.text(error);
+            loger.addLog(functionName, 'fail', error);
             return;
         }
         if (userName.length < minNameLength ||
             userName.length > maxNameLength ||
             loginReg.exec(userName)) {
-            $errorArea.text("Name should exist 4 character at least or incorrect symbols!");
+            let error = "Name should exist 4 character at least or incorrect symbols!";
+            $errorArea.text(error);
+            loger.addLog(functionName, 'fail', error);
             return;
         }
         if (userPassword.length < minPassLength ||
             userPassword.length > maxPassLength ||
             passwordReg.exec(userPassword)) {
+            let error = "Password should exist 6 character at least or incorrect symbols!";
             $errorArea.text("Password should exist 6 character at least or incorrect symbols!");
+            loger.addLog(functionName, 'fail', error);
             return;
         }
         const data = $loginForm.serialize();
@@ -34,6 +42,7 @@ $(function () {
     }));
 
     function logIn(data) {
+        let functionName = "logIn";
         $.ajax({
             type: "POST",
             url: "/dashboard/logIn",
@@ -41,9 +50,11 @@ $(function () {
             dataType: "json",
             cache: false
         }).done(function (response) {
+            loger.addLog(functionName, 'done', response);
             window.location.href = response;
         }).fail(function (xhr) {
             $errorArea.text(xhr.responseText);
+            loger.addLog(functionName, 'fail', xhr.responseText);
         });
     }
 

@@ -18,4 +18,5 @@
     </div>
 </section>
 <script src="/public/libs/jquery/jquery-3.3.1.js"></script>
+<script src="/public/libs/loger/loger.js"></script>
 <script src="/public/js/main.js"></script>

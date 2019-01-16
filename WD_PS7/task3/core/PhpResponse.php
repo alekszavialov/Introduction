@@ -30,7 +30,7 @@ class PhpResponse
         $message = !empty($message) ? $message : 'null';
         $user = isset($_SESSION['user']) ? $_SESSION['user'] : 'unknown';
         $ip = $_SERVER['REMOTE_ADDR'] ?: 'unknown';
-        $log = "[Date: $date; Function: $service; Status: $responseCode; Message: $message; User: $user; IP: $ip]" . PHP_EOL;
+        $log = "[Date: $date; Function: " . implode('=>', $service) ."; Status: $responseCode; Message: $message; User: $user; IP: $ip]" . PHP_EOL;
         file_put_contents(LOG_FILE, $log, FILE_APPEND | LOCK_EX);
     }
 }

@@ -8,8 +8,10 @@ $(function () {
     let messagesCount = 0;
     let addMessageStatus = false;
     let loadMessages;
+    const loger = new Loger();
 
     function loadMessage() {
+        let functionName = 'loadMessage';
         $.ajax({
             type: "GET",
             url: "/dashboard/loadMessage",
@@ -21,12 +23,14 @@ $(function () {
         }).done(function (data) {
             addMessagesToChat(data.messages, data.currentUser);
             messagesCount = data.messagesCount;
+            loger.addLog(functionName, 'done');
             loadMessages = setTimeout(loadMessage, timeout);
         }).fail(function (xhr) {
             if (xhr.status === 202) {
                 loadMessages = setTimeout(loadMessage, timeout);
             } else {
                 $errorArea.text(xhr.responseText);
+                loger.addLog(functionName, 'fail', xhr.responseText);
             }
         });
     }
@@ -36,15 +40,20 @@ $(function () {
         if (addMessageStatus) {
             return;
         }
+        let functionName = 'formSubmit';
         const $messageValue = $("#message-value");
         let $messageValueData = $messageValue.val();
         if (!$messageValueData.replace(/\s+/g, "")) {
             $messageValue.val("");
-            $errorArea.text("Cant send empty message");
+            let error = "Cant send empty message";
+            $errorArea.text(error);
+            loger.addLog(functionName, 'fail', error);
             return;
         }
         if ($messageValueData.length > maxMessageLength) {
-            $errorArea.text("Long message! Max 500 characters");
+            let error = "Long message! Max 500 characters";
+            $errorArea.text(error);
+            loger.addLog(functionName, 'fail', error);
             return;
         }
         const data = $chatForm.serialize();
@@ -58,17 +67,20 @@ $(function () {
     });
 
     function logOut() {
+        let functionName = 'logOut';
         $.ajax({
             type: "POST",
             url: "/dashboard/logOut",
             cache: false
         }).always(function () {
+            loger.addLog(functionName, '');
             window.location.href = location.protocol + '//' + location.host;
         });
     }
 
     function sendMessage(data, $messageValue) {
         addMessageStatus = true;
+        let functionName = 'sendMessage';
         $.ajax({
             type: "POST",
             url: "/dashboard/addMessage",
@@ -80,6 +92,7 @@ $(function () {
             $errorArea.text("");
             addMessageStatus = false;
             $messageValue.attr("readonly", false);
+            loger.addLog(functionName, 'done');
             loadMessage();
         }).fail(function (xhr) {
             if (xhr.status === 400) {
@@ -90,6 +103,7 @@ $(function () {
             } else {
                 $errorArea.text(xhr.responseText);
             }
+            loger.addLog(functionName, 'fail', xhr.responseText);
         });
     }
 

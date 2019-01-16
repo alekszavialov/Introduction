@@ -18,7 +18,7 @@ class Database
         try {
             $this->pdo = new \PDO($db['dsn'], $db['user'], $db['password'], $options);
         } catch (\PDOException $e) {
-            phpResponse::ajaxResponse(503, 'Service unavailable', __FUNCTION__);
+            phpResponse::ajaxResponse(503, 'Service unavailable', [__CLASS__,__FUNCTION__]);
         }
     }
 
