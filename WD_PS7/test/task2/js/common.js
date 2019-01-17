@@ -8,7 +8,7 @@ $(function () {
     $mainForm.on("submit", (function (e) {
         e.preventDefault();
         const textareaText = $('<div/>').text($textarea.val()).html();
-        const inputRegex = /^\/(?<regex>.*)\/(?![gmixXsuUAJD]*([gmixXsuUAJD])[gmixXsuUAJD]*\2)(?<flags>[gmixXsuUAJD]{0,11})$/;
+        const inputRegex = /^\/(?<regex>.*)\/(?!.*(.).*\2)(?<flags>[gmixXsuUAJD]{0,11})$/;
         const regexGroups = inputRegex.exec($regexInput.val());
         if (!regexGroups || !textareaText){
             $refurbishedText.empty().text('Incorrect regex or empty text!');
