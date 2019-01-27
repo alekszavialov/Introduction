@@ -16,7 +16,7 @@ $(function () {
         }
         const regex = new RegExp(regexGroups.groups.regex, regexGroups.groups.flags);
         let refurbishedString = textareaText.replace(regex, function (text) {
-            return `<mark style="background: ${stringToColour(text)}">${text}</mark>`;
+            return `<mark>${text}</mark>`;
         });
         $refurbishedText.empty().html(refurbishedString);
     }));
