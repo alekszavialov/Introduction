@@ -22,7 +22,7 @@ class DashboardModel extends Model
         } else if (!password_verify($userPassword, $user['password'])) {
             return false;
         }
-        return $user['name'];
+        return $user ? $user['name'] : false;
     }
 
     private function addUser($userName, $userPassword)

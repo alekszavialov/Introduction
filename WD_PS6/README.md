@@ -13,6 +13,7 @@ Simple chat
 ## Installation
 
 ```
+Enable AllowOverried All in Apache
 Extract files from Introduction\WD_PS6 to your domain root directory.
 Create new database in MySQL with utf8mb4_general_ci encode.
 Import database chatdb.sql from Introduction to your MySQL.
@@ -25,7 +26,7 @@ Set database name, user and password settings in Introduction\WD_PS6\config\conf
 
 ```
 Run your webserver.
-Go to (http://{yourhost}/)
+Go to (http://{yourdomain}/)
 
 Login
 Enter your name and password in login form. Push submit button. If you new user - application will register you.

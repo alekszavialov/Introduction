@@ -22,7 +22,7 @@ class DashboardController
     public function logInAction()
     {
         if (!$this->isCorrectData()) {
-            PhpResponse::ajaxResponse(400, 'Incorrect data!');
+            PhpResponse::ajaxResponse(406, 'Incorrect data!');
         }
         $this->model->setTable('user');
         $user = $this->model->getUser($_POST['user'], $_POST['password']);
@@ -46,7 +46,7 @@ class DashboardController
             PhpResponse::ajaxResponse(401, 'You need to login!');
         }
         if (!$this->isCorrectMessage()) {
-            PhpResponse::ajaxResponse(400, 'Incorrect message!');
+            PhpResponse::ajaxResponse(202, 'Incorrect message!');
         }
         $this->model->setTable('message');
         $data = $this->model->addMessage();

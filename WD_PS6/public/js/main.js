@@ -1,11 +1,18 @@
+const minNameLength = 4;
+const maxNameLength = 20;
+const minPassLength = 6;
+const maxPassLength = 16;
+const loginReg = /([^\w\d-_])/;
+const passwordReg = /([^\w\d])/;
+const xhrMessages = {
+    401 : "Incorrect password!",
+    404 : "Page issue. Try again later.",
+    406 : "Incorrect data!",
+    503 : "Service unavailable. Try again later"
+};
+
 $(function () {
 
-    const minNameLength = 4;
-    const maxNameLength = 20;
-    const minPassLength = 6;
-    const maxPassLength = 16;
-    const loginReg = /([^\w\d-_])/;
-    const passwordReg = /([^\w\d])/;
     const $loginForm = $("#loginForm");
     const $errorArea = $(".errorArea");
 
@@ -42,8 +49,12 @@ $(function () {
             cache: false
         }).done(function (response) {
             window.location.href = response;
-        }).fail(function (xhr) {
-            $errorArea.text(xhr.responseText);
+        }).fail(function (xhr, textStatus, errorMessage) {
+            if (xhrMessages[xhr.status]){
+                $errorArea.text(xhrMessages[xhr.status]);
+            } else {
+                $errorArea.text(errorMessage);
+            }
         });
     }
 

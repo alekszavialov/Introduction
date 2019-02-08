@@ -1,13 +1,20 @@
+const timeout = 2000;
+const maxMessageLength = 500;
+let messagesCount = 0;
+let addMessageStatus = false;
+let loadMessages;
+const xhrMessages = {
+    401 : "You need to login!",
+    404 : "Page issue. Try again later.",
+    406 : "Incorrect message!",
+    503 : "Service unavailable. Try again later"
+};
+
 $(function () {
 
     const $chatForm = $("#chat-Form");
     const $errorArea = $(".errorArea");
     const $chatBody = $("#message-chat");
-    const timeout = 2000;
-    const maxMessageLength = 500;
-    let messagesCount = 0;
-    let addMessageStatus = false;
-    let loadMessages;
 
     function loadMessage() {
         $.ajax({
@@ -18,15 +25,17 @@ $(function () {
             },
             dataType: "json",
             cache: false
-        }).done(function (data) {
-            addMessagesToChat(data.messages, data.currentUser);
-            messagesCount = data.messagesCount;
+        }).done(function (data, status, xhr) {
+            if (xhr.status === 200){
+                addMessagesToChat(data.messages, data.currentUser);
+                messagesCount = data.messagesCount;
+            }
             loadMessages = setTimeout(loadMessage, timeout);
-        }).fail(function (xhr) {
-            if (xhr.status === 202) {
-                loadMessages = setTimeout(loadMessage, timeout);
+        }).fail(function (xhr, textStatus, errorMessage) {
+            if (xhrMessages[xhr.status]){
+                $errorArea.text(xhrMessages[xhr.status]);
             } else {
-                $errorArea.text(xhr.responseText);
+                $errorArea.text(errorMessage);
             }
         });
     }
@@ -75,20 +84,21 @@ $(function () {
             data: data,
             dataType: "json",
             cache: false
-        }).done(function () {
-            $messageValue.val("");
-            $errorArea.text("");
+        }).done(function (data, status, xhr) {
+            if (xhr.status === 200){
+                $messageValue.val("");
+                $errorArea.text("");
+            } else {
+                $errorArea.text(data);
+            }
             addMessageStatus = false;
             $messageValue.attr("readonly", false);
             loadMessage();
-        }).fail(function (xhr) {
-            if (xhr.status === 400) {
-                $errorArea.text(xhr.responseText);
-                $messageValue.attr("readonly", false);
-                addMessageStatus = false;
-                loadMessage();
+        }).fail(function (xhr, textStatus, errorMessage) {
+            if (xhrMessages[xhr.status]){
+                $errorArea.text(xhrMessages[xhr.status]);
             } else {
-                $errorArea.text(xhr.responseText);
+                $errorArea.text(errorMessage);
             }
         });
     }
