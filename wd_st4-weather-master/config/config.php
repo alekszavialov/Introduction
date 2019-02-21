@@ -1,14 +1,13 @@
 <?php
 
-define('JSON_DB', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'today.json');
+define('PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR);
 
 return [
-    'json_db' => JSON_DB,
+    'json' => PATH  . 'today.json',
+    'api' => PATH  . 'api.json',
     'database' => [
-        'db_Host' => 'localhost',
-        'db_User' => 'root',
-        'db_Password' => '',
-        'db_Name' => 'Weather',
-        'charset' => 'utf8mb4'
+        'dsn' => 'mysql:host=localhost;dbname=cities;charset=utf8',
+        'user' => 'root',
+        'password' => ''
     ]
 ];

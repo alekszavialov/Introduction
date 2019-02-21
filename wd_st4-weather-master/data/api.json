@@ -1,0 +1,182 @@
+[
+  {
+    "DateTime": "2019-02-21T23:00:00+02:00",
+    "EpochDateTime": 1550782800,
+    "WeatherIcon": 36,
+    "IconPhrase": "Intermittent clouds",
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 27,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 0,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=1&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=1&hbhhour=23&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T00:00:00+02:00",
+    "EpochDateTime": 1550786400,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 26,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 1,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=0&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T01:00:00+02:00",
+    "EpochDateTime": 1550790000,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 25,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=1&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T02:00:00+02:00",
+    "EpochDateTime": 1550793600,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 24,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=2&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T03:00:00+02:00",
+    "EpochDateTime": 1550797200,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 23,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=3&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T04:00:00+02:00",
+    "EpochDateTime": 1550800800,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 24,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=4&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T05:00:00+02:00",
+    "EpochDateTime": 1550804400,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 23,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=5&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T06:00:00+02:00",
+    "EpochDateTime": 1550808000,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": false,
+    "Temperature": {
+      "Value": 23,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=6&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T07:00:00+02:00",
+    "EpochDateTime": 1550811600,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 22,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=7&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T08:00:00+02:00",
+    "EpochDateTime": 1550815200,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 23,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=8&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T09:00:00+02:00",
+    "EpochDateTime": 1550818800,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 23,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=9&lang=en-us"
+  },
+  {
+    "DateTime": "2019-02-22T10:00:00+02:00",
+    "EpochDateTime": 1550822400,
+    "WeatherIcon": 7,
+    "IconPhrase": "Cloudy",
+    "IsDaylight": true,
+    "Temperature": {
+      "Value": 23,
+      "Unit": "F",
+      "UnitType": 18
+    },
+    "PrecipitationProbability": 7,
+    "MobileLink": "http://m.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&lang=en-us",
+    "Link": "http://www.accuweather.com/en/ua/kropyvnytskyi/324291/hourly-weather-forecast/324291?day=2&hbhhour=10&lang=en-us"
+  }
+]
