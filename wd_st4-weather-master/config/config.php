@@ -6,7 +6,7 @@ return [
     'json' => PATH  . 'today.json',
     'api' => PATH  . 'api.json',
     'database' => [
-        'dsn' => 'mysql:host=localhost;dbname=cities;charset=utf8',
+        'dsn' => 'mysql:host=localhost;dbname=weather;charset=utf8',
         'user' => 'root',
         'password' => ''
     ]

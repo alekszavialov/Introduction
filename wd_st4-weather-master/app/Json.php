@@ -38,7 +38,7 @@ class Json
             $weatherData[$key]['temperature'] = $this->convertTemperature($value['main']['temp']);
             $weatherData[$key]['icon'] =
                 $this->selectIcon($value['weather'][0]['main'], $value['clouds']['all']);
-            if ($key == 7) {
+            if ($key === 6) {
                 break;
             }
         }
