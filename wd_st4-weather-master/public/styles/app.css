@@ -52,9 +52,7 @@ nav a.active {
 }
 
 .all-50 {
-    display: block;
-    float: left;
-    width: 50%;
+    flex: 0 0 50%;
 }
 
 .weather-icon {
@@ -65,9 +63,11 @@ nav a.active {
 .now {
     text-align: center;
     background-color: #3469af;
+    display: flex;
+    align-items: center;
 }
 
-.now .date {
+.now .date, .now .city-name {
     font-size: 200%;
     margin-top: 10%;
     padding: 0 5%;

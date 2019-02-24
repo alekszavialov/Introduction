@@ -29,20 +29,30 @@ class Database
 
     public function getData()
     {
-        $sql = 'SELECT * FROM cities, forecast';
+        $sql = "SELECT timestamp AS 'date', temperature, clouds, rain_possibility FROM forecast ORDER BY id DESC LIMIT 6";
+        $weather = $this->loadFromDB($sql);
+        $weatherData = array_map(function ($row) {
+            $row['icon'] = $this->selectIcon($row['clouds'], $row['rain_possibility']);
+            unset($row['clouds']);
+            unset($row['rain_possibility']);
+            return $row;
+        },
+            array_reverse($weather));
+        $sql = "SELECT name FROM cities LIMIT 1";
+        $weatherData['city'] = $this->loadFromDB($sql)[0]['name'];
+        return $weatherData;
+    }
+
+    private function loadFromDB($sql)
+    {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
         $res = $stmt->fetchAll();
         if (!$res) {
             echo(json_encode('error!'));
+            die();
         }
-        $weatherData = [];
-        foreach ($res as $key => $value) {
-            $weatherData[$key]['date'] = $value['timestamp'];
-            $weatherData[$key]['temperature'] = $value['temperature'];
-            $weatherData[$key]['icon'] = $this->selectIcon($value['clouds'], $value['rain_possibility']);
-        }
-        return $weatherData;
+        return $res;
     }
 
     private function selectIcon($rainValue, $cloudsValue)

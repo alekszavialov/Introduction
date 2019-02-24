@@ -25,8 +25,9 @@ $(function () {
         loadData(currentFunction);
     });
 
-    function fillHead(data) {
+    function fillHead(data, city) {
         $("<div/>", {"class": "all-50"}).append(
+            $("<div/>", {"class": "city-name", text: city}),
             $("<div/>", {"class": "date", text: `${convertDate(data.date)}`}),
             $("<div/>", {"class": "current-temperature", html: `${data.temperature} &deg`}),
         ).appendTo($nowBlock);
@@ -41,7 +42,7 @@ $(function () {
                 $forecast.empty();
                 $nowBlock.empty();
                 console.log(data);
-                fillHead(data[0]);
+                fillHead(data[0], data["city"]);
                 $.each(data, function (index, element) {
                     if (index > 0)
                         fillData(element);

@@ -12,7 +12,7 @@ namespace app;
 class Api
 {
 
-    private $path;
+    private $data;
     private $farengeitZero = 32;
     private $farengeitInerval = 1.8;
     private $sun = ['Sunny', 'Mostly Sunny', 'Partly Sunny', 'Intermittent Clouds', 'Hazy Sunshine', 'Mostly Cloudy',
@@ -25,26 +25,21 @@ class Api
     private $flash = ['T-Storms', 'Mostly Cloudy w/ T-Storms', 'Partly Sunny w/ T-Storms'];
     private $sky = ['Mostly Cloudy w/ Flurries', 'Partly Sunny w/ Flurries', 'Partly Sunny w/ T-Storms'];
 
-    public function __construct($path)
+    public function __construct($data)
     {
-        $this->path = $path;
+        $this->data = $data;
     }
 
     public function getData()
     {
-        $data = json_decode(file_get_contents($this->path), true);
-        if (!$data && json_last_error()) {
-            echo json_encode($this->path);
-            die();
-        }
-        $weatherData = [];
-        foreach ($data as $key => $value) {
+
+        $city = $this->loadData($this->data['locationSearchURL']);
+        $data = $this->loadData($this->data['forecastSearchURL']);
+        $weatherData['city'] = $city['LocalizedName'];
+        foreach (array_slice($data, 0, 6) as $key => $value) {
             $weatherData[$key]['date'] = $value['DateTime'];
             $weatherData[$key]['temperature'] = $this->convertTemperature($value['Temperature']['Value']);
             $weatherData[$key]['icon'] = $this->selectIcon($value['IconPhrase']);
-            if ($key === 7) {
-                break;
-            }
         }
         return $weatherData;
     }
@@ -72,6 +67,18 @@ class Api
             return 'sky-1';
         }
         return 'sun';
+    }
+
+    private function loadData($url)
+    {
+        $data = json_decode(
+            @file_get_contents($url . $this->data['locationKey'] . '?apikey=' . $this->data['apiKey']), true
+        );
+        if (!$data && json_last_error()) {
+            echo json_encode($this->path);
+            die();
+        }
+        return $data;
     }
 
 }

@@ -24,7 +24,7 @@ class Json
     public function getData()
     {
         if (!file_exists($this->path) || !is_readable($this->path)) {
-            echo json_encode('bad data!');
+            echo json_encode('error!');
             die();
         }
         $data = json_decode(file_get_contents($this->path), true);
@@ -33,15 +33,13 @@ class Json
             die();
         }
         $weatherData = [];
-        foreach ($data['list'] as $key => $value) {
+        foreach (array_slice($data['list'], -6) as $key => $value) {
             $weatherData[$key]['date'] = $value['dt_txt'];
             $weatherData[$key]['temperature'] = $this->convertTemperature($value['main']['temp']);
             $weatherData[$key]['icon'] =
                 $this->selectIcon($value['weather'][0]['main'], $value['clouds']['all']);
-            if ($key === 6) {
-                break;
-            }
         }
+        $weatherData['city'] = $data['city']['name'];
         return $weatherData;
     }
 
